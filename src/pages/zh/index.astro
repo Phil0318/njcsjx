@@ -1,0 +1,193 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+const lang = 'zh' as const;
+
+const capabilities = [
+  {
+    title: '齿轮全序加工',
+    body: '车加工、滚齿、铣齿、插齿、热处理、抛丸喷丸、磨齿、内圆磨、倒角——一站式完成，最大磨齿能力达模数 50 × 直径 3000 毫米。',
+    points: ['NILES 磨齿机 6 台（ZE400S–ZP30）', '数控立车最大直径 2500 毫米', '三/四轴加工中心、五轴线切割'],
+  },
+  {
+    title: '金属热处理',
+    body: '黑色、有色金属及特殊材料的正火、退火、调质、渗碳淬火、碳氮共渗、氮化、真空油淬与高压气淬、分级等温淬火、高/中/超音频感应淬火、喷丸、发黑。',
+    points: ['单件 0.1 kg – 30 t', '年产能约 5 万吨', '大型井式渗碳炉最大 Φ4000×2500'],
+  },
+  {
+    title: '检测与计量',
+    body: '从原材料到成品全流程质量管控：齿轮测量、三坐标检测、无损探伤、硬度与金相分析、力学性能试验。',
+    points: ['Gleason 1000GMS 齿轮测量仪', '三台三坐标（Hexagon / DEA / VENUS）', '超声波、磁粉探伤与光谱分析'],
+  },
+];
+
+const industries = [
+  { label: '海洋钻井平台', img: '/industries/offshore.png' },
+  { label: '风电行业', img: '/industries/wind.png' },
+  { label: '石化行业', img: '/industries/petrochemical.png' },
+  { label: '煤炭矿用行业', img: '/industries/coal.png' },
+  { label: '冶金行业', img: '/industries/metallurgy.png' },
+  { label: '建材行业', img: '/industries/building-materials.png' },
+];
+---
+
+<Base
+  lang={lang}
+  title="南京长升机械工程有限公司 — 专业齿轮加工与热处理供应商"
+  description="南京长升机械工程有限公司（2006年成立）专业从事齿轮全序加工与金属热处理：磨齿最大模数50×直径3000毫米，年热处理产能约5万吨，服务海洋钻井、风电、矿用、石化等行业。"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-ink">
+    <div class="absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-steel-700/40 blur-3xl"></div>
+    <div class="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-accent-500/10 blur-3xl"></div>
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 pt-20 pb-14 sm:pt-28 sm:pb-20">
+      <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-steel-200">
+        长升 — 齿轮与热处理，始于 2006
+      </p>
+      <h1 class="mt-6 max-w-3xl font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+        专业齿轮与<span class="text-accent-400">热处理</span>供应商
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
+        从毛坯到成品齿轮，从调质到渗碳淬火。二十年的热处理经验、五十余台套机械加工设备，
+        为海洋钻井平台、风电、矿用、石化等行业提供可靠的关键零部件。
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href={`/${lang}/contact`}
+          class="rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-lg shadow-accent-500/25 transition-transform hover:scale-105"
+        >
+          立即询价
+        </a>
+        <a
+          href={`/${lang}/equipment`}
+          class="rounded-full border border-white/25 px-8 py-3.5 font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400"
+        >
+          查看设备
+        </a>
+      </div>
+      <div class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-5">
+        {
+          [
+            ['2006', '年成立'],
+            ['286', '名员工'],
+            ['45,000', '平方米厂房'],
+            ['5万', '吨年热处理产能'],
+            ['100+', '台套热处理设备'],
+          ].map(([num, label]) => (
+            <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+              <p class="font-display text-2xl font-bold text-accent-400 sm:text-3xl">{num}</p>
+              <p class="mt-1 text-xs text-slate-400 sm:text-sm">{label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">核心能力</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">三大能力，覆盖齿轮零件全流程。</h2>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          capabilities.map((c) => (
+            <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+              <h3 class="font-display text-xl font-bold text-ink">{c.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">{c.body}</p>
+              <ul class="mt-5 space-y-2.5 text-sm text-slate-500">
+                {c.points.map((p) => (
+                  <li class="flex items-start gap-2">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="bg-steel-50 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">服务行业</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">二十年，深耕重工业关键零部件。</h2>
+      </div>
+      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {industries.map((i) => (
+          <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100">
+            <div class="overflow-hidden bg-steel-100">
+              <img
+                src={i.img}
+                alt={i.label}
+                loading="lazy"
+                width="304"
+                height="228"
+                class="h-32 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <p class="px-5 py-3.5 font-semibold text-ink">{i.label}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 rounded-2xl bg-ink p-8 sm:p-10">
+        <div class="grid gap-6 sm:grid-cols-3">
+          {[
+            ['泥浆泵齿轮 / 齿轮轴', '海上钻井平台核心传动零件'],
+            ['风电变桨齿轮轴', '风力发电机组关键部件'],
+            ['电动轮双联齿轮', '矿用车辆驱动系统'],
+          ].map(([title, desc]) => (
+            <div>
+              <p class="font-display text-lg font-bold text-white">{title}</p>
+              <p class="mt-1.5 text-sm text-slate-400">{desc}</p>
+            </div>
+          ))}
+        </div>
+        <a href={`/${lang}/products`} class="mt-8 inline-block rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400">
+          查看产品展示 →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Culture -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">企业文化</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">严谨 · 高效 · 求实 · 创新</h2>
+        <p class="mt-5 text-lg leading-relaxed text-slate-600">
+          <span class="font-semibold text-ink">团队合作，客户至上，目标驱动。</span>
+          与用户共享成功，与员工共享发展，与社会共享进步——做专业的齿轮及热处理供应商。
+        </p>
+        <a href={`/${lang}/about`} class="mt-8 inline-block rounded-full bg-steel-700 px-7 py-3 font-semibold text-white transition-colors hover:bg-steel-800">
+          了解长升 →
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {[
+          ['58', '名工程技术人员'],
+          ['126', '名技术工人'],
+          ['100', '亩占地面积'],
+          ['50+', '台套机械加工设备'],
+        ].map(([num, label]) => (
+          <div class="rounded-3xl border border-slate-100 bg-white p-7 text-center shadow-sm">
+            <p class="font-display text-3xl font-bold text-steel-600">{num}</p>
+            <p class="mt-2 text-sm text-slate-600">{label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+</Base>

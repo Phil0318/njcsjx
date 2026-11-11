@@ -1,0 +1,225 @@
+---
+import '../styles/global.css';
+import { ui, type Lang } from '../i18n/ui';
+import { SITE } from '../config';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = ui[lang];
+const otherLang: Lang = lang === 'zh' ? 'en' : 'zh';
+
+const path = Astro.url.pathname.replace(/\/$/, '');
+let altUrl = otherLang === 'zh' ? '/zh' : '/en';
+if (path.startsWith('/zh/')) altUrl = path.replace(/^\/zh/, '/en');
+if (path.startsWith('/en/')) altUrl = path.replace(/^\/en/, '/zh');
+
+const homeHref = `/${lang}/`;
+const navItems = [
+  { href: `/${lang}/`, label: t.nav.home },
+  { href: `/${lang}/about`, label: t.nav.about },
+  { href: `/${lang}/equipment`, label: t.nav.equipment },
+  { href: `/${lang}/products`, label: t.nav.products },
+  { href: `/${lang}/contact`, label: t.nav.contact },
+];
+
+const isActive = (href: string) =>
+  href === homeHref
+    ? path === '' || path === `/${lang}`
+    : path.startsWith(href.replace(/\/$/, ''));
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, SITE.url).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={lang === 'zh' ? SITE.nameZh : SITE.nameEn} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, SITE.url).href} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <header class="sticky top-0 z-50 bg-ink text-white">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
+        <a href={homeHref} class="flex items-center gap-2.5">
+          <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent-500">
+            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block font-display text-lg font-bold tracking-wide">{SITE.short}</span>
+            <span class="block text-[10px] text-slate-400">
+              {lang === 'zh' ? '南京长升机械工程有限公司' : 'Machinery Engineering Co., Ltd.'}
+            </span>
+          </span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'text-sm font-medium transition-colors',
+                isActive(item.href) ? 'text-accent-400' : 'text-slate-300 hover:text-white',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={altUrl}
+            class="text-sm font-medium text-slate-400 hover:text-white transition-colors"
+            title={otherLang === 'zh' ? '切换为中文' : 'Switch to English'}
+          >
+            {t.otherLang}
+          </a>
+          <a
+            href={`/${lang}/contact`}
+            class="rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
+          >
+            {t.nav.quote}
+          </a>
+        </nav>
+
+        <button
+          id="menu-btn"
+          class="lg:hidden rounded-lg p-2 text-slate-300 hover:bg-white/10"
+          aria-label="Menu"
+          aria-expanded="false"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-ink">
+        <div class="px-4 py-4 space-y-1">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'block rounded-lg px-3 py-2.5 text-sm font-medium',
+                isActive(item.href) ? 'bg-white/10 text-accent-400' : 'text-slate-300 hover:bg-white/5',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div class="flex items-center gap-3 pt-2 px-3">
+            <a
+              href={`/${lang}/contact`}
+              class="flex-1 rounded-full bg-accent-500 px-5 py-2.5 text-center text-sm font-semibold text-white hover:bg-accent-600"
+            >
+              {t.nav.quote}
+            </a>
+            <a href={altUrl} class="rounded-full border border-white/20 px-4 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5">
+              {t.otherLang}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-ink text-slate-300">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent-500">
+              <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </span>
+            <div class="leading-tight">
+              <span class="block font-display text-lg font-bold text-white">{SITE.short}</span>
+              <span class="block text-[10px] text-slate-400">
+                {lang === 'zh' ? '南京长升机械工程有限公司' : 'Nanjing Changsheng Machinery'}
+              </span>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-slate-400">{t.footer.blurb}</p>
+        </div>
+        <div>
+          <h3 class="font-display text-sm font-semibold uppercase tracking-wider text-white">
+            {t.footer.pages}
+          </h3>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            {navItems.map((item) => (
+              <li>
+                <a href={item.href} class="text-slate-400 transition-colors hover:text-accent-400">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href={altUrl} class="text-slate-400 transition-colors hover:text-accent-400">
+                {t.otherLang}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-sm font-semibold uppercase tracking-wider text-white">
+            {t.footer.capabilities}
+          </h3>
+          <ul class="mt-4 space-y-2.5 text-sm text-slate-400">
+            <li>{t.footer.gearMachining}</li>
+            <li>{t.footer.heatTreatment}</li>
+            <li>{t.footer.inspection}</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-sm font-semibold uppercase tracking-wider text-white">
+            {t.footer.contact}
+          </h3>
+          <a href={`mailto:${SITE.email}`} class="mt-4 inline-block text-sm font-medium text-accent-400 hover:text-accent-500">
+            {SITE.email}
+          </a>
+          <p class="mt-2 text-sm text-slate-400">{SITE.phone}</p>
+          <p class="mt-2 text-sm text-slate-400">
+            {lang === 'zh' ? SITE.addressZh : SITE.addressEn}
+          </p>
+          <p class="mt-3 text-xs text-slate-500">{t.footer.responseTime}</p>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-5 text-sm text-slate-500">
+          © {new Date().getFullYear()} {SITE.nameZh} · {SITE.nameEn} · {t.footer.rights}
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', () => {
+        const open = menu?.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    </script>
+  </body>
+</html>

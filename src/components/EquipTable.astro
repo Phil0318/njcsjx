@@ -1,0 +1,67 @@
+---
+interface Row {
+  m: string;
+  r: string;
+  n?: string;
+  i: string;
+  img?: string;
+}
+
+interface Props {
+  title: string;
+  note?: string;
+  head: string[];
+  rows: Row[];
+  variant?: 'light' | 'dark';
+}
+
+const { title, note, head, rows, variant = 'light' } = Astro.props;
+const dark = variant === 'dark';
+---
+
+<div>
+  {title && (
+    <h2 class:list={['font-display text-2xl font-bold sm:text-3xl', dark ? 'text-white' : 'text-ink']}>
+      {title}
+    </h2>
+  )}
+  {note && <p class:list={['mt-2', dark ? 'text-slate-400' : 'text-slate-600']}>{note}</p>}
+  <div class:list={[
+    'mt-6 overflow-hidden rounded-2xl shadow-sm',
+    dark ? 'ring-1 ring-white/10' : 'border border-slate-100',
+  ]}>
+    <table class="w-full table-fixed text-left text-sm">
+      <thead class:list={dark ? 'bg-white/10 text-white' : 'bg-steel-700 text-white'}>
+        <tr>
+          <th class="w-2/5 px-5 py-3.5 font-semibold">{head[0]}</th>
+          <th class="px-5 py-3.5 font-semibold">{head[1]}</th>
+          {head[2] && <th class="w-48 px-5 py-3.5 font-semibold">{head[2]}</th>}
+        </tr>
+      </thead>
+      <tbody class:list={dark ? 'divide-y divide-white/10' : 'divide-y divide-slate-100 bg-white'}>
+        {rows.map((row) => (
+          <tr
+            class:list={[
+              'equip-row cursor-help transition-colors',
+              dark ? 'hover:bg-white/5' : 'hover:bg-steel-50',
+            ]}
+            data-model={row.m}
+            data-intro={row.i}
+            data-img={row.img ?? ''}
+          >
+            <td class:list={[
+              'w-2/5 truncate px-5 py-3 font-medium',
+              dark ? 'text-slate-200' : 'text-ink',
+            ]}>
+              <span class="border-b border-dotted border-steel-400/60">{row.m}</span>
+            </td>
+            <td class:list={['px-5 py-3', dark ? 'text-slate-400' : 'text-slate-600']}>{row.r}</td>
+            {head[2] && (
+              <td class:list={['px-5 py-3', dark ? 'text-slate-400' : 'text-slate-600']}>{row.n}</td>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

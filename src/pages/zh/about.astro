@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+const lang = 'zh' as const;
+
+const advantages = [
+  '专业的管理团队',
+  '高素质的科研人员',
+  '优秀的一线操作员',
+  '先进水平的制造设备',
+  '多行业的国际国内市场',
+];
+---
+
+<Base
+  lang={lang}
+  title="关于我们 — 南京长升机械工程有限公司"
+  description="南京长升机械工程有限公司创建于2006年，员工286名，占地100亩、厂房45,000平方米，专业从事齿轮全序加工与金属热处理。"
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">关于我们</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">南京长升机械工程有限公司</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-300">为中国的齿轮和热处理行业发展尽一份力</p>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid items-start gap-12 lg:grid-cols-2">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-ink">公司简介</h2>
+          <div class="mt-6 space-y-5 leading-relaxed text-slate-600">
+            <p>
+              南京长升机械工程有限公司<strong class="text-ink">创建于 2006 年</strong>，
+              专业从事齿轮加工与金属热处理。目前公司拥有员工
+              <strong class="text-ink">286 名</strong>，其中工程技术人员 58 人、技术工人 126 人；
+              主要机械加工设备 50 余台套，检测仪器 5 台套，主要热处理加工设备 100 余台套；
+              占地 100 亩，厂房 45,000 平方米。
+            </p>
+            <p>
+              金属热处理涵盖黑色、有色金属以及特殊材料的正火、退火、调质、渗碳淬火与碳氮共渗、
+              氮化与氮碳共渗、真空油淬与高压气淬、分级与等温淬火、高中频及超音频的局部与表面淬火、
+              表面喷丸、发黑处理等，零件单件生产能力从 0.1 kg 到 30 t，年生产能力 5 万吨左右。
+            </p>
+            <p>
+              齿轮加工具备全序能力，包括车加工、滚齿、铣齿、热处理、抛丸、喷丸、磨齿、
+              内圆磨、插齿、无损探伤、齿轮测量、三坐标检测等，最大磨齿能力达
+              <strong class="text-ink">模数 50 × 直径 3000 毫米</strong>。
+            </p>
+          </div>
+        </div>
+        <div class="rounded-[2rem] bg-steel-50 p-8 ring-1 ring-steel-100 sm:p-10">
+          <h3 class="font-display text-xl font-bold text-ink">核心优势</h3>
+          <ul class="mt-6 space-y-4">
+            {advantages.map((a) => (
+              <li class="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-500 text-white">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </span>
+                <span class="font-semibold text-ink">{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-20 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {[
+          ['企业愿景', '做专业的齿轮及热处理供应商'],
+          ['企业文化', '团队合作 · 客户至上 · 目标驱动'],
+          ['工作作风', '严谨 · 高效 · 求实 · 创新'],
+          ['共享理念', '与客户成功 · 与员工发展 · 与社会进步'],
+        ].map(([title, body]) => (
+          <div class="rounded-3xl border border-slate-100 p-8 text-center shadow-sm">
+            <p class="font-display text-lg font-bold text-steel-600">{title}</p>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+</Base>

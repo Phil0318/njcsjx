@@ -1,0 +1,149 @@
+---
+import { FORMSPREE_ENDPOINT } from '../config';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const labels = {
+  zh: {
+    name: '姓名',
+    namePh: '您的姓名',
+    email: '邮箱',
+    emailPh: 'you@example.com',
+    company: '公司名称',
+    companyPh: '贵公司名称',
+    service: '咨询内容',
+    serviceOptions: ['齿轮加工', '金属热处理', '两者都需要', '其他'],
+    message: '需求描述',
+    messagePh: '请描述零件图纸、材质、数量、交期等要求',
+    submit: '提交询价',
+    sending: '发送中…',
+    success: '谢谢！您的询价已发送，我们会在 1–2 个工作日内回复。',
+    error: '出错了，请重试或直接发邮件联系我们。',
+  },
+  en: {
+    name: 'Name',
+    namePh: 'Your name',
+    email: 'Email',
+    emailPh: 'you@example.com',
+    company: 'Company',
+    companyPh: 'Your company name',
+    service: 'What do you need?',
+    serviceOptions: ['Gear machining', 'Heat treatment', 'Both', 'Other'],
+    message: 'Requirements',
+    messagePh: 'Describe drawings, material, quantity, and timeline',
+    submit: 'Send Request',
+    sending: 'Sending…',
+    success: 'Thanks! Your request has been sent. We will reply within 1–2 business days.',
+    error: 'Something went wrong. Please try again or email us directly.',
+  },
+} as const;
+
+const t = labels[lang];
+---
+
+<form id="quote-form" class="grid gap-5 sm:grid-cols-2">
+  <div>
+    <label for="name" class="mb-1.5 block text-sm font-semibold text-ink">{t.name} *</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      required
+      placeholder={t.namePh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div>
+    <label for="email" class="mb-1.5 block text-sm font-semibold text-ink">{t.email} *</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      required
+      placeholder={t.emailPh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div class="sm:col-span-2">
+    <label for="company" class="mb-1.5 block text-sm font-semibold text-ink">{t.company}</label>
+    <input
+      id="company"
+      name="company"
+      type="text"
+      placeholder={t.companyPh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div class="sm:col-span-2">
+    <label for="service" class="mb-1.5 block text-sm font-semibold text-ink">{t.service} *</label>
+    <select
+      id="service"
+      name="service"
+      required
+      class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    >
+      {t.serviceOptions.map((o) => <option value={o}>{o}</option>)}
+    </select>
+  </div>
+  <div class="sm:col-span-2">
+    <label for="message" class="mb-1.5 block text-sm font-semibold text-ink">{t.message} *</label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows={5}
+      placeholder={t.messagePh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"></textarea>
+  </div>
+  <div class="sm:col-span-2">
+    <button
+      type="submit"
+      class="rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-accent-600"
+    >
+      {t.submit}
+    </button>
+    <p id="form-status" class="mt-4 hidden rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700"></p>
+  </div>
+</form>
+
+<script define:vars={{ FORMSPREE_ENDPOINT, success: t.success, error: t.error, sending: t.sending }}>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !status || !submitBtn) return;
+
+    const originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = sending;
+    status.className = 'mt-4 hidden rounded-xl px-4 py-3 text-sm font-medium';
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        form.reset();
+        status.textContent = success;
+        status.className = 'mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700';
+      } else {
+        throw new Error(String(res.status));
+      }
+    } catch {
+      status.textContent = error;
+      status.className = 'mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+</script>

@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+const lang = 'en' as const;
+
+const advantages = [
+  'Professional management team',
+  'Highly qualified R&D staff',
+  'Excellent shop-floor operators',
+  'Advanced manufacturing equipment',
+  'International & domestic markets across industries',
+];
+---
+
+<Base
+  lang={lang}
+  title="About — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Founded in 2006, Nanjing Changsheng Machinery Engineering Co., Ltd. has 286 employees, a 100-mu site, and 45,000 m² of workshops dedicated to gear machining and metal heat treatment."
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">About us</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Nanjing Changsheng Machinery Engineering Co., Ltd.</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-300">Doing our part for China's gear and heat-treatment industry</p>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid items-start gap-12 lg:grid-cols-2">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-ink">Company profile</h2>
+          <div class="mt-6 space-y-5 leading-relaxed text-slate-600">
+            <p>
+              Nanjing Changsheng Machinery Engineering Co., Ltd. was
+              <strong class="text-ink">founded in 2006</strong>, specializing in gear machining
+              and heat treatment. The company employs <strong class="text-ink">286 people</strong>,
+              including 58 engineers & technicians and 126 skilled workers. It operates
+              50+ main machining equipment, 5 inspection instruments, and 100+ heat-treatment
+              units on a 100-mu site with 45,000 m² of workshops.
+            </p>
+            <p>
+              Heat treatment covers normalizing, annealing, quenching & tempering, carburizing and
+              carbonitriding, nitriding and nitrocarburizing, vacuum oil quenching and high-pressure
+              gas quenching, graded and isothermal quenching, high/medium/ultra-audio-frequency
+              induction hardening, shot peening, and blackening — for ferrous, non-ferrous, and
+              special materials. Single-part capacity ranges from 0.1 kg to 30 t, with annual
+              capacity of around 50,000 t.
+            </p>
+            <p>
+              Gear machining covers the full process — turning, hobbing, milling, heat treatment,
+              shot blasting, gear grinding, internal grinding, shaping, NDT, gear measurement, and
+              CMM inspection — with gear grinding up to
+              <strong class="text-ink">module 50 × Ø3000 mm</strong>.
+            </p>
+          </div>
+        </div>
+        <div class="rounded-[2rem] bg-steel-50 p-8 ring-1 ring-steel-100 sm:p-10">
+          <h3 class="font-display text-xl font-bold text-ink">Core strengths</h3>
+          <ul class="mt-6 space-y-4">
+            {advantages.map((a) => (
+              <li class="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-500 text-white">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </span>
+                <span class="font-semibold text-ink">{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-20 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {[
+          ['Vision', 'To be the professional gear & heat-treatment supplier'],
+          ['Culture', 'Teamwork · Customer first · Goal driven'],
+          ['Work style', 'Rigorous · Efficient · Pragmatic · Innovative'],
+          ['Shared values', 'Success with customers · Growth with employees · Progress with society'],
+        ].map(([title, body]) => (
+          <div class="rounded-3xl border border-slate-100 p-8 text-center shadow-sm">
+            <p class="font-display text-lg font-bold text-steel-600">{title}</p>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+</Base>

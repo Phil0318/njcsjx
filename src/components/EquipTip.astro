@@ -1,0 +1,66 @@
+---
+interface Props {
+  placeholder: string;
+}
+
+const { placeholder } = Astro.props;
+---
+
+<div
+  id="equip-tip"
+  data-placeholder={placeholder}
+  class="pointer-events-none fixed z-[100] hidden w-72 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200"
+></div>
+
+<script>
+  const tip = document.getElementById('equip-tip');
+  if (tip) {
+    const pad = 16;
+    const placeholder = tip.dataset.placeholder ?? '';
+
+    document.addEventListener('mouseover', (e) => {
+      const row = (e.target as Element | null)?.closest?.('.equip-row') as HTMLElement | null;
+      if (!row) return;
+
+      const img = row.dataset.img ?? '';
+      const model = row.dataset.model ?? '';
+      const intro = row.dataset.intro ?? '';
+
+      tip.innerHTML =
+        '<div class="grid aspect-[16/10] place-items-center bg-steel-50">' +
+        (img
+          ? '<img src="' + img + '" alt="' + model + '" class="h-full w-full object-cover" />'
+          : '<div class="text-center"><svg class="mx-auto h-10 w-10 text-steel-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path><circle cx="12" cy="12" r="3"></circle></svg><p class="mt-2 text-xs text-steel-400">' +
+            placeholder +
+            '</p></div>') +
+        '</div>' +
+        '<div class="p-4"><p class="font-display text-sm font-bold text-ink">' +
+        model +
+        '</p><p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
+        intro +
+        '</p></div>';
+
+      tip.classList.remove('hidden');
+      position(e);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (tip.classList.contains('hidden')) return;
+      if (!(e.target as Element | null)?.closest?.('.equip-row')) {
+        tip.classList.add('hidden');
+        return;
+      }
+      position(e);
+    });
+
+    function position(e: MouseEvent) {
+      const rect = tip.getBoundingClientRect();
+      let x = e.clientX + pad;
+      let y = e.clientY + pad;
+      if (x + rect.width > window.innerWidth - pad) x = e.clientX - rect.width - pad;
+      if (y + rect.height > window.innerHeight - pad) y = e.clientY - rect.height - pad;
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    }
+  }
+</script>

@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+const lang = 'en' as const;
+
+const products = [
+  {
+    title: 'Mud-pump gears / gear shafts',
+    desc: 'Core drive parts for offshore drilling-rig mud pumps, built for high loads and harsh conditions with carburizing and precision gear grinding.',
+  },
+  {
+    title: 'Wind pitch gear shafts',
+    desc: 'Key components of wind-turbine pitch systems, demanding exceptional fatigue life and reliability.',
+  },
+  {
+    title: 'Jacking system parts / jacking gear shafts',
+    desc: 'Large gear shafts and structural parts for offshore platform jacking systems.',
+  },
+  {
+    title: 'Electric-wheel double gears',
+    desc: 'Double gears for electric-wheel drive systems of mining haul trucks.',
+  },
+  {
+    title: 'Hollow shafts for building materials',
+    desc: 'Hollow shaft parts for large equipment in the building-materials industry.',
+  },
+  {
+    title: 'Custom part heat treatment',
+    desc: 'Normalizing, annealing, quenching & tempering, carburizing, nitriding, and induction hardening for ferrous, non-ferrous, and special materials.',
+  },
+];
+---
+
+<Base
+  lang={lang}
+  title="Products — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Changsheng products: mud-pump gears and shafts, wind pitch gear shafts, offshore jacking parts, mining electric-wheel double gears, hollow shafts, and custom heat treatment."
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Products</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Critical parts for heavy industry.</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
+        Core drive components for offshore drilling, wind power, mining, petrochemical,
+        metallurgy, and building-materials industries.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {products.map((p) => (
+          <div class="group overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
+            <div class="grid aspect-[4/3] place-items-center bg-steel-50">
+              <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-steel-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path>
+                </svg>
+                <p class="mt-2 text-xs text-steel-400">Product photo to be added</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h2 class="font-display text-lg font-bold text-ink">{p.title}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">{p.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-[2rem] bg-steel-50 p-8 text-center ring-1 ring-steel-100 sm:p-10">
+        <h2 class="font-display text-2xl font-bold text-ink">Professional gear & heat-treatment supplier since 2006</h2>
+        <a
+          href={`/${lang}/contact`}
+          class="mt-6 inline-block rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-accent-600"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+</Base>

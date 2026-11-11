@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { SITE } from '../../config';
+
+const lang = 'zh' as const;
+---
+
+<Base
+  lang={lang}
+  title="联系我们 — 南京长升机械工程有限公司"
+  description="南京长升机械工程有限公司联系方式：齿轮加工与热处理询价，1–2 个工作日内回复。"
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">专业的齿轮与热处理供应商 · 始于 2006</h1>
+      <a
+        href="#quote-form"
+        class="mt-8 inline-block rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-lg shadow-accent-500/25 transition-transform hover:scale-105"
+      >
+        联系我们
+      </a>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 grid gap-12 lg:grid-cols-5">
+      <div class="lg:col-span-3 rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm sm:p-10">
+        <h2 class="font-display text-xl font-bold text-ink">在线询价</h2>
+        <p class="mt-2 text-sm text-slate-500">带 * 为必填项</p>
+        <div class="mt-6">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-6">
+        <div class="rounded-[2rem] bg-ink p-8">
+          <h2 class="font-display text-xl font-bold text-white">联系方式</h2>
+          <div class="mt-5 space-y-4 text-sm">
+            <div>
+              <p class="text-slate-400">邮箱</p>
+              <a href={`mailto:${SITE.email}`} class="mt-1 inline-block font-semibold text-accent-400 hover:text-accent-500">
+                {SITE.email}
+              </a>
+            </div>
+            <div>
+              <p class="text-slate-400">电话</p>
+              <p class="mt-1 font-semibold text-white">{SITE.phone}</p>
+            </div>
+            <div>
+              <p class="text-slate-400">地址</p>
+              <p class="mt-1 text-white">{SITE.addressZh}</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] border border-slate-100 p-8">
+          <h2 class="font-display text-xl font-bold text-ink">来图加工流程</h2>
+          <ol class="mt-4 space-y-4">
+            {[
+              '发送图纸与技术要求（PDF / DWG / STEP 等格式均可）',
+              '我们评估工艺与报价（1–2 个工作日）',
+              '确认订单，安排生产与热处理',
+              '检测合格后发货交付',
+            ].map((s, i) => (
+              <li class="flex items-start gap-3">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-steel-700 font-display text-sm font-bold text-white">
+                  {i + 1}
+                </span>
+                <span class="text-slate-600">{s}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="rounded-[2rem] border border-slate-100 p-8">
+          <h2 class="font-display text-xl font-bold text-ink">工作时间</h2>
+          <p class="mt-3 text-slate-600">周一至周六 8:00 – 17:30（北京时间）</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

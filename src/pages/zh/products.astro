@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+
+const lang = 'zh' as const;
+
+const products = [
+  {
+    title: '泥浆泵齿轮 / 齿轮轴',
+    desc: '海上钻井平台泥浆泵核心传动零件，承受高载荷与恶劣工况，经渗碳淬火与精密磨齿。',
+  },
+  {
+    title: '风电变桨齿轮轴',
+    desc: '风力发电机组变桨系统关键部件，对疲劳寿命与可靠性要求极高。',
+  },
+  {
+    title: '钻井平台爬升装置零件 / 爬升齿轮轴',
+    desc: '海洋钻井平台爬升系统大型齿轮轴与结构件。',
+  },
+  {
+    title: '矿用车辆电动轮双联齿轮',
+    desc: '矿用自卸车电动轮驱动系统双联齿轮。',
+  },
+  {
+    title: '建材空心轴',
+    desc: '建材行业大型装备用空心轴类零件。',
+  },
+  {
+    title: '定制零件热处理',
+    desc: '各类黑色、有色金属及特殊材料零件的正火、退火、调质、渗碳、氮化、感应淬火等。',
+  },
+];
+---
+
+<Base
+  lang={lang}
+  title="产品展示 — 南京长升机械工程有限公司"
+  description="长升机械产品：泥浆泵齿轮与齿轮轴、风电变桨齿轮轴、钻井平台爬升装置零件、矿用电动轮双联齿轮、建材空心轴及各类零件热处理。"
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">产品展示</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">重工业关键零部件。</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
+        服务海洋钻井平台、风电、矿用、石化、冶金与建材行业的核心传动零件。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {products.map((p) => (
+          <div class="group overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
+            <div class="grid aspect-[4/3] place-items-center bg-steel-50">
+              <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-steel-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path>
+                </svg>
+                <p class="mt-2 text-xs text-steel-400">产品照片待补充</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <h2 class="font-display text-lg font-bold text-ink">{p.title}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">{p.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-[2rem] bg-steel-50 p-8 text-center ring-1 ring-steel-100 sm:p-10">
+        <h2 class="font-display text-2xl font-bold text-ink">专业的齿轮与热处理供应商 · 始于 2006</h2>
+        <a
+          href={`/${lang}/contact`}
+          class="mt-6 inline-block rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-accent-600"
+        >
+          联系我们
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+</Base>

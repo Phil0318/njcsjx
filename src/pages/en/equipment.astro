@@ -1,0 +1,200 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import EquipTable from '../../components/EquipTable.astro';
+import EquipTip from '../../components/EquipTip.astro';
+
+const lang = 'en' as const;
+
+const gearGrinding = [
+  { m: 'NILES ZE400S', r: 'M18 × Ø400', i: 'Precision profile gear grinder for small-to-medium module gears, delivering high tooth accuracy and low noise.' },
+  { m: 'NILES ZE800', r: 'M32 × Ø800', i: 'Profile grinding for larger cylindrical gears, balancing efficiency and accuracy.' },
+  { m: 'NILES ZE1200', r: 'M40 × Ø1200 (external) / M12 × Ø1100 (internal)', i: 'Large-capacity profile grinder for external and internal gears up to Ø1200 mm.' },
+  { m: 'Rapid1250', r: 'M50 × Ø1250 (external)', i: 'High-efficiency profile grinder up to module 50, built for heavy-duty gears.' },
+  { m: 'NILES ZP20', r: 'M50 × Ø2000 (external) / M32 × Ø1500 (internal)', i: 'Large gear grinding up to Ø2000 mm external, widely used for wind and mining gears.' },
+  { m: 'NILES ZP30', r: 'M50 × Ø3000 (external) / M50 × Ø2500 (internal)', i: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore gears.' },
+];
+
+const grinding = [
+  { m: 'CNC vertical grinder MG28100', r: 'Ø1200 × 800', i: 'Vertical CNC grinder for precision ID/OD grinding of large disc and ring parts.' },
+  { m: 'Cylindrical grinder M1350B', r: 'Ø630 × 3000', i: 'Cylindrical grinder for precision OD finishing of shafts.' },
+  { m: 'Surface grinder M7160H', r: '600 × 2000', i: 'Surface grinder for precision face grinding.' },
+];
+
+const turning = [
+  { m: 'CNC mill-turn COVL-200CM', r: 'Ø2000 × 1600', i: 'Mill-turn center completing turning, milling, and drilling in one setup.' },
+  { m: 'CNC vertical lathe C5225-16/10', r: 'Ø2500 × 1600', i: 'Large double-column vertical lathe, up to Ø2500 mm.' },
+  { m: 'CNC vertical lathe VL-160C', r: 'Ø2000', i: 'CNC vertical lathe for efficient turning of large rotational parts.' },
+  { m: 'CNC vertical lathe SZ-160ATC', r: 'Ø1600 × 1250', i: 'CNC vertical lathe with tool magazine for automated turning.' },
+  { m: 'CNC horizontal lathe CK61125E/3000', r: 'Ø1250 × 3000', i: 'Heavy-duty horizontal lathe for long shafts.' },
+  { m: 'CNC horizontal lathe Doosan PUMA 480L', r: 'Ø900 × 2042', i: 'Doosan high-rigidity horizontal lathe for heavy cutting.' },
+  { m: 'CNC horizontal lathe CKBP6180/200', r: 'Ø800 × 2000', i: 'CNC horizontal lathe for small-to-medium shafts.' },
+  { m: 'Radial drills Z3080×25 / Z3050×16 / Z3132B', r: 'Ø80×2500 / Ø50×1600 / Ø32×1000', i: 'Radial drills for drilling and tapping on large parts.' },
+];
+
+const machiningCenters = [
+  { m: 'Machining center LMY2030 (3-axis)', r: '2000 × 3000 × 1500', i: 'Large gantry machining center with a 2000 × 3000 table for big-part milling.' },
+  { m: 'Machining center VM-1580 (3-axis)', r: '1500 × 800 × 700', i: 'Vertical machining center for general precision milling.' },
+  { m: 'Machining center HCMC-1370 (4-axis)', r: '1300 × 700 × 660', i: '4-axis machining center for multi-face machining in one setup.' },
+  { m: '5-axis wire EDM BM150×130', r: '1500 × 1900', i: '5-axis wire EDM for complex profiles and precision dies.' },
+];
+
+const gearMachines = [
+  { m: 'CNC gear milling YK83500A', r: 'M50 × 5000', i: 'CNC gear milling up to module 50 for extra-large gears.' },
+  { m: 'CNC gear milling YK83200A', r: 'M32 × 2000', i: 'CNC gear milling for large-module cylindrical gears.' },
+  { m: 'CNC hobbing-milling YK31200', r: 'M32 × 2000', i: 'Combined hobbing and milling machine for one-pass gear cutting.' },
+  { m: 'CNC gear shaper YKHL51160', r: 'M20 × 1600', i: 'CNC gear shaper for internal gears and blind-hole gears.' },
+  { m: 'CNC helical spline shaper YKEL5350', r: 'M20 × 1600', i: 'CNC helical spline shaper for helical splines and internal teeth.' },
+  { m: 'Hobbing machine Y31125', r: 'M18 × Ø1250', i: 'Hobbing machine for cylindrical gear cutting.' },
+  { m: 'Chamfering machine YKDV-150B', r: 'M32 × 1500', i: 'Chamfering machine for gear ends and tooth edges.' },
+  { m: 'Shot blasting machine KXS-2000P', r: 'Ø1600 × 1250', i: 'Shot-blasting machine for tooth-surface strengthening and cleaning.' },
+];
+
+const heatFurnaces = [
+  { m: 'Large pit carburizing furnace', r: 'Ø1600 × 5500', i: 'Large pit carburizing furnace for deep-case carburizing of long shafts.' },
+  { m: 'Large pit carburizing furnace', r: 'Ø1600 × 4000', i: 'Pit carburizing furnace for shafts and large parts.' },
+  { m: 'Large pit carburizing furnace', r: 'Ø4000 × 2500', i: 'Extra-large pit carburizing furnace for big-diameter parts.' },
+  { m: 'Large pit carburizing furnace', r: 'Ø1500 × 4000', i: 'Pit carburizing furnace for all kinds of shaft parts.' },
+  { m: 'Box multi-purpose furnace line', r: '—', i: 'Controlled-atmosphere multi-purpose furnace line for carburizing, carbonitriding, and quenching & tempering.' },
+  { m: 'Chamber sizes', r: '3000×3000×1500 / 2500×2500×2500 / 2500×2500×1500 / 1200×2000×1000', i: 'Multiple chamber sizes for batch treatment of small and medium parts.' },
+];
+
+const heatProcesses = [
+  'Normalizing & annealing',
+  'Quenching & tempering',
+  'Carburizing & carbonitriding',
+  'Nitriding & nitrocarburizing',
+  'Vacuum oil & high-pressure gas quenching',
+  'Graded & isothermal quenching',
+  'High/medium/ultra-frequency induction hardening',
+  'Shot peening & blackening',
+];
+
+const cmms = [
+  { m: 'CMM (Hexagon)', r: '1500 × 1000 × 1200', n: 'Max workpiece 1000 kg', i: 'Hexagon CMM for parallelism, coaxiality, roundness, and tooth accuracy inspection.' },
+  { m: 'CMM (Italian DEA)', r: '2500 × 2000 × 1200', n: 'Max workpiece 5000 kg', i: 'Italian DEA CMM for geometric tolerance inspection of large parts.' },
+  { m: 'CMM (VENUS 20.33.14)', r: '2000 × 3000 × 1400', n: 'Max workpiece 3000 kg', i: 'VENUS CMM with large travel for precision measurement.' },
+];
+
+const inspection = [
+  'Ultrasonic flaw detectors OMNISX / USM36S',
+  'Direct-reading spectrometer DE-2000',
+  'Horizontal / vertical magnetic particle testers',
+  'Tooth-flank burn inspection line',
+  'Rockwell / Brinell / Vickers hardness testers',
+  'Microhardness tester',
+  'Metallurgical microscope',
+  'Tensile / impact testing machines',
+];
+---
+
+<Base
+  lang={lang}
+  title="Capabilities & Equipment — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Changsheng equipment: NILES gear grinders up to module 50 × Ø3000 mm, large pit carburizing furnaces, Gleason gear analyzer, Hexagon & DEA CMMs, NDT and metallographic labs."
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Capabilities & equipment</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Advanced machines, complete inspection.</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
+        50+ machining tools, 100+ heat-treatment units, and a professional metrology lab —
+        ensuring accuracy and quality on every part. Hover over a machine name to see details.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
+      <EquipTable
+        title="Gear grinding"
+        note="German NILES profile gear grinders, up to module 50 × Ø3000 mm (external)."
+        head={['Machine', 'Capacity']}
+        rows={gearGrinding}
+      />
+
+      <EquipTable title="Grinders" head={['Machine', 'Capacity']} rows={grinding} />
+
+      <EquipTable title="Turning" head={['Machine', 'Capacity']} rows={turning} />
+
+      <EquipTable title="Machining centers & wire EDM" head={['Machine', 'Capacity']} rows={machiningCenters} />
+
+      <EquipTable title="Gear cutting machines" head={['Machine', 'Capacity']} rows={gearMachines} />
+
+      <!-- Heat treatment -->
+      <div class="rounded-[2rem] bg-ink p-8 sm:p-12">
+        <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">Heat-treatment equipment & processes</h2>
+        <p class="mt-2 text-slate-400">100+ heat-treatment units. Single parts 0.1 kg – 30 t. Annual capacity ~50,000 t.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="font-display text-lg font-bold text-accent-400">Main furnaces</h3>
+            <div class="mt-4">
+              <EquipTable title="" head={['Equipment', 'Size']} rows={heatFurnaces} variant="dark" />
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-accent-400">Processes</h3>
+            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+              {heatProcesses.map((p) => (
+                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inspection -->
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Inspection & metrology</h2>
+        <p class="mt-2 text-slate-600">Gear measurement, CMM inspection, NDT, and physical & chemical laboratories.</p>
+
+        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS gear analyzer</h3>
+          <p class="mt-2 text-sm text-slate-600">Internationally advanced gear metrology — full parameter inspection for cylindrical gears, module 1–56.</p>
+          <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ['Module', '1 – 56'],
+              ['Helix angle', '0 – 60°'],
+              ['Base circle diameter', '20 – 1000 mm'],
+              ['Max tip diameter', '1000 mm'],
+              ['Face width', '800 mm'],
+              ['Center distance', '170 – 750 mm'],
+              ['Max workpiece weight', '5000 kg'],
+            ].map(([k, v]) => (
+              <div class="rounded-xl bg-steel-50 px-4 py-3">
+                <span class="text-slate-500">{k}: </span>
+                <span class="font-semibold text-ink">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <EquipTable
+            title="Coordinate measuring machines"
+            note="CMM inspection covers parallelism, coaxiality, roundness, and other geometric tolerances; tooth accuracy parameters Fp, Fr, Fα, Fβ."
+            head={['Instrument', 'Travel (X × Y × Z)', 'Notes']}
+            rows={cmms}
+          />
+        </div>
+
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {inspection.map((i) => (
+            <div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 text-sm font-medium text-ink shadow-sm">
+              <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+              {i}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <EquipTip placeholder="Photo to be added" />
+  <CTA lang={lang} />
+</Base>

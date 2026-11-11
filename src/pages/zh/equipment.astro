@@ -1,0 +1,200 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import EquipTable from '../../components/EquipTable.astro';
+import EquipTip from '../../components/EquipTip.astro';
+
+const lang = 'zh' as const;
+
+const gearGrinding = [
+  { m: 'NILES ZE400S', r: 'M18 × Φ400', i: '精密成形磨齿机，适合中小模数齿轮的精加工，保证齿面高精度与低噪声。' },
+  { m: 'NILES ZE800', r: 'M32 × Φ800', i: '大模数圆柱齿轮成形磨齿，兼顾效率与精度。' },
+  { m: 'NILES ZE1200', r: 'M40 × Φ1200（外齿）/ M12 × Φ1100（内齿）', i: '大型内外齿磨齿设备，满足直径 1200 mm 以内齿轮的批量精磨。' },
+  { m: 'Rapid1250', r: 'M50 × Φ1250（外齿）', i: '高效成形磨齿机，加工范围达模数 50，适合大模数重载齿轮。' },
+  { m: 'NILES ZP20', r: 'M50 × Φ2000（外齿）/ M32 × Φ1500（内齿）', i: '大型齿轮磨齿设备，外齿直径达 2000 mm，广泛用于风电与矿用齿轮。' },
+  { m: 'NILES ZP30', r: 'M50 × Φ3000（外齿）/ M50 × Φ2500（内齿）', i: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。' },
+];
+
+const grinding = [
+  { m: '数控立磨 MG28100', r: 'Φ1200 × 800', i: '立式数控磨床，用于大型盘类、环类零件的内圆与外圆精密磨削。' },
+  { m: '外圆磨床 M1350B', r: 'Φ630 × 3000', i: '外圆磨床，用于轴类零件外圆的精密磨削。' },
+  { m: '平面磨床 M7160H', r: '600 × 2000', i: '平面磨床，用于零件平面的精密磨削。' },
+];
+
+const turning = [
+  { m: '数控车铣复合 COVL-200CM', r: 'Φ2000 × 1600', i: '车铣复合加工中心，一次装夹完成车、铣、钻多道工序。' },
+  { m: '数控立车 C5225-16/10', r: 'Φ2500 × 1600', i: '大型双柱立式车床，最大加工直径 2500 mm。' },
+  { m: '数控立车 VL-160C', r: 'Φ2000', i: '数控立式车床，高效车削大型回转体零件。' },
+  { m: '数控立车 SZ-160ATC', r: 'Φ1600 × 1250', i: '带刀库的数控立车，自动化程度高。' },
+  { m: '数控卧车 CK61125E/3000', r: 'Φ1250 × 3000', i: '重型卧式车床，适合长轴类零件的加工。' },
+  { m: '数控卧车 斗山 PUMA 480L', r: 'Φ900 × 2042', i: '斗山高刚性卧式车床，重载高效车削。' },
+  { m: '数控卧车 CKBP6180/200', r: 'Φ800 × 2000', i: '数控卧式车床，用于中小型轴类零件加工。' },
+  { m: '摇臂钻 Z3080×25 / Z3050×16 / Z3132B', r: 'Φ80×2500 / Φ50×1600 / Φ32×1000', i: '摇臂钻床，用于大型零件的钻孔与攻丝。' },
+];
+
+const machiningCenters = [
+  { m: '加工中心 LMY2030（三轴）', r: '2000 × 3000 × 1500', i: '大型龙门加工中心，工作台 2000 × 3000，适合大型结构件铣削。' },
+  { m: '加工中心 VM-1580（三轴）', r: '1500 × 800 × 700', i: '立式加工中心，用于通用精密铣削。' },
+  { m: '加工中心 HCMC-1370（四轴）', r: '1300 × 700 × 660', i: '四轴加工中心，一次装夹完成多面加工。' },
+  { m: '五轴线切割 BM150×130', r: '1500 × 1900', i: '五轴慢走丝线切割，用于复杂曲面与精密模具加工。' },
+];
+
+const gearMachines = [
+  { m: '数控铣齿机 YK83500A', r: 'M50 × 5000', i: '数控铣齿机，最大模数 50，适合特大型齿轮的成形铣削。' },
+  { m: '数控铣齿机 YK83200A', r: 'M32 × 2000', i: '数控铣齿机，用于大模数圆柱齿轮成形铣削。' },
+  { m: '数控滚铣复合 YK31200', r: 'M32 × 2000', i: '数控滚铣复合机床，滚齿、铣齿一体化加工。' },
+  { m: '数控插齿机 YKHL51160', r: 'M20 × 1600', i: '数控插齿机，用于内齿与盲孔齿轮的加工。' },
+  { m: '数控斜花键插齿机 YKEL5350', r: 'M20 × 1600', i: '数控斜花键插齿机，用于斜花键与内齿加工。' },
+  { m: '滚齿机 Y31125', r: 'M18 × Φ1250', i: '滚齿机，用于圆柱齿轮的成形加工。' },
+  { m: '倒角机 YKDV-150B', r: 'M32 × 1500', i: '倒角机，用于齿轮端面与齿棱的倒角。' },
+  { m: '强力抛丸机 KXS-2000P', r: 'Φ1600 × 1250', i: '强力抛丸机，用于齿面强化与表面清理。' },
+];
+
+const heatFurnaces = [
+  { m: '大型井式渗碳炉', r: 'Φ1600 × 5500', i: '大型井式渗碳炉，适合长轴类零件的深层渗碳。' },
+  { m: '大型井式渗碳炉', r: 'Φ1600 × 4000', i: '井式渗碳炉，用于轴类与大型零件的渗碳。' },
+  { m: '大型井式渗碳炉', r: 'Φ4000 × 2500', i: '超大型井式渗碳炉，适合大直径零件的渗碳淬火。' },
+  { m: '大型井式渗碳炉', r: 'Φ1500 × 4000', i: '井式渗碳炉，用于各类轴件的渗碳处理。' },
+  { m: '箱式多用炉生产线', r: '—', i: '可控气氛箱式多用炉，用于渗碳、碳氮共渗、调质等热处理。' },
+  { m: '炉膛尺寸', r: '3000×3000×1500 / 2500×2500×2500 / 2500×2500×1500 / 1200×2000×1000', i: '多规格箱式炉膛，覆盖各类中小零件的批量热处理。' },
+];
+
+const heatProcesses = [
+  '正火、退火',
+  '调质',
+  '渗碳淬火与碳氮共渗',
+  '氮化与氮碳共渗',
+  '真空油淬与高压气淬',
+  '分级与等温淬火',
+  '高、中、超音频局部与表面淬火',
+  '表面喷丸、发黑处理',
+];
+
+const cmms = [
+  { m: '三坐标测量仪（海克斯康 Hexagon）', r: '1500 × 1000 × 1200', n: '最大工件重量 1000 kg', i: '海克斯康三坐标测量仪，检测平行度、同轴度、圆度等形位公差及齿部精度。' },
+  { m: '三坐标测量仪（意大利 DEA）', r: '2500 × 2000 × 1200', n: '最大工件重量 5000 kg', i: '意大利 DEA 三坐标测量仪，适合大型零件的形位公差检测。' },
+  { m: '三坐标测量仪（VENUS 20.33.14）', r: '2000 × 3000 × 1400', n: '最大工件重量 3000 kg', i: 'VENUS 三坐标测量仪，大行程精密测量。' },
+];
+
+const inspection = [
+  '超声波探伤仪 OMNISX / USM36S',
+  '直读式光谱仪 DE-2000',
+  '卧式 / 立式磁粉探伤机',
+  '齿面烧伤检测线',
+  '洛氏 / 布氏 / 维氏硬度计',
+  '显微硬度计',
+  '金相显微镜',
+  '拉伸 / 冲击试验机',
+];
+---
+
+<Base
+  lang={lang}
+  title="能力与设备 — 南京长升机械工程有限公司"
+  description="长升机械加工与检测设备：NILES 磨齿机最大模数50×直径3000毫米、大型井式渗碳炉、Gleason齿轮测量仪、海克斯康/DEA三坐标等。"
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">能力与设备</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">设备先进，检测完备。</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
+        50 余台套机械加工设备、100 余台套热处理设备与专业计量实验室，保障每一件产品的精度与质量。
+        将鼠标悬停在设备名称上，可查看设备简介。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
+      <EquipTable
+        title="磨齿设备"
+        note="德国 NILES 系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
+        head={['设备型号', '加工范围']}
+        rows={gearGrinding}
+      />
+
+      <EquipTable title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
+
+      <EquipTable title="车削设备" head={['设备型号', '加工范围']} rows={turning} />
+
+      <EquipTable title="加工中心与线切割" head={['设备型号', '加工范围']} rows={machiningCenters} />
+
+      <EquipTable title="齿轮加工机床" head={['设备型号', '加工范围']} rows={gearMachines} />
+
+      <!-- Heat treatment -->
+      <div class="rounded-[2rem] bg-ink p-8 sm:p-12">
+        <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">热处理设备与工艺</h2>
+        <p class="mt-2 text-slate-400">100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨。</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="font-display text-lg font-bold text-accent-400">主要炉型</h3>
+            <div class="mt-4">
+              <EquipTable title="" head={['设备', '规格']} rows={heatFurnaces} variant="dark" />
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-accent-400">热处理工艺</h3>
+            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+              {heatProcesses.map((p) => (
+                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inspection -->
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">检测与计量</h2>
+        <p class="mt-2 text-slate-600">齿轮测量、三坐标检测、无损探伤与理化实验室。</p>
+
+        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量仪</h3>
+          <p class="mt-2 text-sm text-slate-600">国际先进的齿轮测量设备，覆盖模数 1–56 的圆柱齿轮全参数检测。</p>
+          <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ['模数', '1 – 56'],
+              ['螺旋角', '0 – 60°'],
+              ['基圆直径', '20 – 1000 mm'],
+              ['最大齿顶圆直径', '1000 mm'],
+              ['齿宽', '800 mm'],
+              ['中心距', '170 – 750 mm'],
+              ['最大工件重量', '5000 kg'],
+            ].map(([k, v]) => (
+              <div class="rounded-xl bg-steel-50 px-4 py-3">
+                <span class="text-slate-500">{k}：</span>
+                <span class="font-semibold text-ink">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <EquipTable
+            title="三坐标测量仪"
+            note="检测范围：平行度、同轴度、圆度等形位公差；齿部 Fp、Fr、Fα、Fβ 等精度指标。"
+            head={['仪器', '行程范围（X × Y × Z）', '备注']}
+            rows={cmms}
+          />
+        </div>
+
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {inspection.map((i) => (
+            <div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 text-sm font-medium text-ink shadow-sm">
+              <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+              {i}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <EquipTip placeholder="设备照片待补充" />
+  <CTA lang={lang} />
+</Base>
