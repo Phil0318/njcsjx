@@ -11,4 +11,4 @@ export const SITE = {
   phone: '+86 (25) 0000-0000',
 };
 
-export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljbrlbd';
