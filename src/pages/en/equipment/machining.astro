@@ -2,89 +2,102 @@
 import Base from '../../../layouts/Base.astro';
 import CTA from '../../../components/CTA.astro';
 import EquipTable from '../../../components/EquipTable.astro';
+import EquipPhoto from '../../../components/EquipPhoto.astro';
 import EquipTip from '../../../components/EquipTip.astro';
-import MachineSection from '../../../components/MachineSection.astro';
 
 const lang = 'en' as const;
 
-const featured = [
+const categories = [
   {
-    make: 'German NILES',
-    model: 'ZE400S precision profile grinder',
-    spec: 'M20 × Ø400',
-    desc: 'Precision profile grinding for small-to-medium module gears — high tooth accuracy and low noise.',
-    img: '/equipment-photos/niles-ze400s.jpg',
+    id: 'gear-grinding',
+    title: 'Gear Grinding',
+    note: 'German NILES / Hoffmann profile grinders, up to module 50 × Ø3000 mm (external).',
+    photos: [
+      {
+        img: '/equipment-photos/niles-zp30.jpg',
+        model: 'NILES ZP30',
+        spec: 'M50 × Ø3000 (external) / Ø2500 (internal)',
+        desc: 'Our largest grinder — for ultra-large offshore drilling gears.',
+      },
+      {
+        img: '/equipment-photos/niles-ze400s.jpg',
+        model: 'NILES ZE400S',
+        spec: 'M20 × Ø400',
+        desc: 'Precision profile grinder — high tooth accuracy, low noise.',
+      },
+    ],
+    rows: [
+      { m: 'NILES ZE400S', r: 'M20 × Ø400', i: 'German NILES precision profile grinder for small-to-medium module gears — high accuracy, low noise.' },
+      { m: 'NILES ZE800', r: 'M20 × Ø800', i: 'German NILES profile grinder for efficient finishing of medium and large cylindrical gears.' },
+      { m: 'NILES ZE1200', r: 'M25 × Ø1200 (ext.) / Ø1080 (int.)', i: 'German NILES internal/external profile grinder for batch finishing up to Ø1200 mm.' },
+      { m: 'NILES ZP20', r: 'M50 × Ø2000 (ext.) / Ø1480 (int.)', i: 'Large gear grinding up to Ø2000 mm — widely used for wind and mining gears.' },
+      { m: 'NILES ZP30', r: 'M50 × Ø3000 (ext.) / Ø2500 (int.)', i: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore drilling gears.' },
+      { m: 'Ri1250 (German Hoffmann)', r: 'M25 × Ø1200 (ext.)', i: 'High-efficiency profile grinder for heavy-duty gears.' },
+    ],
   },
   {
-    make: 'German NILES',
-    model: 'ZE800S profile grinder',
-    spec: 'M20 × Ø800',
-    desc: 'Efficient finishing of medium and large cylindrical gears — widely used for wind and mining gears.',
-    img: '/equipment-photos/niles-ze800.jpg',
+    id: 'turning',
+    title: 'Turning',
+    note: 'CNC horizontal lathes, CNC vertical lathes and engine lathes.',
+    photos: [
+      {
+        img: '/equipment-photos/puma-480l.jpg',
+        model: 'DOOSAN PUMA 480L',
+        spec: 'Ø650 × 2000',
+        desc: 'Doosan high-rigidity CNC lathe for heavy cutting.',
+      },
+    ],
+    rows: [
+      { m: 'CNC lathe DOOSAN PUMA 480L', r: 'Ø650 × 2000', i: 'Doosan high-rigidity horizontal lathe for heavy cutting.' },
+      { m: 'CNC lathe CKBP6180/2', r: 'Ø800 × 2000', i: 'Anyang Xinsheng CNC horizontal lathe for medium and large shafts.' },
+      { m: 'CNC lathe CK61125E/3', r: 'Ø1250 × 3000', i: 'Anyang Xinsheng heavy-duty horizontal lathe for long shafts.' },
+      { m: 'CNC vertical lathe HONOR VL-160C', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Honor CNC vertical lathe for efficient turning of large rotational parts.' },
+      { m: 'CNC vertical lathe SZ1600ATC', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Suzhou Sanzhong CNC vertical lathe with tool magazine for automated turning.' },
+      { m: 'CNC vertical lathe C5225×16/10', r: 'Table Ø2000, swing Ø2500 × 1600', i: 'Qiqihar double-column vertical lathe, up to Ø2500 mm.' },
+      { m: 'Engine lathes CA6266C / CW6180B / CW61125', r: 'Ø660–1250 × 3000', i: 'Five Shenyang and other engine lathes for roughing and auxiliary operations.' },
+    ],
   },
   {
-    make: 'German NILES',
-    model: 'ZE1200 internal/external grinder',
-    spec: 'M25 × Ø1200 (ext.) / Ø1080 (int.)',
-    desc: 'Large internal/external profile grinding for batch finishing up to Ø1200 mm.',
-    img: '/equipment-photos/niles-ze1200.jpg',
+    id: 'gear-cutting',
+    title: 'Gear Cutting Machines',
+    note: 'Hobbing, milling, shaping, chamfering and hob sharpening — up to module 50 × Ø5000 mm.',
+    photos: [],
+    rows: [
+      { m: 'CNC gear miller YK31500L', r: 'M50 × Ø5000', i: 'Qizhong CNC gear miller — module 50, Ø5000 mm — for form-milling of ultra-large gears.' },
+      { m: 'CNC gear miller YK83200', r: 'M26/32 × Ø2500, 10 t load', i: 'Yichang Changji CNC miller with internal/external milling heads, 10 t table load.' },
+      { m: 'CNC gear hobber Y31200CNC', r: 'M32 × Ø2500', i: 'Hebei Zhuohao CNC hobber for large-module cylindrical gears.' },
+      { m: 'Gear hobbers Y3180H ×3', r: 'M10 × Ø800', i: 'Three Chongqing hobbers for small-to-medium module gears.' },
+      { m: 'Gear hobbers YA31125 / Y31125E', r: 'M16 × Ø1250', i: 'Chongqing hobbers for medium and large cylindrical gears.' },
+      { m: 'CNC gear shaper YKHL51160', r: 'M20 × Ø1600 (ext.) / Ø2000 (int.)', i: 'Wuhan Gewei CNC shaper for large internal and blind-hole gears.' },
+      { m: 'Gear shaper YK5150B', r: 'M8 × Ø500 (ext.) / Ø625 (int.)', i: 'Nanjing Bocheng shaper for small-to-medium internal gears.' },
+      { m: 'Chamfering machine YKDV150B', r: 'M32 × Ø1500', i: 'Shaanxi Guoxi chamfering machine for gear face and tooth-edge chamfering.' },
+      { m: 'Hob sharpener M6425', r: 'Hobs Ø50–250', i: 'Wuhan hob sharpening machine keeping hobs at full accuracy.' },
+    ],
   },
   {
-    make: 'German NILES',
-    model: 'ZP30 large gear grinder',
-    spec: 'M50 × Ø3000 (ext.) / Ø2500 (int.)',
-    desc: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore drilling gears.',
-    img: '/equipment-photos/niles-zp30.jpg',
+    id: 'machining-centers',
+    title: 'Machining Centers',
+    note: '',
+    photos: [],
+    rows: [
+      { m: 'Gantry machining center SK-LMX2030', r: '3000 × 2000 × 1000', i: 'Large gantry machining center for big structural parts.' },
+      { m: 'Machining center SK-VM1580', r: '1500 × 800 × 800', i: 'Vertical machining center for general precision milling.' },
+      { m: 'Machining center HCMC-1370', r: '1300 × 700 × 660', i: 'Hartford 4-axis machining center for multi-face machining in one setup.' },
+    ],
   },
   {
-    make: 'Korean Doosan',
-    model: 'PUMA 480L CNC lathe',
-    spec: 'Ø650 × 2000',
-    desc: 'High-rigidity CNC horizontal lathe for heavy cutting of large shafts.',
-    img: '/equipment-photos/puma-480l.jpg',
+    id: 'grinding-machines',
+    title: 'Grinding',
+    note: '',
+    photos: [],
+    rows: [
+      { m: 'CNC vertical grinder MG28100', r: 'Ø1200 × 800', i: 'Wuxi Mingxin vertical CNC grinder for precision grinding of large disc and ring parts.' },
+      { m: 'Cylindrical grinder M1332B×1500', r: 'Ø320 × 1500', i: 'Shanghai Machine Tool Works cylindrical grinder for precision shaft OD finishing.' },
+      { m: 'Crankshaft grinder MQ8260', r: 'Ø580 × 1600', i: 'Hanzhong crankshaft grinder for crankshaft-type parts.' },
+      { m: 'Internal grinder M250A', r: 'Ø150–500 × 450', i: 'Wuxi internal grinder for precision bore grinding.' },
+      { m: 'Surface grinder M7160×20/HZ', r: '600 × 2000', i: 'Hangzhou surface grinder for precision face grinding.' },
+    ],
   },
-];
-
-const rows = [
-  { m: 'Gear Grinding', group: true, anchor: 'gear-grinding', i: '' },
-  { m: 'NILES ZE400S', r: 'M20 × Ø400', img: '/equipment-photos/niles-ze400s.jpg', i: 'German NILES precision profile grinder for small-to-medium module gears — high accuracy, low noise.' },
-  { m: 'NILES ZE800', r: 'M20 × Ø800', img: '/equipment-photos/niles-ze800.jpg', i: 'German NILES profile grinder for efficient finishing of medium and large cylindrical gears.' },
-  { m: 'NILES ZE1200', r: 'M25 × Ø1200 (external) / Ø1080 (internal)', img: '/equipment-photos/niles-ze1200.jpg', i: 'German NILES internal/external profile grinder for batch finishing up to Ø1200 mm.' },
-  { m: 'NILES ZP20', r: 'M50 × Ø2000 (external) / Ø1480 (internal)', i: 'Large gear grinding up to Ø2000 mm — widely used for wind and mining gears.' },
-  { m: 'NILES ZP30', r: 'M50 × Ø3000 (external) / Ø2500 (internal)', img: '/equipment-photos/niles-zp30.jpg', i: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore drilling gears.' },
-  { m: 'Ri1250 (German Hoffmann)', r: 'M25 × Ø1200 (external)', i: 'High-efficiency profile grinder for heavy-duty gears.' },
-
-  { m: 'Turning', group: true, anchor: 'turning', i: '' },
-  { m: 'CNC lathe DOOSAN PUMA 480L', r: 'Ø650 × 2000', img: '/equipment-photos/puma-480l.jpg', i: 'Doosan high-rigidity horizontal lathe for heavy cutting.' },
-  { m: 'CNC lathe CKBP6180/2', r: 'Ø800 × 2000', i: 'Anyang Xinsheng CNC horizontal lathe for medium and large shafts.' },
-  { m: 'CNC lathe CK61125E/3', r: 'Ø1250 × 3000', i: 'Anyang Xinsheng heavy-duty horizontal lathe for long shafts.' },
-  { m: 'CNC vertical lathe HONOR VL-160C', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Honor CNC vertical lathe for efficient turning of large rotational parts.' },
-  { m: 'CNC vertical lathe SZ1600ATC', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Suzhou Sanzhong CNC vertical lathe with tool magazine for automated turning.' },
-  { m: 'CNC vertical lathe C5225×16/10', r: 'Table Ø2000, swing Ø2500 × 1600', i: 'Qiqihar double-column vertical lathe, up to Ø2500 mm.' },
-  { m: 'Engine lathes CA6266C / CW6180B / CW61125', r: 'Ø660–1250 × 3000', i: 'Five Shenyang and other engine lathes for roughing and auxiliary operations.' },
-
-  { m: 'Gear Cutting Machines', group: true, anchor: 'gear-cutting', i: '' },
-  { m: 'CNC gear miller YK31500L', r: 'M50 × Ø5000', i: 'Qizhong CNC gear miller — module 50, Ø5000 mm — for form-milling of ultra-large gears.' },
-  { m: 'CNC gear miller YK83200', r: 'M26/32 × Ø2500, 10 t load', i: 'Yichang Changji CNC miller with internal/external milling heads, 10 t table load.' },
-  { m: 'CNC gear hobber Y31200CNC', r: 'M32 × Ø2500', i: 'Hebei Zhuohao CNC hobber for large-module cylindrical gears.' },
-  { m: 'Gear hobbers Y3180H ×3', r: 'M10 × Ø800', i: 'Three Chongqing hobbers for small-to-medium module gears.' },
-  { m: 'Gear hobbers YA31125 / Y31125E', r: 'M16 × Ø1250', i: 'Chongqing hobbers for medium and large cylindrical gears.' },
-  { m: 'CNC gear shaper YKHL51160', r: 'M20 × Ø1600 (ext.) / Ø2000 (int.)', i: 'Wuhan Gewei CNC shaper for large internal and blind-hole gears.' },
-  { m: 'Gear shaper YK5150B', r: 'M8 × Ø500 (ext.) / Ø625 (int.)', i: 'Nanjing Bocheng shaper for small-to-medium internal gears.' },
-  { m: 'Chamfering machine YKDV150B', r: 'M32 × Ø1500', i: 'Shaanxi Guoxi chamfering machine for gear face and tooth-edge chamfering.' },
-  { m: 'Hob sharpener M6425', r: 'Hobs Ø50–250', i: 'Wuhan hob sharpening machine keeping hobs at full accuracy.' },
-
-  { m: 'Machining Centers', group: true, anchor: 'machining-centers', i: '' },
-  { m: 'Gantry machining center SK-LMX2030', r: '3000 × 2000 × 1000', i: 'Large gantry machining center for big structural parts.' },
-  { m: 'Machining center SK-VM1580', r: '1500 × 800 × 800', i: 'Vertical machining center for general precision milling.' },
-  { m: 'Machining center HCMC-1370', r: '1300 × 700 × 660', i: 'Hartford 4-axis machining center for multi-face machining in one setup.' },
-
-  { m: 'Grinding', group: true, anchor: 'grinding-machines', i: '' },
-  { m: 'CNC vertical grinder MG28100', r: 'Ø1200 × 800', i: 'Wuxi Mingxin vertical CNC grinder for precision grinding of large disc and ring parts.' },
-  { m: 'Cylindrical grinder M1332B×1500', r: 'Ø320 × 1500', i: 'Shanghai Machine Tool Works cylindrical grinder for precision shaft OD finishing.' },
-  { m: 'Crankshaft grinder MQ8260', r: 'Ø580 × 1600', i: 'Hanzhong crankshaft grinder for crankshaft-type parts.' },
-  { m: 'Internal grinder M250A', r: 'Ø150–500 × 450', i: 'Wuxi internal grinder for precision bore grinding.' },
-  { m: 'Surface grinder M7160×20/HZ', r: '600 × 2000', i: 'Hangzhou surface grinder for precision face grinding.' },
 ];
 
 const otherMachining = [
@@ -113,49 +126,33 @@ const otherMachining = [
   </section>
 
   <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment showcase</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Featured machines</h2>
-      </div>
+    <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
+      {categories.map((c) => (
+        <div id={c.id} class="scroll-mt-24">
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">{c.title}</h2>
+          {c.note && <p class="mt-2 text-slate-600">{c.note}</p>}
 
-      <div class="mt-12 space-y-16">
-        {featured.map((f) => (
-          <MachineSection
-            make={f.make}
-            model={f.model}
-            spec={f.spec}
-            desc={f.desc}
-            img={f.img}
-            makeLabel="Manufacturer"
-            modelLabel="Model"
-            specLabel="Capacity"
-            details={[
-              { src: f.img.replace(/(\.[a-z]+)$/, '-panel$1'), label: 'Control panel' },
-              { src: f.img.replace(/(\.[a-z]+)$/, '-area$1'), label: 'Machining area' },
-            ]}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
+          {c.photos.length > 0 && (
+            <div class:list={['mt-6 grid gap-6', c.photos.length > 1 && 'sm:grid-cols-2']}>
+              {c.photos.map((p) => (
+                <div class="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
+                  <EquipPhoto src={p.img} name={p.model} fit="contain" class="aspect-[4/3] rounded-none border-0 ring-0" />
+                  <div class="border-t border-slate-100 p-4 sm:p-5">
+                    <p class="font-display font-bold text-ink">{p.model}</p>
+                    <p class="mt-0.5 text-sm font-medium text-accent-500">{p.spec}</p>
+                    <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{p.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-  <section class="bg-steel-50 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment list</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">All machining equipment</h2>
-      </div>
+          <EquipTable head={['Model', 'Capacity']} rows={c.rows} />
+        </div>
+      ))}
 
-      <EquipTable
-        head={['Model', 'Capacity']}
-        rows={rows}
-        photoHead="Photo"
-        note="Gear grinding up to module 50 × Ø3000 mm; gear hobbing/milling up to module 50 × Ø5000 mm."
-      />
-
-      <div id="other-machining" class="scroll-mt-24 mt-8 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-        <h3 class="font-display text-lg font-bold text-ink">Other Machining Equipment</h3>
+      <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Other Machining Equipment</h2>
         <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
           {otherMachining.map((p) => (
             <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
