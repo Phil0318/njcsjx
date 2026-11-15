@@ -5,6 +5,7 @@ export const ui = {
     nav: {
       home: '首页',
       about: '关于我们',
+      certificates: '资质认证',
       equipment: '服务与设备',
       products: '产品展示',
       contact: '联系我们',
@@ -50,6 +51,7 @@ export const ui = {
     nav: {
       home: 'Home',
       about: 'About',
+      certificates: 'Certifications',
       equipment: 'Services',
       products: 'Products',
       contact: 'Contact',
