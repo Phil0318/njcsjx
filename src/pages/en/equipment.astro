@@ -144,109 +144,160 @@ const mechanicalTests = [
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Capabilities & Equipment</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Advanced machines, complete inspection.</h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-        50+ machining tools, 100+ heat-treatment units and a professional metrology lab.
+        Three divisions — machining, heat treatment, and inspection & metrology.
         Hover over an equipment name for details.
       </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href="#machining"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          01 Machining
+        </a>
+        <a
+          href="#heat-treatment"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          02 Heat Treatment
+        </a>
+        <a
+          href="#inspection"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          03 Inspection & Metrology
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
-      <EquipTable
-        title="Gear Grinding"
-        note="German NILES / Hoffmann profile grinders, up to module 50 × Ø3000 mm (external)."
-        head={['Model', 'Capacity']}
-        rows={gearGrinding}
-      />
-
-      <EquipTable title="Turning" note="CNC horizontal lathes, CNC vertical lathes and engine lathes." head={['Model', 'Capacity']} rows={turning} />
-
-      <EquipTable
-        title="Gear Cutting Machines"
-        note="Hobbing, milling, shaping, chamfering and hob sharpening — up to module 50 × Ø5000 mm."
-        head={['Model', 'Capacity']}
-        rows={gearMachines}
-      />
-
-      <EquipTable title="Machining Centers" head={['Model', 'Capacity']} rows={machiningCenters} />
-
-      <EquipTable title="Grinding" head={['Model', 'Capacity']} rows={grinding} />
-
-      <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-        <h3 class="font-display text-lg font-bold text-ink">Other Machining Equipment</h3>
-        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-          {otherMachining.map((p) => (
-            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
-              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-              </svg>
-              {p}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Heat treatment -->
-      <div class="rounded-[2rem] bg-ink p-8 sm:p-12">
-        <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">Heat Treatment Equipment & Processes</h2>
-        <p class="mt-2 text-slate-400">
-          100+ heat-treatment units, single parts 0.1 kg – 30 t, ~50,000 t annual capacity; ABS-approved heat-treatment facility.
-        </p>
-        <div class="mt-8 space-y-8">
-          <EquipTable title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} variant="dark" />
-          <EquipTable
-            title="Pit Carburizing Furnaces"
-            note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
-            head={['Equipment', 'Size']}
-            rows={carburizingFurnaces}
-            variant="dark"
-          />
-          <EquipTable title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} variant="dark" />
-          <EquipTable title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} variant="dark" />
-          <div>
-            <h3 class="font-display text-lg font-bold text-accent-400">Other Heat-Treatment Equipment</h3>
-            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {otherHeatTreat.map((p) => (
-                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-display text-lg font-bold text-accent-400">Processes</h3>
-            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {[
-                'Normalizing, annealing',
-                'Quenching & tempering',
-                'Carburizing & carbonitriding',
-                'Nitriding & nitrocarburizing',
-                'Vacuum oil & high-pressure gas quenching',
-                'Step & isothermal quenching',
-                'HF / MF / super-audio induction hardening',
-                'Shot peening, blackening',
-              ].map((p) => (
-                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
+  <!-- 01 Machining -->
+  <section id="machining" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">01</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Machining Equipment</h2>
+          <p class="mt-1 max-w-2xl text-slate-600">50+ machine tools, gear grinding up to module 50 × Ø3000 mm.</p>
         </div>
       </div>
 
-      <!-- Inspection -->
-      <div>
-        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Inspection & Metrology</h2>
-        <p class="mt-2 text-slate-600">Gear measurement, CMM inspection, NDT and physical/metallurgical laboratories.</p>
+      <div class="mt-10 space-y-12">
+        <EquipTable
+          title="Gear Grinding"
+          note="German NILES / Hoffmann profile grinders, up to module 50 × Ø3000 mm (external)."
+          head={['Model', 'Capacity']}
+          rows={gearGrinding}
+        />
 
-        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div class="grid items-start gap-12 lg:grid-cols-2">
+          <EquipTable title="Turning" note="CNC horizontal lathes, CNC vertical lathes and engine lathes." head={['Model', 'Capacity']} rows={turning} />
+          <EquipTable
+            title="Gear Cutting Machines"
+            note="Hobbing, milling, shaping, chamfering and hob sharpening — up to module 50 × Ø5000 mm."
+            head={['Model', 'Capacity']}
+            rows={gearMachines}
+          />
+        </div>
+
+        <div class="grid items-start gap-12 lg:grid-cols-2">
+          <EquipTable title="Machining Centers" head={['Model', 'Capacity']} rows={machiningCenters} />
+          <EquipTable title="Grinding" head={['Model', 'Capacity']} rows={grinding} />
+        </div>
+
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h3 class="font-display text-lg font-bold text-ink">Other Machining Equipment</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {otherMachining.map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Heat treatment -->
+  <section id="heat-treatment" class="scroll-mt-24 bg-ink py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-white/15 sm:text-6xl">02</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">Heat Treatment Equipment & Processes</h2>
+          <p class="mt-1 max-w-2xl text-slate-400">
+            100+ heat-treatment units, single parts 0.1 kg – 30 t, ~50,000 t annual capacity; ABS-approved heat-treatment facility.
+          </p>
+        </div>
+      </div>
+      <div class="mt-10 space-y-8">
+        <EquipTable title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} variant="dark" />
+        <EquipTable
+          title="Pit Carburizing Furnaces"
+          note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
+          head={['Equipment', 'Size']}
+          rows={carburizingFurnaces}
+          variant="dark"
+        />
+        <div class="grid items-start gap-8 lg:grid-cols-2">
+          <EquipTable title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} variant="dark" />
+          <EquipTable title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} variant="dark" />
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-accent-400">Other Heat-Treatment Equipment</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {otherHeatTreat.map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-accent-400">Processes</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {[
+              'Normalizing, annealing',
+              'Quenching & tempering',
+              'Carburizing & carbonitriding',
+              'Nitriding & nitrocarburizing',
+              'Vacuum oil & high-pressure gas quenching',
+              'Step & isothermal quenching',
+              'HF / MF / super-audio induction hardening',
+              'Shot peening, blackening',
+            ].map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Inspection -->
+  <section id="inspection" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">03</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Inspection & Metrology</h2>
+          <p class="mt-1 max-w-2xl text-slate-600">Gear measurement, CMM inspection, NDT and physical/metallurgical laboratories.</p>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS Gear Analyzer</h3>
           <p class="mt-2 text-sm text-slate-600">Advanced gear measurement — max inspection Ø1000 mm × height 1200 mm.</p>
           <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">

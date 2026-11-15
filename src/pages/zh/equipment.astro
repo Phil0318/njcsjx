@@ -144,109 +144,160 @@ const mechanicalTests = [
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">能力与设备</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">设备先进，检测完备。</h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-        集团机加设备 50 余台套、热处理设备 100 余台套与专业计量实验室，保障每一件产品的精度与质量。
+        三大板块——机械加工、热处理、检测与计量，保障每一件产品的精度与质量。
         将鼠标悬停在设备名称上，可查看设备简介。
       </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href="#machining"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          01 机械加工
+        </a>
+        <a
+          href="#heat-treatment"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          02 热处理
+        </a>
+        <a
+          href="#inspection"
+          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
+        >
+          03 检测与计量
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
-      <EquipTable
-        title="磨齿设备"
-        note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
-        head={['设备型号', '加工范围']}
-        rows={gearGrinding}
-      />
-
-      <EquipTable title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
-
-      <EquipTable
-        title="齿轮加工机床"
-        note="滚齿、铣齿、插齿、倒角、刃磨，最大滚铣能力模数 50 × 直径 5000 毫米。"
-        head={['设备型号', '加工范围']}
-        rows={gearMachines}
-      />
-
-      <EquipTable title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
-
-      <EquipTable title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
-
-      <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-        <h3 class="font-display text-lg font-bold text-ink">其他机加设备</h3>
-        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-          {otherMachining.map((p) => (
-            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
-              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-              </svg>
-              {p}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Heat treatment -->
-      <div class="rounded-[2rem] bg-ink p-8 sm:p-12">
-        <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">热处理设备与工艺</h2>
-        <p class="mt-2 text-slate-400">
-          100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨；通过 ABS 船级社热处理设施认可。
-        </p>
-        <div class="mt-8 space-y-8">
-          <EquipTable title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} variant="dark" />
-          <EquipTable
-            title="井式渗碳炉"
-            note="9 台大型井式渗碳炉，最大 Φ4000 × 2000，一次装炉量最高 50 t。"
-            head={['设备', '规格']}
-            rows={carburizingFurnaces}
-            variant="dark"
-          />
-          <EquipTable title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} variant="dark" />
-          <EquipTable title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} variant="dark" />
-          <div>
-            <h3 class="font-display text-lg font-bold text-accent-400">其他热处理设备</h3>
-            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {otherHeatTreat.map((p) => (
-                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-display text-lg font-bold text-accent-400">热处理工艺</h3>
-            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {[
-                '正火、退火',
-                '调质',
-                '渗碳淬火与碳氮共渗',
-                '氮化与氮碳共渗',
-                '真空油淬与高压气淬',
-                '分级与等温淬火',
-                '高、中、超音频局部与表面淬火',
-                '表面喷丸、发黑处理',
-              ].map((p) => (
-                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
+  <!-- 01 Machining -->
+  <section id="machining" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">01</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">机械加工设备</h2>
+          <p class="mt-1 max-w-2xl text-slate-600">50 余台套机加设备，最大磨齿能力模数 50 × 直径 3000 毫米。</p>
         </div>
       </div>
 
-      <!-- Inspection -->
-      <div>
-        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">检测与计量</h2>
-        <p class="mt-2 text-slate-600">齿轮测量、三坐标检测、无损探伤与理化实验室。</p>
+      <div class="mt-10 space-y-12">
+        <EquipTable
+          title="磨齿设备"
+          note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
+          head={['设备型号', '加工范围']}
+          rows={gearGrinding}
+        />
 
-        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div class="grid items-start gap-12 lg:grid-cols-2">
+          <EquipTable title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
+          <EquipTable
+            title="齿轮加工机床"
+            note="滚齿、铣齿、插齿、倒角、刃磨，最大滚铣能力模数 50 × 5000 毫米。"
+            head={['设备型号', '加工范围']}
+            rows={gearMachines}
+          />
+        </div>
+
+        <div class="grid items-start gap-12 lg:grid-cols-2">
+          <EquipTable title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
+          <EquipTable title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
+        </div>
+
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h3 class="font-display text-lg font-bold text-ink">其他机加设备</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {otherMachining.map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Heat treatment -->
+  <section id="heat-treatment" class="scroll-mt-24 bg-ink py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-white/15 sm:text-6xl">02</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">热处理设备与工艺</h2>
+          <p class="mt-1 max-w-2xl text-slate-400">
+            100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨；通过 ABS 船级社热处理设施认可。
+          </p>
+        </div>
+      </div>
+      <div class="mt-10 space-y-8">
+        <EquipTable title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} variant="dark" />
+        <EquipTable
+          title="井式渗碳炉"
+          note="9 台大型井式渗碳炉，最大 Φ4000 × 2000，一次装炉量最高 50 t。"
+          head={['设备', '规格']}
+          rows={carburizingFurnaces}
+          variant="dark"
+        />
+        <div class="grid items-start gap-8 lg:grid-cols-2">
+          <EquipTable title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} variant="dark" />
+          <EquipTable title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} variant="dark" />
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-accent-400">其他热处理设备</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {otherHeatTreat.map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-accent-400">热处理工艺</h3>
+          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {[
+              '正火、退火',
+              '调质',
+              '渗碳淬火与碳氮共渗',
+              '氮化与氮碳共渗',
+              '真空油淬与高压气淬',
+              '分级与等温淬火',
+              '高、中、超音频局部与表面淬火',
+              '表面喷丸、发黑处理',
+            ].map((p) => (
+              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Inspection -->
+  <section id="inspection" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-5">
+        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">03</span>
+        <div>
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">检测与计量</h2>
+          <p class="mt-1 max-w-2xl text-slate-600">齿轮测量、三坐标检测、无损探伤与理化实验室。</p>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量中心</h3>
           <p class="mt-2 text-sm text-slate-600">国际先进的齿轮测量设备，最大检测直径 1000 mm、最大检测高度 1200 mm。</p>
           <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
