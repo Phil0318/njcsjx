@@ -13,13 +13,14 @@ interface Props {
   head: string[];
   rows: Row[];
   variant?: 'light' | 'dark';
+  id?: string;
 }
 
-const { title, note, head, rows, variant = 'light' } = Astro.props;
+const { title, note, head, rows, variant = 'light', id } = Astro.props;
 const dark = variant === 'dark';
 ---
 
-<div>
+<div id={id} class="scroll-mt-24">
   {title && (
     <h2 class:list={['font-display text-2xl font-bold sm:text-3xl', dark ? 'text-white' : 'text-ink']}>
       {title}

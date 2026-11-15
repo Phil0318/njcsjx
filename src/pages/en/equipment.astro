@@ -183,6 +183,7 @@ const mechanicalTests = [
 
       <div class="mt-10 space-y-12">
         <EquipTable
+          id="gear-grinding"
           title="Gear Grinding"
           note="German NILES / Hoffmann profile grinders, up to module 50 × Ø3000 mm (external)."
           head={['Model', 'Capacity']}
@@ -190,8 +191,9 @@ const mechanicalTests = [
         />
 
         <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable title="Turning" note="CNC horizontal lathes, CNC vertical lathes and engine lathes." head={['Model', 'Capacity']} rows={turning} />
+          <EquipTable id="turning" title="Turning" note="CNC horizontal lathes, CNC vertical lathes and engine lathes." head={['Model', 'Capacity']} rows={turning} />
           <EquipTable
+            id="gear-cutting"
             title="Gear Cutting Machines"
             note="Hobbing, milling, shaping, chamfering and hob sharpening — up to module 50 × Ø5000 mm."
             head={['Model', 'Capacity']}
@@ -200,11 +202,11 @@ const mechanicalTests = [
         </div>
 
         <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable title="Machining Centers" head={['Model', 'Capacity']} rows={machiningCenters} />
-          <EquipTable title="Grinding" head={['Model', 'Capacity']} rows={grinding} />
+          <EquipTable id="machining-centers" title="Machining Centers" head={['Model', 'Capacity']} rows={machiningCenters} />
+          <EquipTable id="grinding-machines" title="Grinding" head={['Model', 'Capacity']} rows={grinding} />
         </div>
 
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">Other Machining Equipment</h3>
           <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
             {otherMachining.map((p) => (
@@ -234,8 +236,9 @@ const mechanicalTests = [
         </div>
       </div>
       <div class="mt-10 space-y-8">
-        <EquipTable title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} variant="dark" />
+        <EquipTable id="vacuum-furnaces" title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} variant="dark" />
         <EquipTable
+          id="carburizing"
           title="Pit Carburizing Furnaces"
           note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
           head={['Equipment', 'Size']}
@@ -243,8 +246,8 @@ const mechanicalTests = [
           variant="dark"
         />
         <div class="grid items-start gap-8 lg:grid-cols-2">
-          <EquipTable title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} variant="dark" />
-          <EquipTable title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} variant="dark" />
+          <EquipTable id="sealed-quench" title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} variant="dark" />
+          <EquipTable id="nitriding" title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} variant="dark" />
         </div>
         <div>
           <h3 class="font-display text-lg font-bold text-accent-400">Other Heat-Treatment Equipment</h3>
@@ -297,7 +300,7 @@ const mechanicalTests = [
       </div>
 
       <div class="mt-10">
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="gleason" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS Gear Analyzer</h3>
           <p class="mt-2 text-sm text-slate-600">Advanced gear measurement — max inspection Ø1000 mm × height 1200 mm.</p>
           <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
@@ -320,6 +323,7 @@ const mechanicalTests = [
 
         <div class="mt-6">
           <EquipTable
+            id="cmm"
             title="Coordinate Measuring Machines"
             note="Inspection of parallelism, concentricity, roundness and gear accuracy indices Fp, Fr, Fα, Fβ."
             head={['Machine', 'Travel (X × Y × Z)']}
@@ -327,7 +331,7 @@ const mechanicalTests = [
           />
         </div>
 
-        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="ndt" class="scroll-mt-24 mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">NDT & Material Analysis</h3>
           <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {ndt.map((i) => (
@@ -339,7 +343,7 @@ const mechanicalTests = [
           </div>
         </div>
 
-        <div class="mt-6 grid gap-3 md:grid-cols-2">
+        <div id="labs" class="scroll-mt-24 mt-6 grid gap-3 md:grid-cols-2">
           <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
             <h3 class="font-display text-lg font-bold text-ink">Hardness & Metallography</h3>
             <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">

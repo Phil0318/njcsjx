@@ -183,15 +183,17 @@ const mechanicalTests = [
 
       <div class="mt-10 space-y-12">
         <EquipTable
+          id="gear-grinding"
           title="磨齿设备"
-          note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
+          note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 3000 毫米（外齿）。"
           head={['设备型号', '加工范围']}
           rows={gearGrinding}
         />
 
         <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
+          <EquipTable id="turning" title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
           <EquipTable
+            id="gear-cutting"
             title="齿轮加工机床"
             note="滚齿、铣齿、插齿、倒角、刃磨，最大滚铣能力模数 50 × 5000 毫米。"
             head={['设备型号', '加工范围']}
@@ -200,11 +202,11 @@ const mechanicalTests = [
         </div>
 
         <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
-          <EquipTable title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
+          <EquipTable id="machining-centers" title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
+          <EquipTable id="grinding-machines" title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
         </div>
 
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">其他机加设备</h3>
           <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
             {otherMachining.map((p) => (
@@ -234,8 +236,9 @@ const mechanicalTests = [
         </div>
       </div>
       <div class="mt-10 space-y-8">
-        <EquipTable title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} variant="dark" />
+        <EquipTable id="vacuum-furnaces" title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} variant="dark" />
         <EquipTable
+          id="carburizing"
           title="井式渗碳炉"
           note="9 台大型井式渗碳炉，最大 Φ4000 × 2000，一次装炉量最高 50 t。"
           head={['设备', '规格']}
@@ -243,8 +246,8 @@ const mechanicalTests = [
           variant="dark"
         />
         <div class="grid items-start gap-8 lg:grid-cols-2">
-          <EquipTable title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} variant="dark" />
-          <EquipTable title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} variant="dark" />
+          <EquipTable id="sealed-quench" title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} variant="dark" />
+          <EquipTable id="nitriding" title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} variant="dark" />
         </div>
         <div>
           <h3 class="font-display text-lg font-bold text-accent-400">其他热处理设备</h3>
@@ -297,7 +300,7 @@ const mechanicalTests = [
       </div>
 
       <div class="mt-10">
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="gleason" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量中心</h3>
           <p class="mt-2 text-sm text-slate-600">国际先进的齿轮测量设备，最大检测直径 1000 mm、最大检测高度 1200 mm。</p>
           <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
@@ -320,6 +323,7 @@ const mechanicalTests = [
 
         <div class="mt-6">
           <EquipTable
+            id="cmm"
             title="三坐标测量仪"
             note="检测范围：平行度、同轴度、圆度等形位公差；齿部 Fp、Fr、Fα、Fβ 等精度指标。"
             head={['仪器', '行程范围（X × Y × Z）']}
@@ -327,7 +331,7 @@ const mechanicalTests = [
           />
         </div>
 
-        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div id="ndt" class="scroll-mt-24 mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
           <h3 class="font-display text-lg font-bold text-ink">无损探伤与材质分析</h3>
           <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {ndt.map((i) => (
@@ -339,7 +343,7 @@ const mechanicalTests = [
           </div>
         </div>
 
-        <div class="mt-6 grid gap-3 md:grid-cols-2">
+        <div id="labs" class="scroll-mt-24 mt-6 grid gap-3 md:grid-cols-2">
           <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
             <h3 class="font-display text-lg font-bold text-ink">硬度与金相</h3>
             <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
