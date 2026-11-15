@@ -55,7 +55,7 @@ const vacuumFurnaces = [
 
 const carburizingFurnaces = [
   { m: 'Pit carburizing furnace TL160×550', r: 'Ø1600 × 5500', i: 'Tianlong extra-large pit carburizer, 50 t load, for deep carburizing of long shafts.' },
-  { m: 'Pit carburizing furnace TL400×240', r: 'Ø4000 × 2000', i: 'Tianlong extra-large pit carburizer, 50 t load, for large-diameter parts.' },
+  { m: 'Pit carburizing furnace TL400×240', r: 'Ø4000 × 2500', i: 'Tianlong extra-large pit carburizer, 50 t load, for large-diameter parts.' },
   { m: 'Pit carburizing furnace TL150×400', r: 'Ø1500 × 4000', i: 'Tianlong pit carburizer, 35 t load.' },
   { m: 'Pit carburizing furnace AXL180×400', r: 'Ø1800 × 4000', i: 'Aichelin pit carburizer, 30 t load.' },
   { m: 'Pit carburizing furnaces AXL250×300 ×2', r: 'Ø2500 × 3000', i: 'Two Aichelin pit carburizers, 30 t load each.' },
@@ -69,6 +69,7 @@ const multiFurnaces = [
   { m: 'Preheating furnaces VKHE5/2A-CN ×4', r: '900 × 900 × 1500', i: 'Four Aichelin preheating/low-temperature tempering furnaces.' },
   { m: 'Washers KEKTE5/2A-CN ×2', r: '900 × 900 × 1500', i: 'Two Aichelin washing machines.' },
   { m: 'Hefeisi line NDS-RM ×2 / NDS-GH ×2', r: '1500 × 1200 × 1200', i: 'Two main and two preheating furnaces, 3 t load, single parts up to 2500 kg.' },
+  { m: 'Sealed-quench chamber sizes', r: '2500×2500×2500 / 1500×2500×2500 / 800×1200 / 800×2500', i: 'Multiple chamber sizes covering batch heat treatment of small and medium parts.' },
 ];
 
 const nitridingFurnaces = [
@@ -145,7 +146,7 @@ const otherHeatTreat = [
       <EquipTable
         id="carburizing"
         title="Pit Carburizing Furnaces"
-        note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
+        note="Nine large pit carburizers, up to Ø4000 × 2500, 50 t load."
         head={['Equipment', 'Size']}
         rows={carburizingFurnaces}
       />
