@@ -3,8 +3,47 @@ import Base from '../../../layouts/Base.astro';
 import CTA from '../../../components/CTA.astro';
 import EquipTable from '../../../components/EquipTable.astro';
 import EquipTip from '../../../components/EquipTip.astro';
+import MachineSection from '../../../components/MachineSection.astro';
 
 const lang = 'en' as const;
+
+const featured = [
+  {
+    make: 'German NILES',
+    model: 'ZE400S precision profile grinder',
+    spec: 'M20 × Ø400',
+    desc: 'Precision profile grinding for small-to-medium module gears — high tooth accuracy and low noise.',
+    img: '/equipment-photos/niles-ze400s.jpg',
+  },
+  {
+    make: 'German NILES',
+    model: 'ZE800S profile grinder',
+    spec: 'M20 × Ø800',
+    desc: 'Efficient finishing of medium and large cylindrical gears — widely used for wind and mining gears.',
+    img: '/equipment-photos/niles-ze800.jpg',
+  },
+  {
+    make: 'German NILES',
+    model: 'ZE1200 internal/external grinder',
+    spec: 'M25 × Ø1200 (ext.) / Ø1080 (int.)',
+    desc: 'Large internal/external profile grinding for batch finishing up to Ø1200 mm.',
+    img: '/equipment-photos/niles-ze1200.jpg',
+  },
+  {
+    make: 'German NILES',
+    model: 'ZP30 large gear grinder',
+    spec: 'M50 × Ø3000 (ext.) / Ø2500 (int.)',
+    desc: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore drilling gears.',
+    img: '/equipment-photos/niles-zp30.jpg',
+  },
+  {
+    make: 'Korean Doosan',
+    model: 'PUMA 480L CNC lathe',
+    spec: 'Ø650 × 2000',
+    desc: 'High-rigidity CNC horizontal lathe for heavy cutting of large shafts.',
+    img: '/equipment-photos/puma-480l.jpg',
+  },
+];
 
 const rows = [
   { m: 'Gear Grinding', group: true, anchor: 'gear-grinding', i: '' },
@@ -74,6 +113,34 @@ const otherMachining = [
   </section>
 
   <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment showcase</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Featured machines</h2>
+      </div>
+
+      <div class="mt-12 space-y-16">
+        {featured.map((f) => (
+          <MachineSection
+            make={f.make}
+            model={f.model}
+            spec={f.spec}
+            desc={f.desc}
+            img={f.img}
+            makeLabel="Manufacturer"
+            modelLabel="Model"
+            specLabel="Capacity"
+            details={[
+              { src: f.img.replace(/(\.[a-z]+)$/, '-panel$1'), label: 'Control panel' },
+              { src: f.img.replace(/(\.[a-z]+)$/, '-area$1'), label: 'Machining area' },
+            ]}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-steel-50 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment list</p>

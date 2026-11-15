@@ -1,0 +1,61 @@
+---
+import EquipPhoto from './EquipPhoto.astro';
+
+interface Detail {
+  src: string;
+  label: string;
+}
+
+interface Props {
+  make: string;
+  model: string;
+  spec: string;
+  desc: string;
+  img: string;
+  details?: Detail[];
+  makeLabel: string;
+  modelLabel: string;
+  specLabel: string;
+  dark?: boolean;
+}
+
+const { make, model, spec, desc, img, details = [], makeLabel, modelLabel, specLabel, dark = false } = Astro.props;
+---
+
+<section>
+  <h3 class:list={['font-display text-xl font-bold sm:text-2xl', dark ? 'text-white' : 'text-ink']}>
+    {make} <span class:list={[dark ? 'text-accent-400' : 'text-accent-500']}>{model}</span>
+  </h3>
+  <div class="mt-5 grid items-start gap-8 lg:grid-cols-2">
+    <div>
+      <EquipPhoto src={img} name={`${make} ${model}`} class="aspect-[4/3]" />
+      {details.length > 0 && (
+        <div class="mt-3 grid grid-cols-2 gap-3">
+          {details.map((d) => (
+            <EquipPhoto src={d.src} name={d.label} class="aspect-video" />
+          ))}
+        </div>
+      )}
+    </div>
+    <div>
+      <dl class:list={[
+        'divide-y rounded-2xl text-sm',
+        dark ? 'divide-white/10 bg-white/5 ring-1 ring-white/10' : 'divide-slate-200 bg-steel-50 ring-1 ring-slate-200',
+      ]}>
+        <div class="flex items-baseline gap-4 px-5 py-3">
+          <dt class:list={['w-24 shrink-0 font-semibold', dark ? 'text-slate-400' : 'text-slate-500']}>{makeLabel}</dt>
+          <dd class:list={[dark ? 'text-white' : 'text-ink']}>{make}</dd>
+        </div>
+        <div class="flex items-baseline gap-4 px-5 py-3">
+          <dt class:list={['w-24 shrink-0 font-semibold', dark ? 'text-slate-400' : 'text-slate-500']}>{modelLabel}</dt>
+          <dd class:list={[dark ? 'text-white' : 'text-ink']}>{model}</dd>
+        </div>
+        <div class="flex items-baseline gap-4 px-5 py-3">
+          <dt class:list={['w-24 shrink-0 font-semibold', dark ? 'text-slate-400' : 'text-slate-500']}>{specLabel}</dt>
+          <dd class:list={['font-medium', dark ? 'text-accent-400' : 'text-accent-500']}>{spec}</dd>
+        </div>
+      </dl>
+      <p class:list={['mt-4 text-sm leading-relaxed', dark ? 'text-slate-400' : 'text-slate-600']}>{desc}</p>
+    </div>
+  </div>
+</section>

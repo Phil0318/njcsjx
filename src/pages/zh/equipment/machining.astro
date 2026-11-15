@@ -3,8 +3,47 @@ import Base from '../../../layouts/Base.astro';
 import CTA from '../../../components/CTA.astro';
 import EquipTable from '../../../components/EquipTable.astro';
 import EquipTip from '../../../components/EquipTip.astro';
+import MachineSection from '../../../components/MachineSection.astro';
 
 const lang = 'zh' as const;
+
+const featured = [
+  {
+    make: '德国 NILES',
+    model: 'ZE400S 精密成形磨齿机',
+    spec: 'M20 × Φ400',
+    desc: '适合中小模数齿轮精加工，保证齿面高精度与低噪声，是精密齿轮批量生产的主力机型。',
+    img: '/equipment-photos/niles-ze400s.jpg',
+  },
+  {
+    make: '德国 NILES',
+    model: 'ZE800S 成形磨齿机',
+    spec: 'M20 × Φ800',
+    desc: '用于中大型圆柱齿轮的高效精磨，兼顾效率与精度，广泛用于风电与矿用齿轮。',
+    img: '/equipment-photos/niles-ze800.jpg',
+  },
+  {
+    make: '德国 NILES',
+    model: 'ZE1200 内外齿磨齿机',
+    spec: 'M25 × Φ1200（外齿）/ Φ1080（内齿）',
+    desc: '大型内外齿磨齿设备，满足直径 1200 mm 以内齿轮的批量精磨。',
+    img: '/equipment-photos/niles-ze1200.jpg',
+  },
+  {
+    make: '德国 NILES',
+    model: 'ZP30 大型磨齿机',
+    spec: 'M50 × Φ3000（外齿）/ Φ2500（内齿）',
+    desc: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。',
+    img: '/equipment-photos/niles-zp30.jpg',
+  },
+  {
+    make: '韩国斗山',
+    model: 'PUMA 480L 数控卧车',
+    spec: 'Φ650 × 2000',
+    desc: '高刚性数控卧式车床，重载高效车削，适合大型轴类零件的精密加工。',
+    img: '/equipment-photos/puma-480l.jpg',
+  },
+];
 
 const rows = [
   { m: '磨齿设备', group: true, anchor: 'gear-grinding', i: '' },
@@ -74,6 +113,34 @@ const otherMachining = [
   </section>
 
   <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备展示</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">重点设备详解</h2>
+      </div>
+
+      <div class="mt-12 space-y-16">
+        {featured.map((f) => (
+          <MachineSection
+            make={f.make}
+            model={f.model}
+            spec={f.spec}
+            desc={f.desc}
+            img={f.img}
+            makeLabel="制造商"
+            modelLabel="型号"
+            specLabel="加工范围"
+            details={[
+              { src: f.img.replace(/(\.[a-z]+)$/, '-panel$1'), label: '操作面板' },
+              { src: f.img.replace(/(\.[a-z]+)$/, '-area$1'), label: '加工区域' },
+            ]}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-steel-50 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备清单</p>
