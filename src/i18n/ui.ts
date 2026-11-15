@@ -9,6 +9,10 @@ export const ui = {
       products: '产品展示',
       contact: '联系我们',
       quote: '询价 / 咨询',
+      equipmentOverview: '能力总览',
+      machining: '机械加工设备',
+      heatTreat: '热处理设备',
+      inspection: '检测与计量',
     },
     otherLang: 'English',
     footer: {
@@ -36,6 +40,10 @@ export const ui = {
       products: 'Products',
       contact: 'Contact',
       quote: 'Get a Quote',
+      equipmentOverview: 'Overview',
+      machining: 'Machining',
+      heatTreat: 'Heat treatment',
+      inspection: 'Inspection & metrology',
     },
     otherLang: '中文',
     footer: {
