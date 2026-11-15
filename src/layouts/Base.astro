@@ -132,10 +132,25 @@ const isActive = (href: string) =>
           ))}
           <a
             href={altUrl}
-            class="text-sm font-medium text-slate-400 hover:text-white transition-colors"
-            title={otherLang === 'zh' ? '切换为中文' : 'Switch to English'}
+            class="flex items-center gap-1 rounded-full border border-white/20 px-2 py-1 text-xs font-semibold transition-colors hover:border-accent-400"
+            title={otherLang === 'zh' ? '切换到中文' : 'Switch to English'}
           >
-            {t.otherLang}
+            <span
+              class:list={[
+                'rounded-full px-1.5 py-0.5 transition-colors',
+                lang === 'en' ? 'bg-accent-500 text-white' : 'text-slate-400',
+              ]}
+            >
+              EN
+            </span>
+            <span
+              class:list={[
+                'rounded-full px-1.5 py-0.5 transition-colors',
+                lang === 'zh' ? 'bg-accent-500 text-white' : 'text-slate-400',
+              ]}
+            >
+              中文
+            </span>
           </a>
           <a
             href={`/${lang}/contact`}
@@ -205,8 +220,17 @@ const isActive = (href: string) =>
             >
               {t.nav.quote}
             </a>
-            <a href={altUrl} class="rounded-full border border-white/20 px-4 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5">
-              {t.otherLang}
+            <a
+              href={altUrl}
+              class="flex items-center justify-center gap-1 rounded-full border border-white/20 px-3 py-2.5 text-xs font-semibold transition-colors hover:border-accent-400"
+              title={otherLang === 'zh' ? '切换到中文' : 'Switch to English'}
+            >
+              <span class:list={['rounded-full px-1.5 py-0.5', lang === 'en' ? 'bg-accent-500 text-white' : 'text-slate-400']}>
+                EN
+              </span>
+              <span class:list={['rounded-full px-1.5 py-0.5', lang === 'zh' ? 'bg-accent-500 text-white' : 'text-slate-400']}>
+                中文
+              </span>
             </a>
           </div>
         </div>
