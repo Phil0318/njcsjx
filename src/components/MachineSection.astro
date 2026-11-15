@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import EquipPhoto from './EquipPhoto.astro';
 
 interface Detail {
@@ -20,26 +22,28 @@ interface Props {
 }
 
 const { make, model, spec, desc, img, details = [], makeLabel, modelLabel, specLabel, dark = false } = Astro.props;
+const hasPhoto = existsSync(resolve('public', img.replace(/^\//, '')));
+const availableDetails = details.filter((detail) => existsSync(resolve('public', detail.src.replace(/^\//, ''))));
 ---
 
 <section>
   <h3 class:list={['font-display text-xl font-bold sm:text-2xl', dark ? 'text-white' : 'text-ink']}>
     {make} <span class:list={[dark ? 'text-accent-400' : 'text-accent-500']}>{model}</span>
   </h3>
-  <div class="mt-5 grid items-start gap-8 lg:grid-cols-2">
-    <div>
+  <div class:list={['mt-5 grid items-start gap-8', hasPhoto && 'lg:grid-cols-2']}>
+    {hasPhoto && <div>
       <EquipPhoto src={img} name={`${make} ${model}`} class="aspect-[4/3]" />
-      {details.length > 0 && (
+      {availableDetails.length > 0 && (
         <div class="mt-3 grid grid-cols-2 gap-3">
-          {details.map((d) => (
+          {availableDetails.map((d) => (
             <EquipPhoto src={d.src} name={d.label} class="aspect-video" />
           ))}
         </div>
       )}
-    </div>
+    </div>}
     <div>
       <dl class:list={[
-        'divide-y rounded-2xl text-sm',
+        'divide-y rounded-lg text-sm',
         dark ? 'divide-white/10 bg-white/5 ring-1 ring-white/10' : 'divide-slate-200 bg-steel-50 ring-1 ring-slate-200',
       ]}>
         <div class="flex items-baseline gap-4 px-5 py-3">

@@ -43,7 +43,7 @@ const products = [
   title="Products — Nanjing Changsheng Machinery Engineering Co., Ltd."
   description="Changsheng products: mud-pump gears and shafts, wind pitch gear shafts, offshore jacking parts, mining electric-wheel double gears, hollow shafts, and custom heat treatment."
 >
-  <section class="bg-ink">
+  <section class="page-heading bg-ink">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Products</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Critical parts for heavy industry.</h1>
@@ -58,19 +58,12 @@ const products = [
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
-          <div class="group overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
-            <div class="grid aspect-[4/3] place-items-center bg-steel-50">
-              <div class="text-center">
-                <svg class="mx-auto h-12 w-12 text-steel-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.3 3.9a1.6 1.6 0 012.4-1l.7.5a1.6 1.6 0 002.2-.5l.5-.8a1.6 1.6 0 012.5 1.5l-.1.9a1.6 1.6 0 001.6 1.7h1a1.6 1.6 0 011.2 2.6l-.5.7a1.6 1.6 0 00.5 2.2l.8.5a1.6 1.6 0 01-1.5 2.5l-.9-.1a1.6 1.6 0 00-1.7 1.6v1a1.6 1.6 0 01-2.6 1.2l-.7-.5a1.6 1.6 0 00-2.2.5l-.5.8a1.6 1.6 0 01-2.5-1.5l.1-.9a1.6 1.6 0 00-1.6-1.7h-1a1.6 1.6 0 01-1.2-2.6l.5-.7a1.6 1.6 0 00-.5-2.2l-.8-.5a1.6 1.6 0 011.5-2.5l.9.1a1.6 1.6 0 001.7-1.6v-1a1.6 1.6 0 012.6-1.2l.7.5z"></path>
-                </svg>
-                <p class="mt-2 text-xs text-steel-400">Product photo to be added</p>
-              </div>
-            </div>
-            <div class="p-6">
+          <div class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm transition-all hover:border-steel-300 hover:shadow-md">
+            <div class="p-6 border-t-2 border-steel-600">
               <h2 class="font-display text-lg font-bold text-ink">{p.title}</h2>
               <p class="mt-2 text-sm leading-relaxed text-slate-600">{p.desc}</p>
               <p class="mt-3 inline-block rounded-md bg-steel-50 px-2.5 py-1 text-xs font-medium text-steel-600">{p.process}</p>
+              <a href={`/${lang}/contact`} class="mt-6 block text-sm font-semibold text-steel-700 hover:underline">Discuss this component →</a>
             </div>
           </div>
         ))}

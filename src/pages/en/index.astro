@@ -38,57 +38,31 @@ const industries = [
   title="Nanjing Changsheng Machinery Engineering Co., Ltd. — Gears & Heat Treatment"
   description="Nanjing Changsheng Machinery Engineering Co., Ltd. (est. 2006) specializes in full-process gear machining and metal heat treatment — gear grinding up to module 50 × Ø3000 mm, ~50,000 t annual heat-treatment capacity."
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-ink">
-    <div class="absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-steel-700/40 blur-3xl"></div>
-    <div class="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-accent-500/10 blur-3xl"></div>
-    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 pt-20 pb-14 sm:pt-28 sm:pb-20">
-      <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-steel-200">
-        Changsheng — “Long Rising”: gears & thermal processing since 2006
-      </p>
-      <h1 class="mt-6 max-w-3xl font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-        A specialist in gears &<span class="text-accent-400"> heat treatment</span>
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-        From blank to finished gear, from quenching & tempering to carburizing. Two decades of
-        thermal-processing experience and 50+ machine tools — supplying critical parts for
-        offshore drilling, wind power, mining, and petrochemical industries.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-4">
-        <a
-          href={`/${lang}/contact`}
-          class="rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-lg shadow-accent-500/25 transition-transform hover:scale-105"
-        >
-          Request a Quote
-        </a>
-        <a
-          href={`/${lang}/equipment`}
-          class="rounded-full border border-white/25 px-8 py-3.5 font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400"
-        >
-          View Equipment
-        </a>
+  <section class="home-hero">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <p class="eyebrow">CHANGSHENG · SINCE 2006</p>
+        <h1>Precision gears.<br /><span>Expert heat treatment.</span></h1>
+        <p class="hero-intro">Integrated machining, gear cutting, heat treatment and inspection for critical industrial components.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="/en/contact">Request a quote →</a>
+          <a class="secondary-action" href="#capabilities">Explore capabilities ↓</a>
+        </div>
       </div>
-      <div class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-5">
-        {
-          [
-            ['2006', 'year founded'],
-            ['286', 'employees'],
-            ['45,000', 'm² workshops'],
-            ['50k', 't/yr heat treatment'],
-            ['100+', 'heat-treatment units'],
-          ].map(([num, label]) => (
-            <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
-              <p class="font-display text-2xl font-bold text-accent-400 sm:text-3xl">{num}</p>
-              <p class="mt-1 text-xs text-slate-400 sm:text-sm">{label}</p>
-            </div>
-          ))
-        }
-      </div>
+      <figure class="hero-photo">
+        <img src="/equipment-photos/niles-ze1200.jpg" alt="NILES ZE1200 gear grinding equipment" width="1200" height="900" fetchpriority="high" />
+        <figcaption><span>Precision gear grinding</span><span>NILES ZE1200</span></figcaption>
+      </figure>
+    </div>
+    <div class="hero-facts">
+      {[['2006', 'Established'], ['50+', 'Machine tools'], ['45,000', 'm² of factory space'], ['50,000', 't annual heat treatment capacity']].map(([value, label]) => (
+        <div><strong>{value}</strong><span>{label}</span></div>
+      ))}
     </div>
   </section>
 
   <!-- Capabilities -->
-  <section class="py-20 sm:py-24">
+  <section id="capabilities" class="services-section py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Services</p>
@@ -97,7 +71,7 @@ const industries = [
       <div class="mt-12 grid gap-6 md:grid-cols-3">
         {
           capabilities.map((c) => (
-            <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+            <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
               <h3 class="font-display text-xl font-bold text-ink">{c.title}</h3>
               <p class="mt-3 text-sm leading-relaxed text-slate-600">{c.body}</p>
               <ul class="mt-5 space-y-2.5 text-sm text-slate-500">
@@ -123,7 +97,7 @@ const industries = [
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div class="max-w-2xl">
           <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment</p>
-          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Real machines on the shop floor.</h2>
+          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Equipment and capabilities.</h2>
         </div>
         <a href={`/${lang}/equipment`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
           View all equipment →
@@ -132,27 +106,27 @@ const industries = [
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         <a
           href={`/${lang}/equipment/machining`}
-          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
         >
-          <EquipPhoto src="/equipment-photos/niles-zp30.jpg" name="NILES ZP30" class="aspect-[4/3]" />
+          <EquipPhoto src="/equipment-photos/niles-zp30.jpg" name="NILES ZP30" class="aspect-[4/3]" fit="contain" />
           <p class="mt-4 font-display text-lg font-bold text-ink">NILES ZP30 gear grinder</p>
-          <p class="mt-1 text-sm text-accent-500">M50 × Ø3000 (external)</p>
+          <p class="mt-1 text-sm text-accent-500">M50 × Φ3000 (external)</p>
         </a>
         <a
-          href={`/${lang}/equipment/heat-treatment`}
-          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+          href={`/${lang}/equipment/machining`}
+          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
         >
-          <EquipPhoto src="/equipment-photos/furnace-tl160-550.jpg" name="Pit carburizer TL160×550" class="aspect-[4/3]" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">Large pit carburizer TL160×550</p>
-          <p class="mt-1 text-sm text-accent-500">Ø1600 × 5500, 50 t load</p>
+          <EquipPhoto src="/equipment-photos/puma-480l.jpg" name="DOOSAN PUMA 480L" class="aspect-[4/3]" fit="contain" />
+          <p class="mt-4 font-display text-lg font-bold text-ink">DOOSAN PUMA 480L CNC lathe</p>
+          <p class="mt-1 text-sm text-accent-500">Shafts and rotational components</p>
         </a>
         <a
-          href={`/${lang}/equipment/inspection`}
-          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+          href={`/${lang}/equipment/machining`}
+          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
         >
-          <EquipPhoto src="/equipment-photos/gleason-1000gms.jpg" name="Gleason 1000GMS" class="aspect-[4/3]" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">Gleason 1000GMS gear analyzer</p>
-          <p class="mt-1 text-sm text-accent-500">Modules 1–56 full inspection</p>
+          <EquipPhoto src="/equipment-photos/hcmc-1370.jpg" name="HCMC-1370" class="aspect-[4/3]" fit="contain" />
+          <p class="mt-4 font-display text-lg font-bold text-ink">HCMC-1370 machining center</p>
+          <p class="mt-1 text-sm text-accent-500">Milling, drilling and multi-operation machining</p>
         </a>
       </div>
     </div>
@@ -167,7 +141,7 @@ const industries = [
       </div>
       <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {industries.map((i) => (
-          <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100">
+          <div class="group overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
             <div class="overflow-hidden bg-steel-100">
               <img
                 src={i.img}
@@ -182,7 +156,7 @@ const industries = [
           </div>
         ))}
       </div>
-      <div class="mt-10 rounded-2xl bg-ink p-8 sm:p-10">
+      <div class="mt-10 rounded-lg bg-ink p-8 sm:p-10">
         <div class="grid gap-6 sm:grid-cols-3">
           {[
             ['Mud-pump gears & shafts', 'Core drive parts for offshore drilling rigs'],
@@ -224,7 +198,7 @@ const industries = [
           ['100', 'mu site area'],
           ['50+', 'machining equipment'],
         ].map(([num, label]) => (
-          <div class="rounded-3xl border border-slate-100 bg-white p-7 text-center shadow-sm">
+          <div class="rounded-lg border border-slate-100 bg-white p-7 text-center shadow-sm">
             <p class="font-display text-3xl font-bold text-steel-600">{num}</p>
             <p class="mt-2 text-sm text-slate-600">{label}</p>
           </div>
@@ -246,17 +220,17 @@ const industries = [
         </a>
       </div>
       <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
           <p class="font-display text-2xl font-bold text-accent-500">ISO 9001</p>
           <p class="mt-2 font-display font-bold text-ink">Quality management system</p>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">ISO 9001:2015 (cert. no. 02925Q3DR48R3S) covering gear machining and heat treatment.</p>
         </div>
-        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
           <p class="font-display text-2xl font-bold text-accent-500">ABS</p>
           <p class="mt-2 font-display font-bold text-ink">Heat-treatment facility approval</p>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">ABS approval HT-0579098 for marine components, valid until 2031.</p>
         </div>
-        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
           <p class="font-display text-2xl font-bold text-accent-500">NDT</p>
           <p class="mt-2 font-display font-bold text-ink">Certified NDT inspectors</p>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">Qualified ultrasonic & magnetic particle inspectors for forgings and tooth flanks.</p>

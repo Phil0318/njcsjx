@@ -33,17 +33,17 @@ const colCount = head.length + (hasPhotos ? 1 : 0);
   )}
   {note && <p class:list={['mt-2', dark ? 'text-slate-400' : 'text-slate-600']}>{note}</p>}
   <div class:list={[
-    'mt-6 overflow-hidden rounded-2xl shadow-sm',
+    'mt-6 overflow-x-auto rounded-lg shadow-sm',
     dark ? 'ring-1 ring-white/10' : 'border border-slate-100',
   ]}>
-    <table class="w-full table-fixed text-left text-sm">
+    <table class="w-full min-w-[560px] table-fixed text-left text-sm">
       <thead class:list={dark ? 'bg-white/10 text-white' : 'bg-steel-700 text-white'}>
         <tr>
-          <th class:list={['px-5 py-3.5 font-semibold', hasPhotos ? 'w-2/5' : 'w-1/2']}>{head[0]}</th>
-          {head[1] && <th class="px-5 py-3.5 font-semibold">{head[1]}</th>}
-          {head[2] && <th class="w-48 px-5 py-3.5 font-semibold">{head[2]}</th>}
+          <th scope="col" class:list={['px-5 py-3.5 font-semibold', hasPhotos ? 'w-2/5' : 'w-1/2']}>{head[0]}</th>
+          {head[1] && <th scope="col" class="px-5 py-3.5 font-semibold">{head[1]}</th>}
+          {head[2] && <th scope="col" class="w-48 px-5 py-3.5 font-semibold">{head[2]}</th>}
           {hasPhotos && (
-            <th class="w-28 px-5 py-3.5 text-center font-semibold">{photoHead ?? 'Photo'}</th>
+            <th scope="col" class="w-28 px-5 py-3.5 text-center font-semibold">{photoHead ?? 'Photo'}</th>
           )}
         </tr>
       </thead>
@@ -64,18 +64,18 @@ const colCount = head.length + (hasPhotos ? 1 : 0);
           ) : (
             <tr
               class:list={[
-                'equip-row cursor-help transition-colors',
+                'transition-colors',
                 dark ? 'hover:bg-white/5' : 'hover:bg-steel-50',
               ]}
               data-model={row.m}
               data-intro={row.i}
             >
               <td class:list={[
-                'truncate px-5 py-3 font-medium',
+                'px-5 py-3 font-medium',
                 hasPhotos ? 'w-2/5' : 'w-1/2',
                 dark ? 'text-slate-200' : 'text-ink',
               ]}>
-                <span class="border-b border-dotted border-steel-400/60">{row.m}</span>
+                <details><summary class="cursor-pointer font-semibold">{row.m}</summary><p class="mt-2 text-sm font-normal leading-relaxed">{row.i}</p></details>
               </td>
               <td class:list={['px-5 py-3', dark ? 'text-slate-400' : 'text-slate-600']}>{row.r}</td>
               {head[2] && (

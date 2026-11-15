@@ -163,7 +163,7 @@ const sawingRough = [
   title="机械加工设备 — 南京长升机械工程有限公司"
   description="长升机械加工设备：德国 NILES 磨齿机最大模数50×直径3000毫米、韩国斗山 PUMA 480L、数控立车、滚齿/铣齿/插齿机床、龙门加工中心等 50 余台套。"
 >
-  <section class="bg-ink">
+  <section class="page-heading bg-ink">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-16 sm:pt-24 sm:pb-20">
       <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
@@ -288,7 +288,7 @@ const sawingRough = [
             <div class:list={['mt-6 grid gap-6', c.photos.length > 1 && 'sm:grid-cols-2']}>
               {c.photos.map((p) => (
                 <div class:list={[
-                  'overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm',
+                  'overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm',
                   c.photos.length === 1 && 'sm:max-w-[calc(50%-0.75rem)]',
                 ]}>
                   <EquipPhoto src={p.img} name={p.model} fit="contain" class="aspect-[4/3] rounded-none border-0 ring-0" />
@@ -311,7 +311,7 @@ const sawingRough = [
         <div class="mt-6 space-y-8">
           <EquipTable title="镗削与钻削" head={['设备型号', '加工范围']} rows={boringDrilling} />
           <EquipTable title="线切割" head={['设备型号', '加工范围']} rows={wireCutting} />
-          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <div class="rounded-lg border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
             <h3 class="font-display text-lg font-bold text-ink">锯切与粗加工</h3>
             <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
               {sawingRough.map((p) => (
