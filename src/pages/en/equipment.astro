@@ -1,376 +1,108 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
-import EquipTable from '../../components/EquipTable.astro';
-import EquipTip from '../../components/EquipTip.astro';
 
 const lang = 'en' as const;
 
-const gearGrinding = [
-  { m: 'NILES ZE400S', r: 'M20 × Ø400', i: 'German NILES precision profile grinder for small-to-medium module gears, delivering high tooth accuracy and low noise.' },
-  { m: 'NILES ZE800', r: 'M20 × Ø800', i: 'German NILES profile grinder for efficient finishing of medium and large cylindrical gears.' },
-  { m: 'NILES ZE1200', r: 'M25 × Ø1200 (external) / Ø1080 (internal)', i: 'German NILES internal/external profile grinder for batch finishing up to Ø1200 mm.' },
-  { m: 'Ri1250 (German Hoffmann)', r: 'M25 × Ø1200 (external)', i: 'High-efficiency Hoffmann profile grinder for heavy-duty gears.' },
-  { m: 'NILES ZP20', r: 'M50 × Ø2000 (external) / Ø1480 (internal)', i: 'Large gear grinding up to Ø2000 mm external — widely used for wind and mining gears.' },
-  { m: 'NILES ZP30', r: 'M50 × Ø3000 (external) / Ø2500 (internal)', i: 'Our largest grinder — Ø3000 mm external — for ultra-large offshore drilling gears.' },
-];
-
-const turning = [
-  { m: 'CNC lathe DOOSAN PUMA 480L', r: 'Ø650 × 2000', i: 'Doosan high-rigidity horizontal lathe for heavy cutting.' },
-  { m: 'CNC lathe CKBP6180/2', r: 'Ø800 × 2000', i: 'Anyang Xinsheng CNC horizontal lathe for medium and large shafts.' },
-  { m: 'CNC lathe CK61125E/3', r: 'Ø1250 × 3000', i: 'Anyang Xinsheng heavy-duty horizontal lathe for long shafts.' },
-  { m: 'CNC vertical lathe HONOR VL-160C', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Honor CNC vertical lathe for efficient turning of large rotational parts.' },
-  { m: 'CNC vertical lathe SZ1600ATC', r: 'Table Ø1600, swing Ø2000 × 1250', i: 'Suzhou Sanzhong CNC vertical lathe with tool magazine for automated turning.' },
-  { m: 'CNC vertical lathe C5225×16/10', r: 'Table Ø2000, swing Ø2500 × 1600', i: 'Qiqihar double-column vertical lathe, up to Ø2500 mm.' },
-  { m: 'Engine lathes CA6266C / CW6180B / CW61125', r: 'Ø660–1250 × 3000', i: 'Five Shenyang and other engine lathes for roughing and auxiliary operations.' },
-];
-
-const gearMachines = [
-  { m: 'CNC gear miller YK31500L', r: 'M50 × Ø5000', i: 'Qizhong CNC gear miller — module 50, Ø5000 mm — for form-milling of ultra-large gears.' },
-  { m: 'CNC gear miller YK83200', r: 'M26/32 × Ø2500, 10 t load', i: 'Yichang Changji CNC miller with internal/external milling heads, 10 t table load.' },
-  { m: 'CNC gear hobber Y31200CNC', r: 'M32 × Ø2500', i: 'Hebei Zhuohao CNC hobber for large-module cylindrical gears.' },
-  { m: 'Gear hobbers Y3180H ×3', r: 'M10 × Ø800', i: 'Three Chongqing hobbers for small-to-medium module gears.' },
-  { m: 'Gear hobbers YA31125 / Y31125E', r: 'M16 × Ø1250', i: 'Chongqing hobbers for medium and large cylindrical gears.' },
-  { m: 'CNC gear shaper YKHL51160', r: 'M20 × Ø1600 (ext.) / Ø2000 (int.)', i: 'Wuhan Gewei CNC shaper for large internal and blind-hole gears.' },
-  { m: 'Gear shaper YK5150B', r: 'M8 × Ø500 (ext.) / Ø625 (int.)', i: 'Nanjing Bocheng shaper for small-to-medium internal gears.' },
-  { m: 'Chamfering machine YKDV150B', r: 'M32 × Ø1500', i: 'Shaanxi Guoxi chamfering machine for gear face and tooth-edge chamfering.' },
-  { m: 'Hob sharpener M6425', r: 'Hobs Ø50–250', i: 'Wuhan hob sharpening machine keeping hobs at full accuracy.' },
-];
-
-const machiningCenters = [
-  { m: 'Gantry machining center SK-LMX2030', r: '3000 × 2000 × 1000', i: 'Large gantry machining center for big structural parts.' },
-  { m: 'Machining center SK-VM1580', r: '1500 × 800 × 800', i: 'Vertical machining center for general precision milling.' },
-  { m: 'Machining center HCMC-1370', r: '1300 × 700 × 660', i: 'Hartford 4-axis machining center for multi-face machining in one setup.' },
-];
-
-const grinding = [
-  { m: 'CNC vertical grinder MG28100', r: 'Ø1200 × 800', i: 'Wuxi Mingxin vertical CNC grinder for precision grinding of large disc and ring parts.' },
-  { m: 'Cylindrical grinder M1332B×1500', r: 'Ø320 × 1500', i: 'Shanghai Machine Tool Works cylindrical grinder for precision shaft OD finishing.' },
-  { m: 'Crankshaft grinder MQ8260', r: 'Ø580 × 1600', i: 'Hanzhong crankshaft grinder for crankshaft-type parts.' },
-  { m: 'Internal grinder M250A', r: 'Ø150–500 × 450', i: 'Wuxi internal grinder for precision bore grinding.' },
-  { m: 'Surface grinder M7160×20/HZ', r: '600 × 2000', i: 'Hangzhou surface grinder for precision face grinding.' },
-];
-
-const otherMachining = [
-  'Radial drills ZN3050×16 / ZQ3080×20 / Z3050×16/1',
-  'Band saws GW4028B / GB4250',
-  'Shot-blasting machine KXS-2000P (Ø1600 table)',
-  'Roughing shop: lathes C6136A-D, CA6266C, C6140D, CW6180B, CW61125, CA6140A, C6150D, CK6280B, CK6140, C5116A',
-  'Roughing shop: gantry mill SW-4200, universal mill X6140, mill-borer CL-A64110, horizontal borer TPX6111B',
-];
-
-const vacuumFurnaces = [
-  { m: 'Vacuum oil-quench furnace VQG-200', r: '600 × 420 × 300', i: 'Shenyang Zhenyan vacuum oil-quench furnace, 1300 °C max, 300 kg oil / 400 kg gas quench.' },
-  { m: 'Vacuum oil-quench furnace VQG-557', r: '500 × 500 × 700', i: 'Weitu vacuum oil-quench furnace, 1300 °C max, 300 kg oil / 400 kg gas quench.' },
-  { m: 'High-pressure gas-quench furnace VOG-557', r: '500 × 500 × 700', i: 'Weitu vacuum gas-quench furnace, 10 bar, 400 kg load.' },
-  { m: 'High-pressure gas-quench furnace VOG-669', r: '600 × 600 × 900', i: 'Shenyang Zhenyan gas-quench furnace, 6 bar, 600 kg load.' },
-  { m: 'Vacuum tempering furnace VPT-669', r: '600 × 600 × 900', i: 'Shenyang Jiayu vacuum tempering furnace, 800 °C max, 600 kg load.' },
-];
-
-const carburizingFurnaces = [
-  { m: 'Pit carburizing furnace TL160×550', r: 'Ø1600 × 5500', i: 'Tianlong extra-large pit carburizer, 50 t load, for deep carburizing of long shafts.' },
-  { m: 'Pit carburizing furnace TL400×240', r: 'Ø4000 × 2000', i: 'Tianlong extra-large pit carburizer, 50 t load, for large-diameter parts.' },
-  { m: 'Pit carburizing furnace TL150×400', r: 'Ø1500 × 4000', i: 'Tianlong pit carburizer, 35 t load.' },
-  { m: 'Pit carburizing furnace AXL180×400', r: 'Ø1800 × 4000', i: 'Aichelin pit carburizer, 30 t load.' },
-  { m: 'Pit carburizing furnaces AXL250×300 ×2', r: 'Ø2500 × 3000', i: 'Two Aichelin pit carburizers, 30 t load each.' },
-  { m: 'Pit carburizing furnaces SS250×200 ×2', r: 'Ø2500 × 2000', i: 'Two Sheshan pit carburizers, 30 t load each.' },
-  { m: 'Pit carburizing furnace MS160×350', r: 'Ø1600 × 3500', i: 'Minsheng pit carburizer, 30 t load.' },
-  { m: 'Pit carburizing furnaces HFS160×200 ×2', r: 'Ø1600 × 2000', i: 'Two Hefeisi pit carburizers, 15 t load each.' },
-];
-
-const multiFurnaces = [
-  { m: 'Sealed-quench main furnaces VKES5/2A-CN ×4', r: '900 × 900 × 1500', i: 'Four Aichelin sealed-quench main furnaces, 1.5 t load, for carburizing, carbonitriding and hardening.' },
-  { m: 'Preheating furnaces VKHE5/2A-CN ×4', r: '900 × 900 × 1500', i: 'Four Aichelin preheating/low-temperature tempering furnaces.' },
-  { m: 'Washers KEKTE5/2A-CN ×2', r: '900 × 900 × 1500', i: 'Two Aichelin washing machines.' },
-  { m: 'Hefeisi line NDS-RM ×2 / NDS-GH ×2', r: '1500 × 1200 × 1200', i: 'Two main and two preheating furnaces, 3 t load, single parts up to 2500 kg.' },
-];
-
-const nitridingFurnaces = [
-  { m: 'Pit nitriding furnace RNS-350×200', r: 'Ø3500 × 2000', i: 'Sheshan large pit nitrider, 15 t load.' },
-  { m: 'Pit nitriding furnaces RNS-280×250 / RNS-270×200 / RNS-210×400', r: 'Ø2700–2800 × 2000–4000', i: 'Three Sheshan/Hengtong large nitriders, up to 30 t load.' },
-  { m: 'Pit nitriding furnaces RNS-180×230 / RNS-160×230 / RNS-160×450 / RNS-100×800', r: 'Ø1000–1800 × 2300–8000', i: 'Four Sheshan nitriders, including an 8 m deep unit for long shafts.' },
-  { m: 'QPQ line (liquid nitriding / oxidizing / preheating)', r: 'Ø650–800 × 1500–2000', i: 'Three Hengtong QPQ furnaces for surface hardening of alloy structural steels.' },
-];
-
-const otherHeatTreat = [
-  'Pit heating furnaces RJ2 series ×7 (950 °C, up to 20 t load)',
-  'High-temperature quench furnace RLM-160-12 (1200 °C)',
-  'Car-bottom tempering furnaces RT2-320-6 / CL-180-3 / GFG3 series ×8 (up to 30 t)',
-  'Induction hardening GGC-80-0.3/2 ×2, Aichelin ECM400 (case depth 1–8 mm)',
-  'Salt-bath line ×5 (isothermal & step quenching)',
-  'Cryogenic chamber SLX10M-R (40 t load)',
-  'Shot-blasting machines ×2 (incl. Ø5000×3000 large unit)',
-  'Quench oil tanks ×2 + PAG quench tank (30 t/batch cooling capacity)',
-  'Straightening presses 100 t / 250 t, pit washer (15 t)',
-];
-
-const cmms = [
-  { m: 'CMM Hexagon 15.22.10', r: '1500 × 2200 × 1000', i: 'Hexagon CMM for form & position tolerances and gear tooth accuracy.' },
-  { m: 'CMM DEA Delta20.33.15', r: '3300 × 2000 × 1500', i: 'Italian DEA CMM for form & position inspection of large parts.' },
-  { m: 'CMM VENUS20.33.14', r: '3300 × 2000 × 1400', i: 'VENUS large-travel precision CMM.' },
-];
-
-const ndt = [
-  'Ultrasonic flaw detectors OMNISX (Olympus) / USM36S (GE)',
-  'Magnetic particle tester CJW-10000 (tooth-flank inspection)',
-  'Optical emission spectrometer DE-2000 (28 alloying elements)',
-  'Tooth-burn detection line (acid pickling)',
-  'Residual-field meter HT20A / Mitutoyo roughness testers ×4',
-];
-
-const hardnessMetallography = [
-  'Leeb hardness testers ×9 / Brinell ×4 / Rockwell ×4',
-  'Vickers hardness testers ×2 / micro-Vickers HV-1000AT ×2',
-  'Metallographic microscopes 4XC / XJX-1 / Zeiss XJG-04 large microscope',
-  'Specimen prep: mounting XQ-1, cutting QG-5A, grinding YM-2A, polishing PG-2B',
-];
-
-const mechanicalTests = [
-  'Universal testing machine WDW-300 (tensile, yield, elongation)',
-  'Impact tester JB-300B + cryostat DWY-60A',
-  'Notch broacher L71-UV / projector XD-50 / gauge-mark DX-400',
-  'Analytical balance FA1004B / carbon-potential meters GM-1A',
-  'Laboratory furnaces RJJ-950 / RJS-300 (process verification)',
+const divisions = [
+  {
+    href: `/${lang}/equipment/machining`,
+    num: '01',
+    title: 'Machining Equipment',
+    blurb: 'German NILES grinder fleet, Doosan lathes, CNC vertical lathes and gear cutting machines — the complete gear process.',
+    stats: [['Gear grinding', 'M50 × Ø3000'], ['Machine tools', '50+'], ['Gear milling', 'M50 × Ø5000']],
+  },
+  {
+    href: `/${lang}/equipment/heat-treatment`,
+    num: '02',
+    title: 'Heat Treatment & Processes',
+    blurb: 'Aichelin/Tianlong pit carburizers, vacuum gas quench, sealed-quench lines and cryogenic chamber — ~50,000 t/year.',
+    stats: [['Largest carburizer', 'Ø4000 × 2000'], ['Part capacity', '0.1 kg – 30 t'], ['Qualification', 'ABS approved']],
+  },
+  {
+    href: `/${lang}/equipment/inspection`,
+    num: '03',
+    title: 'Inspection & Metrology',
+    blurb: 'Gleason gear analyzer, CMMs, NDT and metallurgical laboratories — full-process quality control.',
+    stats: [['Gear measurement', 'Gleason 1000GMS'], ['CMMs', '3 (up to 3.3 m travel)'], ['Metallography', 'Zeiss XJG-04']],
+  },
 ];
 ---
 
 <Base
   lang={lang}
-  title="Capabilities & Equipment — Nanjing Changsheng Machinery Engineering Co., Ltd."
-  description="Changsheng Group equipment: NILES gear grinders up to module 50 × Ø3000 mm, Aichelin/Tianlong pit carburizing furnaces, vacuum high-pressure gas quench, Gleason gear analyzer, Hexagon/DEA CMMs, ABS-approved heat-treatment facility."
+  title="Services & Equipment — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Changsheng Group's three divisions: machining (NILES gear grinders up to M50 × Ø3000), heat treatment (Aichelin/Tianlong pit carburizers, ABS-approved), and inspection & metrology (Gleason gear analyzer, CMMs)."
 >
   <section class="bg-ink">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
-      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Capabilities & Equipment</p>
-      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Advanced machines, complete inspection.</h1>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-14 sm:pt-24 sm:pb-20 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Services & Equipment</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Three service divisions, one complete chain.</h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-        Three divisions — machining, heat treatment, and inspection & metrology.
-        Hover over an equipment name for details.
+        From blank to finished gear — machining, heat treatment and inspection work hand in hand.
+        50+ machine tools, 100+ heat-treatment units and a professional metrology lab.
       </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a
-          href="#machining"
-          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
-        >
-          01 Machining
-        </a>
-        <a
-          href="#heat-treatment"
-          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
-        >
-          02 Heat Treatment
-        </a>
-        <a
-          href="#inspection"
-          class="rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition-colors hover:bg-accent-500 hover:ring-accent-500"
-        >
-          03 Inspection & Metrology
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- 01 Machining -->
-  <section id="machining" class="scroll-mt-24 py-16 sm:py-20">
+  <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex items-center gap-5">
-        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">01</span>
-        <div>
-          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Machining Equipment</h2>
-          <p class="mt-1 max-w-2xl text-slate-600">50+ machine tools, gear grinding up to module 50 × Ø3000 mm.</p>
-        </div>
-      </div>
-
-      <div class="mt-10 space-y-12">
-        <EquipTable
-          id="gear-grinding"
-          title="Gear Grinding"
-          note="German NILES / Hoffmann profile grinders, up to module 50 × Ø3000 mm (external)."
-          head={['Model', 'Capacity']}
-          rows={gearGrinding}
-        />
-
-        <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable id="turning" title="Turning" note="CNC horizontal lathes, CNC vertical lathes and engine lathes." head={['Model', 'Capacity']} rows={turning} />
-          <EquipTable
-            id="gear-cutting"
-            title="Gear Cutting Machines"
-            note="Hobbing, milling, shaping, chamfering and hob sharpening — up to module 50 × Ø5000 mm."
-            head={['Model', 'Capacity']}
-            rows={gearMachines}
-          />
-        </div>
-
-        <div class="grid items-start gap-12 lg:grid-cols-2">
-          <EquipTable id="machining-centers" title="Machining Centers" head={['Model', 'Capacity']} rows={machiningCenters} />
-          <EquipTable id="grinding-machines" title="Grinding" head={['Model', 'Capacity']} rows={grinding} />
-        </div>
-
-        <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-          <h3 class="font-display text-lg font-bold text-ink">Other Machining Equipment</h3>
-          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-            {otherMachining.map((p) => (
-              <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
-                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 Heat treatment -->
-  <section id="heat-treatment" class="scroll-mt-24 bg-ink py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex items-center gap-5">
-        <span class="font-display text-5xl font-bold text-white/15 sm:text-6xl">02</span>
-        <div>
-          <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">Heat Treatment Equipment & Processes</h2>
-          <p class="mt-1 max-w-2xl text-slate-400">
-            100+ heat-treatment units, single parts 0.1 kg – 30 t, ~50,000 t annual capacity; ABS-approved heat-treatment facility.
-          </p>
-        </div>
-      </div>
-      <div class="mt-10 space-y-8">
-        <EquipTable id="vacuum-furnaces" title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} variant="dark" />
-        <EquipTable
-          id="carburizing"
-          title="Pit Carburizing Furnaces"
-          note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
-          head={['Equipment', 'Size']}
-          rows={carburizingFurnaces}
-          variant="dark"
-        />
-        <div class="grid items-start gap-8 lg:grid-cols-2">
-          <EquipTable id="sealed-quench" title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} variant="dark" />
-          <EquipTable id="nitriding" title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} variant="dark" />
-        </div>
-        <div>
-          <h3 class="font-display text-lg font-bold text-accent-400">Other Heat-Treatment Equipment</h3>
-          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-            {otherHeatTreat.map((p) => (
-              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-display text-lg font-bold text-accent-400">Processes</h3>
-          <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-            {[
-              'Normalizing, annealing',
-              'Quenching & tempering',
-              'Carburizing & carbonitriding',
-              'Nitriding & nitrocarburizing',
-              'Vacuum oil & high-pressure gas quenching',
-              'Step & isothermal quenching',
-              'HF / MF / super-audio induction hardening',
-              'Shot peening, blackening',
-            ].map((p) => (
-              <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
-                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                </svg>
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 Inspection -->
-  <section id="inspection" class="scroll-mt-24 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex items-center gap-5">
-        <span class="font-display text-5xl font-bold text-steel-200 sm:text-6xl">03</span>
-        <div>
-          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">Inspection & Metrology</h2>
-          <p class="mt-1 max-w-2xl text-slate-600">Gear measurement, CMM inspection, NDT and physical/metallurgical laboratories.</p>
-        </div>
-      </div>
-
-      <div class="mt-10">
-        <div id="gleason" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-          <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS Gear Analyzer</h3>
-          <p class="mt-2 text-sm text-slate-600">Advanced gear measurement — max inspection Ø1000 mm × height 1200 mm.</p>
-          <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ['Module', '1 – 56'],
-              ['Helix angle', '0 – 60°'],
-              ['Base circle', '20 – 1000 mm'],
-              ['Max tip circle', '1000 mm'],
-              ['Face width', '800 mm'],
-              ['Center distance', '170 – 750 mm'],
-              ['Max part weight', '5000 kg'],
-            ].map(([k, v]) => (
-              <div class="rounded-xl bg-steel-50 px-4 py-3">
-                <span class="text-slate-500">{k}: </span>
-                <span class="font-semibold text-ink">{v}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <EquipTable
-            id="cmm"
-            title="Coordinate Measuring Machines"
-            note="Inspection of parallelism, concentricity, roundness and gear accuracy indices Fp, Fr, Fα, Fβ."
-            head={['Machine', 'Travel (X × Y × Z)']}
-            rows={cmms}
-          />
-        </div>
-
-        <div id="ndt" class="scroll-mt-24 mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-          <h3 class="font-display text-lg font-bold text-ink">NDT & Material Analysis</h3>
-          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {ndt.map((i) => (
-              <div class="flex items-center gap-3 rounded-2xl bg-steel-50 p-4 text-sm font-medium text-ink">
-                <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
-                {i}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div id="labs" class="scroll-mt-24 mt-6 grid gap-3 md:grid-cols-2">
-          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-            <h3 class="font-display text-lg font-bold text-ink">Hardness & Metallography</h3>
-            <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
-              {hardnessMetallography.map((i) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
-                  {i}
-                </li>
+      <div class="grid gap-6 lg:grid-cols-3">
+        {divisions.map((d) => (
+          <a
+            href={d.href}
+            class="group flex flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-xl"
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-display text-4xl font-bold text-steel-200 transition-colors group-hover:text-accent-500">
+                {d.num}
+              </span>
+              <svg
+                class="h-6 w-6 text-steel-300 transition-transform group-hover:translate-x-1 group-hover:text-accent-500"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"></path>
+              </svg>
+            </div>
+            <h2 class="mt-6 font-display text-2xl font-bold text-ink">{d.title}</h2>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{d.blurb}</p>
+            <dl class="mt-6 space-y-2.5 border-t border-slate-100 pt-5">
+              {d.stats.map(([k, v]) => (
+                <div class="flex items-baseline justify-between gap-3 text-sm">
+                  <dt class="text-slate-500">{k}</dt>
+                  <dd class="font-semibold text-ink">{v}</dd>
+                </div>
               ))}
-            </ul>
-          </div>
-          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-            <h3 class="font-display text-lg font-bold text-ink">Mechanical Testing & Process Labs</h3>
-            <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
-              {mechanicalTests.map((i) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
-                  {i}
-                </li>
-              ))}
-            </ul>
-          </div>
+            </dl>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-[2rem] bg-ink p-8 sm:p-10">
+        <div class="grid gap-6 sm:grid-cols-3">
+          {[
+            ['6 NILES gear grinders', 'Up to module 50 × Ø3000 mm'],
+            ['ABS approval', 'Marine heat-treatment facility & process'],
+            ['Gleason gear analysis', 'Modules 1–56 full inspection'],
+          ].map(([title, desc]) => (
+            <div>
+              <p class="font-display text-lg font-bold text-white">{title}</p>
+              <p class="mt-1.5 text-sm text-slate-400">{desc}</p>
+            </div>
+          ))}
         </div>
+        <a
+          href={`/${lang}/products`}
+          class="mt-8 inline-block rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400"
+        >
+          View products →
+        </a>
       </div>
     </div>
   </section>
 
-  <EquipTip placeholder="Equipment photos to be added" />
   <CTA lang={lang} />
 </Base>

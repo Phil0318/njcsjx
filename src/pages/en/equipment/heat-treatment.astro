@@ -1,0 +1,187 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CTA from '../../../components/CTA.astro';
+import EquipTable from '../../../components/EquipTable.astro';
+import EquipPhoto from '../../../components/EquipPhoto.astro';
+import EquipTip from '../../../components/EquipTip.astro';
+
+const lang = 'en' as const;
+
+const featured = [
+  {
+    img: '/equipment-photos/furnace-tl160-550.jpg',
+    name: 'Pit carburizing furnace TL160×550',
+    spec: 'Ø1600 × 5500, 50 t load',
+    desc: 'Tianlong extra-large pit carburizer for deep carburizing of long shafts — among the largest in the country.',
+    flagship: true,
+  },
+  {
+    img: '/equipment-photos/furnace-tl400-240.jpg',
+    name: 'Pit carburizing furnace TL400×240',
+    spec: 'Ø4000 × 2000, 50 t load',
+    desc: 'For carburizing and quenching of extra-large gears and gear rings.',
+  },
+  {
+    img: '/equipment-photos/vacuum-vog-557.jpg',
+    name: 'Vacuum gas-quench furnace VOG-557',
+    spec: '500 × 500 × 700, 10 bar',
+    desc: 'Weitu vacuum high-pressure gas-quench furnace for tooling, dies and precision parts.',
+  },
+  {
+    img: '/equipment-photos/sealed-quench.jpg',
+    name: 'Aichelin sealed-quench line',
+    spec: '900 × 900 × 1500, 4 main furnaces',
+    desc: 'Controlled-atmosphere sealed-quench line for carburizing, carbonitriding and hardening in batch.',
+  },
+  {
+    img: '/equipment-photos/cryo-slx10m.jpg',
+    name: 'Cryogenic chamber SLX10M-R',
+    spec: '40 t load',
+    desc: 'For deep cryogenic treatment of Ni-containing carburizing steels and cold assembly.',
+  },
+];
+
+const vacuumFurnaces = [
+  { m: 'Vacuum oil-quench furnace VQG-200', r: '600 × 420 × 300', i: 'Shenyang Zhenyan vacuum oil-quench furnace, 1300 °C max, 300 kg oil / 400 kg gas quench.' },
+  { m: 'Vacuum oil-quench furnace VQG-557', r: '500 × 500 × 700', i: 'Weitu vacuum oil-quench furnace, 1300 °C max, 300 kg oil / 400 kg gas quench.' },
+  { m: 'High-pressure gas-quench furnace VOG-557', r: '500 × 500 × 700', i: 'Weitu vacuum gas-quench furnace, 10 bar, 400 kg load.' },
+  { m: 'High-pressure gas-quench furnace VOG-669', r: '600 × 600 × 900', i: 'Shenyang Zhenyan gas-quench furnace, 6 bar, 600 kg load.' },
+  { m: 'Vacuum tempering furnace VPT-669', r: '600 × 600 × 900', i: 'Shenyang Jiayu vacuum tempering furnace, 800 °C max, 600 kg load.' },
+];
+
+const carburizingFurnaces = [
+  { m: 'Pit carburizing furnace TL160×550', r: 'Ø1600 × 5500', i: 'Tianlong extra-large pit carburizer, 50 t load, for deep carburizing of long shafts.' },
+  { m: 'Pit carburizing furnace TL400×240', r: 'Ø4000 × 2000', i: 'Tianlong extra-large pit carburizer, 50 t load, for large-diameter parts.' },
+  { m: 'Pit carburizing furnace TL150×400', r: 'Ø1500 × 4000', i: 'Tianlong pit carburizer, 35 t load.' },
+  { m: 'Pit carburizing furnace AXL180×400', r: 'Ø1800 × 4000', i: 'Aichelin pit carburizer, 30 t load.' },
+  { m: 'Pit carburizing furnaces AXL250×300 ×2', r: 'Ø2500 × 3000', i: 'Two Aichelin pit carburizers, 30 t load each.' },
+  { m: 'Pit carburizing furnaces SS250×200 ×2', r: 'Ø2500 × 2000', i: 'Two Sheshan pit carburizers, 30 t load each.' },
+  { m: 'Pit carburizing furnace MS160×350', r: 'Ø1600 × 3500', i: 'Minsheng pit carburizer, 30 t load.' },
+  { m: 'Pit carburizing furnaces HFS160×200 ×2', r: 'Ø1600 × 2000', i: 'Two Hefeisi pit carburizers, 15 t load each.' },
+];
+
+const multiFurnaces = [
+  { m: 'Sealed-quench main furnaces VKES5/2A-CN ×4', r: '900 × 900 × 1500', i: 'Four Aichelin sealed-quench main furnaces, 1.5 t load, for carburizing, carbonitriding and hardening.' },
+  { m: 'Preheating furnaces VKHE5/2A-CN ×4', r: '900 × 900 × 1500', i: 'Four Aichelin preheating/low-temperature tempering furnaces.' },
+  { m: 'Washers KEKTE5/2A-CN ×2', r: '900 × 900 × 1500', i: 'Two Aichelin washing machines.' },
+  { m: 'Hefeisi line NDS-RM ×2 / NDS-GH ×2', r: '1500 × 1200 × 1200', i: 'Two main and two preheating furnaces, 3 t load, single parts up to 2500 kg.' },
+];
+
+const nitridingFurnaces = [
+  { m: 'Pit nitriding furnace RNS-350×200', r: 'Ø3500 × 2000', i: 'Sheshan large pit nitrider, 15 t load.' },
+  { m: 'Pit nitriding furnaces RNS-280×250 / RNS-270×200 / RNS-210×400', r: 'Ø2700–2800 × 2000–4000', i: 'Three Sheshan/Hengtong large nitriders, up to 30 t load.' },
+  { m: 'Pit nitriding furnaces RNS-180×230 / RNS-160×230 / RNS-160×450 / RNS-100×800', r: 'Ø1000–1800 × 2300–8000', i: 'Four Sheshan nitriders, including an 8 m deep unit for long shafts.' },
+  { m: 'QPQ line (liquid nitriding / oxidizing / preheating)', r: 'Ø650–800 × 1500–2000', i: 'Three Hengtong QPQ furnaces for surface hardening of alloy structural steels.' },
+];
+
+const otherHeatTreat = [
+  'Pit heating furnaces RJ2 series ×7 (950 °C, up to 20 t load)',
+  'High-temperature quench furnace RLM-160-12 (1200 °C)',
+  'Car-bottom tempering furnaces RT2-320-6 / CL-180-3 / GFG3 series ×8 (up to 30 t)',
+  'Induction hardening GGC-80-0.3/2 ×2, Aichelin ECM400 (case depth 1–8 mm)',
+  'Salt-bath line ×5 (isothermal & step quenching)',
+  'Shot-blasting machines ×2 (incl. Ø5000×3000 large unit)',
+  'Quench oil tanks ×2 + PAG quench tank (30 t/batch cooling capacity)',
+  'Straightening presses 100 t / 250 t, pit washer (15 t)',
+];
+---
+
+<Base
+  lang={lang}
+  title="Heat Treatment Equipment & Processes — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Changsheng heat treatment: Aichelin/Tianlong pit carburizing furnaces up to Ø4000×2000, vacuum high-pressure gas quench, sealed-quench lines, cryogenic chamber — ABS-approved, ~50,000 t annual capacity."
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Services & Equipment · Heat Treatment</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Heat Treatment Equipment & Processes</h1>
+      <p class="mt-5 max-w-2xl text-lg text-slate-300">
+        100+ heat-treatment units, single parts 0.1 kg – 30 t, ~50,000 t annual capacity.
+        ABS-approved heat-treatment facility for offshore and marine applications.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-ink pb-16 sm:pb-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Featured equipment</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">Large carburizing, vacuum & cryogenic equipment</h2>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((f) => (
+          <div class:list={['rounded-3xl bg-white/5 p-4 ring-1 ring-white/10', f.flagship && 'sm:col-span-2']}>
+            <EquipPhoto
+              src={f.img}
+              name={f.name}
+              hint="Photo coming soon"
+              class:list={['bg-white/10 ring-white/15', f.flagship ? 'aspect-[16/9]' : 'aspect-[4/3]']}
+            />
+            <p class="mt-4 font-display text-lg font-bold text-white">{f.name}</p>
+            <p class="mt-0.5 text-sm font-medium text-accent-400">{f.spec}</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl space-y-8 px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Full list</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">All heat-treatment equipment</h2>
+      </div>
+      <EquipTable id="vacuum-furnaces" title="Vacuum Furnaces" head={['Equipment', 'Work zone']} rows={vacuumFurnaces} />
+      <EquipTable
+        id="carburizing"
+        title="Pit Carburizing Furnaces"
+        note="Nine large pit carburizers, up to Ø4000 × 2000, 50 t load."
+        head={['Equipment', 'Size']}
+        rows={carburizingFurnaces}
+      />
+      <div class="grid items-start gap-8 lg:grid-cols-2">
+        <EquipTable id="sealed-quench" title="Sealed-Quench Lines" head={['Equipment', 'Work zone']} rows={multiFurnaces} />
+        <EquipTable id="nitriding" title="Nitriding & QPQ Lines" head={['Equipment', 'Size']} rows={nitridingFurnaces} />
+      </div>
+      <div id="other-heat-treat" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">Other Heat-Treatment Equipment</h3>
+        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {otherHeatTreat.map((p) => (
+            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div id="processes" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">Processes</h3>
+        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {[
+            'Normalizing, annealing',
+            'Quenching & tempering',
+            'Carburizing & carbonitriding',
+            'Nitriding & nitrocarburizing',
+            'Vacuum oil & high-pressure gas quenching',
+            'Step & isothermal quenching',
+            'HF / MF / super-audio induction hardening',
+            'Shot peening, blackening',
+          ].map((p) => (
+            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <EquipTip placeholder="Equipment photos to be added" />
+  <CTA lang={lang} />
+</Base>

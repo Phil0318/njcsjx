@@ -1,0 +1,192 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CTA from '../../../components/CTA.astro';
+import EquipTable from '../../../components/EquipTable.astro';
+import EquipPhoto from '../../../components/EquipPhoto.astro';
+import EquipTip from '../../../components/EquipTip.astro';
+
+const lang = 'en' as const;
+
+const featured = [
+  {
+    img: '/equipment-photos/gleason-1000gms.jpg',
+    name: 'Gleason 1000GMS Gear Analyzer',
+    spec: 'Max inspection Ø1000 mm × height 1200 mm',
+    desc: 'Advanced gear measurement covering modules 1–56 full-parameter inspection.',
+    flagship: true,
+  },
+  {
+    img: '/equipment-photos/cmm-hexagon.jpg',
+    name: 'CMM Hexagon 15.22.10',
+    spec: 'Travel 1500 × 2200 × 1000',
+    desc: 'Hexagon CMM for form & position tolerances and gear tooth accuracy.',
+  },
+  {
+    img: '/equipment-photos/cmm-dea.jpg',
+    name: 'CMM DEA Delta20.33.15',
+    spec: 'Travel 3300 × 2000 × 1500',
+    desc: 'Italian DEA CMM for form & position inspection of large parts.',
+  },
+  {
+    img: '/equipment-photos/cmm-venus.jpg',
+    name: 'CMM VENUS20.33.14',
+    spec: 'Travel 3300 × 2000 × 1400',
+    desc: 'VENUS large-travel precision CMM.',
+  },
+  {
+    img: '/equipment-photos/zeiss-xjg04.jpg',
+    name: 'Zeiss XJG-04 large metallurgical microscope',
+    spec: 'Microstructure & failure analysis after heat treatment',
+    desc: 'German Zeiss large metallurgical microscope for microstructure judgment and failure analysis.',
+  },
+];
+
+const cmms = [
+  { m: 'CMM Hexagon 15.22.10', r: '1500 × 2200 × 1000', i: 'Hexagon CMM for form & position tolerances and gear tooth accuracy.' },
+  { m: 'CMM DEA Delta20.33.15', r: '3300 × 2000 × 1500', i: 'Italian DEA CMM for form & position inspection of large parts.' },
+  { m: 'CMM VENUS20.33.14', r: '3300 × 2000 × 1400', i: 'VENUS large-travel precision CMM.' },
+];
+
+const ndt = [
+  'Ultrasonic flaw detectors OMNISX (Olympus) / USM36S (GE)',
+  'Magnetic particle tester CJW-10000 (tooth-flank inspection)',
+  'Optical emission spectrometer DE-2000 (28 alloying elements)',
+  'Tooth-burn detection line (acid pickling)',
+  'Residual-field meter HT20A / Mitutoyo roughness testers ×4',
+];
+
+const hardnessMetallography = [
+  'Leeb hardness testers ×9 / Brinell ×4 / Rockwell ×4',
+  'Vickers hardness testers ×2 / micro-Vickers HV-1000AT ×2',
+  'Metallographic microscopes 4XC / XJX-1 / Zeiss XJG-04 large microscope',
+  'Specimen prep: mounting XQ-1, cutting QG-5A, grinding YM-2A, polishing PG-2B',
+];
+
+const mechanicalTests = [
+  'Universal testing machine WDW-300 (tensile, yield, elongation)',
+  'Impact tester JB-300B + cryostat DWY-60A',
+  'Notch broacher L71-UV / projector XD-50 / gauge-mark DX-400',
+  'Analytical balance FA1004B / carbon-potential meters GM-1A',
+  'Laboratory furnaces RJJ-950 / RJS-300 (process verification)',
+];
+---
+
+<Base
+  lang={lang}
+  title="Inspection & Metrology — Nanjing Changsheng Machinery Engineering Co., Ltd."
+  description="Changsheng inspection: Gleason 1000GMS gear analyzer, Hexagon/DEA/VENUS CMMs, ultrasonic & magnetic particle NDT, Zeiss large metallurgical microscope, hardness testers and mechanical testing machines."
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Services & Equipment · Inspection</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Inspection & Metrology</h1>
+      <p class="mt-5 max-w-2xl text-lg text-slate-300">
+        Full quality control from raw material to finished part: gear measurement, CMM inspection,
+        NDT, hardness & metallographic analysis, and mechanical testing.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Featured equipment</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Gear measurement & CMM inspection</h2>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((f) => (
+          <div class:list={['rounded-3xl border border-slate-100 bg-white p-4 shadow-sm', f.flagship && 'sm:col-span-2']}>
+            <EquipPhoto
+              src={f.img}
+              name={f.name}
+              class:list={[f.flagship ? 'aspect-[16/9]' : 'aspect-[4/3]']}
+            />
+            <p class="mt-4 font-display text-lg font-bold text-ink">{f.name}</p>
+            <p class="mt-0.5 text-sm font-medium text-accent-500">{f.spec}</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-steel-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Full list</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">All inspection equipment</h2>
+      </div>
+
+      <div id="gleason" class="scroll-mt-24 mt-10 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS Gear Analyzer</h3>
+        <p class="mt-2 text-sm text-slate-600">Advanced gear measurement — max inspection Ø1000 mm × height 1200 mm.</p>
+        <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            ['Module', '1 – 56'],
+            ['Helix angle', '0 – 60°'],
+            ['Base circle', '20 – 1000 mm'],
+            ['Max tip circle', '1000 mm'],
+            ['Face width', '800 mm'],
+            ['Center distance', '170 – 750 mm'],
+            ['Max part weight', '5000 kg'],
+          ].map(([k, v]) => (
+            <div class="rounded-xl bg-steel-50 px-4 py-3">
+              <span class="text-slate-500">{k}: </span>
+              <span class="font-semibold text-ink">{v}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <EquipTable
+          id="cmm"
+          title="Coordinate Measuring Machines"
+          note="Inspection of parallelism, concentricity, roundness and gear accuracy indices Fp, Fr, Fα, Fβ."
+          head={['Machine', 'Travel (X × Y × Z)']}
+          rows={cmms}
+        />
+      </div>
+
+      <div id="ndt" class="scroll-mt-24 mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">NDT & Material Analysis</h3>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {ndt.map((i) => (
+            <div class="flex items-center gap-3 rounded-2xl bg-steel-50 p-4 text-sm font-medium text-ink">
+              <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+              {i}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div id="labs" class="scroll-mt-24 mt-6 grid gap-3 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+          <h3 class="font-display text-lg font-bold text-ink">Hardness & Metallography</h3>
+          <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
+            {hardnessMetallography.map((i) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+          <h3 class="font-display text-lg font-bold text-ink">Mechanical Testing & Process Labs</h3>
+          <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
+            {mechanicalTests.map((i) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <EquipTip placeholder="Equipment photos to be added" />
+  <CTA lang={lang} />
+</Base>

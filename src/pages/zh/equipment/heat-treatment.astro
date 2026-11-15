@@ -1,0 +1,187 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CTA from '../../../components/CTA.astro';
+import EquipTable from '../../../components/EquipTable.astro';
+import EquipPhoto from '../../../components/EquipPhoto.astro';
+import EquipTip from '../../../components/EquipTip.astro';
+
+const lang = 'zh' as const;
+
+const featured = [
+  {
+    img: '/equipment-photos/furnace-tl160-550.jpg',
+    name: '大型井式渗碳炉 TL160×550',
+    spec: 'Φ1600 × 5500，一次装炉量 50 t',
+    desc: '天龙炉业超大型井式渗碳炉，适合长轴类零件深层渗碳，全国少有的大型渗碳装备。',
+    flagship: true,
+  },
+  {
+    img: '/equipment-photos/furnace-tl400-240.jpg',
+    name: '超大型井式渗碳炉 TL400×240',
+    spec: 'Φ4000 × 2000，一次装炉量 50 t',
+    desc: '适合超大直径齿轮、齿圈的渗碳淬火。',
+  },
+  {
+    img: '/equipment-photos/vacuum-vog-557.jpg',
+    name: '真空高压气淬炉 VOG-557',
+    spec: '500 × 500 × 700，10 bar',
+    desc: '威途真空高压气淬炉，气淬压力 10 bar，适合刀具、模具与精密结构件。',
+  },
+  {
+    img: '/equipment-photos/sealed-quench.jpg',
+    name: '爱协林多用炉生产线',
+    spec: '900 × 900 × 1500，主炉 4 台',
+    desc: '可控气氛多用炉生产线，用于渗碳、碳氮共渗、调质等批量热处理。',
+  },
+  {
+    img: '/equipment-photos/cryo-slx10m.jpg',
+    name: '深冷炉 SLX10M-R',
+    spec: '一次装炉量 40 t',
+    desc: '用于含镍渗碳钢及特殊材料的深冷处理与零件冷装。',
+  },
+];
+
+const vacuumFurnaces = [
+  { m: '真空油淬炉 VQG-200', r: '600 × 420 × 300', i: '沈阳真研真空油淬炉，最高 1300 ℃，油淬装炉量 300 kg，气淬 400 kg。' },
+  { m: '真空油淬炉 VQG-557', r: '500 × 500 × 700', i: '威途真空油淬炉，最高 1300 ℃，油淬 300 kg，气淬 400 kg。' },
+  { m: '高压气淬炉 VOG-557', r: '500 × 500 × 700', i: '威途真空高压气淬炉，气淬压力 10 bar，装炉量 400 kg。' },
+  { m: '高压气淬炉 VOG-669', r: '600 × 600 × 900', i: '沈阳真研高压气淬炉，气淬压力 6 bar，装炉量 600 kg。' },
+  { m: '真空回火炉 VPT-669', r: '600 × 600 × 900', i: '沈阳佳誉真空回火炉，最高 800 ℃，一次装炉量 600 kg。' },
+];
+
+const carburizingFurnaces = [
+  { m: '井式渗碳炉 TL160×550', r: 'Φ1600 × 5500', i: '天龙炉业超大型井式渗碳炉，一次装炉量 50 t，适合长轴类零件深层渗碳。' },
+  { m: '井式渗碳炉 TL400×240', r: 'Φ4000 × 2000', i: '天龙炉业超大型井式渗碳炉，一次装炉量 50 t，适合超大直径零件渗碳淬火。' },
+  { m: '井式渗碳炉 TL150×400', r: 'Φ1500 × 4000', i: '天龙炉业井式渗碳炉，一次装炉量 35 t。' },
+  { m: '井式渗碳炉 AXL180×400', r: 'Φ1800 × 4000', i: '爱协林井式渗碳炉，一次装炉量 30 t。' },
+  { m: '井式渗碳炉 AXL250×300 ×2', r: 'Φ2500 × 3000', i: '爱协林井式渗碳炉 2 台，一次装炉量各 30 t。' },
+  { m: '井式渗碳炉 SS250×200 ×2', r: 'Φ2500 × 2000', i: '摄山炉业井式渗碳炉 2 台，一次装炉量各 30 t。' },
+  { m: '井式渗碳炉 MS160×350', r: 'Φ1600 × 3500', i: '民生炉业井式渗碳炉，一次装炉量 30 t。' },
+  { m: '井式渗碳炉 HFS160×200 ×2', r: 'Φ1600 × 2000', i: '赫菲斯炉业井式渗碳炉 2 台，一次装炉量各 15 t。' },
+];
+
+const multiFurnaces = [
+  { m: '多用炉主炉 VKES5/2A-CN ×4', r: '900 × 900 × 1500', i: '爱协林可控气氛多用炉主炉 4 台，一次装炉量 1.5 t，用于渗碳、碳氮共渗、调质。' },
+  { m: '多用炉预热炉 VKHE5/2A-CN ×4', r: '900 × 900 × 1500', i: '爱协林预热炉 4 台，用于预热与低温回火。' },
+  { m: '多用炉清洗机 KEKTE5/2A-CN ×2', r: '900 × 900 × 1500', i: '爱协林清洗机 2 台。' },
+  { m: '赫菲斯生产线 NDS-RM ×2 / NDS-GH ×2', r: '1500 × 1200 × 1200', i: '赫菲斯炉业主炉与预热炉各 2 台，一次装炉量 3 t，单件 ≤2500 kg。' },
+];
+
+const nitridingFurnaces = [
+  { m: '井式氮化炉 RNS-350×200', r: 'Φ3500 × 2000', i: '摄山炉业大型井式氮化炉，一次装炉量 15 t。' },
+  { m: '井式氮化炉 RNS-280×250 / RNS-270×200 / RNS-210×400', r: 'Φ2700–2800 × 2000–4000', i: '摄山、亨通炉业大型氮化炉共 3 台，一次装炉量最高 30 t。' },
+  { m: '井式氮化炉 RNS-180×230 / RNS-160×230 / RNS-160×450 / RNS-100×800', r: 'Φ1000–1800 × 2300–8000', i: '摄山炉业氮化炉 4 台，含 8 m 深长轴专用氮化炉。' },
+  { m: 'QPQ 生产线（液体氮化/氧化/预热）', r: 'Φ650–800 × 1500–2000', i: '亨通炉业 QPQ 生产线 3 台，用于中低碳合金结构钢表面强化。' },
+];
+
+const otherHeatTreat = [
+  '井式加热炉 RJ2 系列 7 台（950 ℃，装炉量最高 20 t）',
+  '高温淬火炉 RLM-160-12（1200 ℃）',
+  '台车回火炉 RT2-320-6 / CL-180-3 / GFG3 系列共 8 台（装炉量最高 30 t）',
+  '感应淬火 GGC-80-0.3/2 ×2、爱协林 ECM400（硬化层 1–8 mm）',
+  '盐浴炉生产线 5 台（等温、分级淬火）',
+  '抛丸机 2 台（Φ5000×3000 大型抛丸机）',
+  '淬火油槽 2 台 + PAG 淬火槽（最大冷却能力 30 t/次）',
+  '校直机 100 t / 250 t、井式清洗机（15 t）',
+];
+---
+
+<Base
+  lang={lang}
+  title="热处理设备与工艺 — 南京长升机械工程有限公司"
+  description="长升热处理：爱协林/天龙大型井式渗碳炉最大Φ4000×2000、真空高压气淬炉、多用炉生产线、深冷炉，ABS船级社认可，年产能约5万吨。"
+>
+  <section class="bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">服务与设备 · 热处理</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">热处理设备与工艺</h1>
+      <p class="mt-5 max-w-2xl text-lg text-slate-300">
+        100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨；
+        通过 ABS 船级社热处理设施认可，服务海洋钻井平台等高端装备。
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-ink pb-16 sm:pb-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">主力设备</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">大型渗碳、真空与深冷装备</h2>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((f) => (
+          <div class:list={['rounded-3xl bg-white/5 p-4 ring-1 ring-white/10', f.flagship && 'sm:col-span-2']}>
+            <EquipPhoto
+              src={f.img}
+              name={f.name}
+              hint="照片待补充 · Photo coming soon"
+              class:list={['bg-white/10 ring-white/15', f.flagship ? 'aspect-[16/9]' : 'aspect-[4/3]']}
+            />
+            <p class="mt-4 font-display text-lg font-bold text-white">{f.name}</p>
+            <p class="mt-0.5 text-sm font-medium text-accent-400">{f.spec}</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl space-y-8 px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备明细</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">全部热处理设备清单</h2>
+      </div>
+      <EquipTable id="vacuum-furnaces" title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} />
+      <EquipTable
+        id="carburizing"
+        title="井式渗碳炉"
+        note="9 台大型井式渗碳炉，最大 Φ4000 × 2000，一次装炉量最高 50 t。"
+        head={['设备', '规格']}
+        rows={carburizingFurnaces}
+      />
+      <div class="grid items-start gap-8 lg:grid-cols-2">
+        <EquipTable id="sealed-quench" title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} />
+        <EquipTable id="nitriding" title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} />
+      </div>
+      <div id="other-heat-treat" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">其他热处理设备</h3>
+        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {otherHeatTreat.map((p) => (
+            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div id="processes" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">热处理工艺</h3>
+        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {[
+            '正火、退火',
+            '调质',
+            '渗碳淬火与碳氮共渗',
+            '氮化与氮碳共渗',
+            '真空油淬与高压气淬',
+            '分级与等温淬火',
+            '高、中、超音频局部与表面淬火',
+            '表面喷丸、发黑处理',
+          ].map((p) => (
+            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <EquipTip placeholder="设备照片待补充" />
+  <CTA lang={lang} />
+</Base>
