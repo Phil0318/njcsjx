@@ -174,7 +174,10 @@ const otherMachining = [
           {c.photos.length > 0 && (
             <div class:list={['mt-6 grid gap-6', c.photos.length > 1 && 'sm:grid-cols-2']}>
               {c.photos.map((p) => (
-                <div class="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
+                <div class:list={[
+                  'overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm',
+                  c.photos.length === 1 && 'sm:max-w-[calc(50%-0.75rem)]',
+                ]}>
                   <EquipPhoto src={p.img} name={p.model} fit="contain" class="aspect-[4/3] rounded-none border-0 ring-0" />
                   <div class="border-t border-slate-100 p-4 sm:p-5">
                     <p class="font-display font-bold text-ink">{p.model}</p>
