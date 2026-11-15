@@ -42,10 +42,12 @@ const lang = 'zh' as const;
                 {SITE.email}
               </a>
             </div>
-            <div>
-              <p class="text-slate-400">电话</p>
-              <p class="mt-1 font-semibold text-white">{SITE.phone}</p>
-            </div>
+            {SITE.phone && (
+              <div>
+                <p class="text-slate-400">电话</p>
+                <p class="mt-1 font-semibold text-white">{SITE.phone}</p>
+              </div>
+            )}
             <div>
               <p class="text-slate-400">地址</p>
               <p class="mt-1 text-white">{SITE.addressZh}</p>

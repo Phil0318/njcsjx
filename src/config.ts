@@ -8,7 +8,7 @@ export const SITE = {
   email: 'sales@njcsjx.com',
   addressZh: '江苏省南京市江宁区铜井镇汤铜路16号',
   addressEn: 'No. 16 Tangtong Road, Tongjin Town, Jiangning District, Nanjing, Jiangsu, China',
-  phone: '+86 (25) 0000-0000',
+  phone: '',
 };
 
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljbrlbd';

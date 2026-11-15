@@ -42,10 +42,12 @@ const lang = 'en' as const;
                 {SITE.email}
               </a>
             </div>
-            <div>
-              <p class="text-slate-400">Phone</p>
-              <p class="mt-1 font-semibold text-white">{SITE.phone}</p>
-            </div>
+            {SITE.phone && (
+              <div>
+                <p class="text-slate-400">Phone</p>
+                <p class="mt-1 font-semibold text-white">{SITE.phone}</p>
+              </div>
+            )}
             <div>
               <p class="text-slate-400">Address</p>
               <p class="mt-1 text-white">{SITE.addressEn}</p>

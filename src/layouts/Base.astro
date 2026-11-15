@@ -29,42 +29,12 @@ const navItems = [
 const equipmentHref = `/${lang}/equipment`;
 const equipmentSub = [
   { href: equipmentHref, label: t.nav.equipmentOverview },
-  {
-    group: t.nav.machining,
-    href: `${equipmentHref}/machining`,
-    items: [
-      { href: `${equipmentHref}/machining#gear-grinding`, label: t.nav.gearGrinding },
-      { href: `${equipmentHref}/machining#gear-cutting`, label: t.nav.gearCutting },
-      { href: `${equipmentHref}/machining#turning`, label: t.nav.turning },
-      { href: `${equipmentHref}/machining#machining-centers`, label: t.nav.machiningCenters },
-      { href: `${equipmentHref}/machining#grinding-machines`, label: t.nav.grindingMachines },
-      { href: `${equipmentHref}/machining#additional-machining`, label: t.nav.otherMachining },
-    ],
-  },
-  {
-    group: t.nav.heatTreat,
-    href: `${equipmentHref}/heat-treatment`,
-    items: [
-      { href: `${equipmentHref}/heat-treatment#vacuum-furnaces`, label: t.nav.vacuumFurnaces },
-      { href: `${equipmentHref}/heat-treatment#carburizing`, label: t.nav.carburizing },
-      { href: `${equipmentHref}/heat-treatment#sealed-quench`, label: t.nav.sealedQuench },
-      { href: `${equipmentHref}/heat-treatment#nitriding`, label: t.nav.nitriding },
-    ],
-  },
-  {
-    group: t.nav.inspection,
-    href: `${equipmentHref}/inspection`,
-    items: [
-      { href: `${equipmentHref}/inspection#gleason`, label: t.nav.gleason },
-      { href: `${equipmentHref}/inspection#cmm`, label: t.nav.cmm },
-      { href: `${equipmentHref}/inspection#ndt`, label: t.nav.ndt },
-      { href: `${equipmentHref}/inspection#labs`, label: t.nav.labs },
-    ],
-  },
+  { href: `${equipmentHref}/machining`, label: t.nav.machining },
+  { href: `${equipmentHref}/heat-treatment`, label: t.nav.heatTreat },
+  { href: `${equipmentHref}/inspection`, label: t.nav.inspection },
 ];
 
 const subItemClass = 'block px-5 py-2 text-sm font-medium text-ink transition-colors hover:bg-steel-50 hover:text-accent-500';
-const subGroupClass = 'mt-1.5 block px-5 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-steel-500 border-t border-slate-100 transition-colors hover:text-accent-500';
 
 const isActive = (href: string) =>
   href === homeHref
@@ -138,25 +108,12 @@ const isActive = (href: string) =>
               </svg>
             </a>
             <div class="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              <div class="w-72 overflow-hidden rounded-2xl bg-white py-2 shadow-xl ring-1 ring-slate-900/10">
-                {equipmentSub.map((sub) =>
-                  'group' in sub ? (
-                    <div>
-                      <a href={sub.href} class={subGroupClass}>
-                        {sub.group}
-                      </a>
-                      {sub.items.map((item) => (
-                        <a href={item.href} class={subItemClass}>
-                          {item.label}
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <a href={sub.href} class:list={[subItemClass, 'font-semibold']}>
-                      {sub.label}
-                    </a>
-                  )
-                )}
+              <div class="w-64 overflow-hidden rounded-2xl bg-white py-2 shadow-xl ring-1 ring-slate-900/10">
+                {equipmentSub.map((sub) => (
+                  <a href={sub.href} class:list={[subItemClass, sub.href === equipmentHref && 'font-semibold']}>
+                    {sub.label}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -221,27 +178,11 @@ const isActive = (href: string) =>
             {t.nav.equipment}
           </a>
           <div class="ml-4 space-y-1 border-l border-white/10 pl-3">
-            {equipmentSub.slice(1).map((sub) =>
-              'group' in sub ? (
-                <div>
-                  <a
-                    href={sub.href}
-                    class="block rounded-lg px-3 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-500 hover:text-accent-400"
-                  >
-                    {sub.group}
-                  </a>
-                  {sub.items.map((item) => (
-                    <a href={item.href} class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <a href={sub.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white">
-                  {sub.label}
-                </a>
-              )
-            )}
+            {equipmentSub.slice(1).map((sub) => (
+              <a href={sub.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white">
+                {sub.label}
+              </a>
+            ))}
           </div>
           {navItems.slice(2).map((item) => (
             <a
@@ -328,7 +269,7 @@ const isActive = (href: string) =>
           <a href={`mailto:${SITE.email}`} class="mt-4 inline-block text-sm font-medium text-accent-400 hover:text-accent-500">
             {SITE.email}
           </a>
-          <p class="mt-2 text-sm text-slate-400">{SITE.phone}</p>
+          {SITE.phone && <p class="mt-2 text-sm text-slate-400">{SITE.phone}</p>}
           <p class="mt-2 text-sm text-slate-400">
             {lang === 'zh' ? SITE.addressZh : SITE.addressEn}
           </p>

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
+import EquipPhoto from '../../components/EquipPhoto.astro';
 
 const lang = 'zh' as const;
 
@@ -8,7 +9,7 @@ const capabilities = [
   {
     title: '齿轮全序加工',
     body: '车加工、滚齿、铣齿、插齿、热处理、抛丸喷丸、磨齿、内圆磨、倒角——一站式完成，最大磨齿能力达模数 50 × 直径 3000 毫米。',
-    points: ['NILES 磨齿机 6 台（ZE400S–ZP30）', '数控立车最大直径 2500 毫米', '三/四轴加工中心、五轴线切割'],
+    points: ['NILES 磨齿机 6 台（ZE400S–ZP30）', '数控立车最大直径 2500 毫米', '三/四轴加工中心、线切割'],
   },
   {
     title: '金属热处理',
@@ -115,6 +116,47 @@ const industries = [
     </div>
   </section>
 
+  <!-- Featured equipment -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备一览</p>
+          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">真实的生产设备。</h2>
+        </div>
+        <a href={`/${lang}/equipment`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
+          查看全部设备 →
+        </a>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <a
+          href={`/${lang}/equipment/machining`}
+          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+        >
+          <EquipPhoto src="/equipment-photos/niles-zp30.jpg" name="NILES ZP30" class="aspect-[4/3]" />
+          <p class="mt-4 font-display text-lg font-bold text-ink">NILES ZP30 磨齿机</p>
+          <p class="mt-1 text-sm text-accent-500">M50 × Φ3000（外齿）</p>
+        </a>
+        <a
+          href={`/${lang}/equipment/heat-treatment`}
+          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+        >
+          <EquipPhoto src="/equipment-photos/furnace-tl160-550.jpg" name="井式渗碳炉 TL160×550" class="aspect-[4/3]" />
+          <p class="mt-4 font-display text-lg font-bold text-ink">大型井式渗碳炉 TL160×550</p>
+          <p class="mt-1 text-sm text-accent-500">Φ1600 × 5500，装炉量 50 t</p>
+        </a>
+        <a
+          href={`/${lang}/equipment/inspection`}
+          class="group rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+        >
+          <EquipPhoto src="/equipment-photos/gleason-1000gms.jpg" name="Gleason 1000GMS" class="aspect-[4/3]" />
+          <p class="mt-4 font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量中心</p>
+          <p class="mt-1 text-sm text-accent-500">模数 1–56 全参数检测</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Industries -->
   <section class="bg-steel-50 py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
@@ -185,6 +227,38 @@ const industries = [
             <p class="mt-2 text-sm text-slate-600">{label}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality assurance -->
+  <section class="bg-steel-50 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">质量保证</p>
+          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">资质认证与检测能力。</h2>
+        </div>
+        <a href={`/${lang}/about#certifications`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
+          了解资质详情 →
+        </a>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+          <p class="font-display text-2xl font-bold text-accent-500">ISO 9001</p>
+          <p class="mt-2 font-display font-bold text-ink">质量管理体系认证</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">ISO 9001:2015（证书编号 02925Q3DR48R3S），覆盖齿轮加工与热处理全流程。</p>
+        </div>
+        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+          <p class="font-display text-2xl font-bold text-accent-500">ABS</p>
+          <p class="mt-2 font-display font-bold text-ink">船级社热处理设施认可</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">ABS 热处理设施与工艺认可 HT-0579098，服务海洋装备，有效期至 2031 年。</p>
+        </div>
+        <div class="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
+          <p class="font-display text-2xl font-bold text-accent-500">NDT</p>
+          <p class="mt-2 font-display font-bold text-ink">探伤人员持证上岗</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">超声波、磁粉探伤人员持证，保障锻件与齿部探伤结果的权威性。</p>
+        </div>
       </div>
     </div>
   </section>
