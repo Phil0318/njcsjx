@@ -140,10 +140,8 @@ const otherHeatTreat = [
         head={['设备', '规格']}
         rows={carburizingFurnaces}
       />
-      <div class="grid items-start gap-8 lg:grid-cols-2">
-        <EquipTable id="sealed-quench" title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} />
-        <EquipTable id="nitriding" title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} />
-      </div>
+      <EquipTable id="sealed-quench" title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} />
+      <EquipTable id="nitriding" title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} />
       <div id="other-heat-treat" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
         <h3 class="font-display text-lg font-bold text-ink">其他热处理设备</h3>
         <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">

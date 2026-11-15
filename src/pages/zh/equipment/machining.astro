@@ -2,68 +2,29 @@
 import Base from '../../../layouts/Base.astro';
 import CTA from '../../../components/CTA.astro';
 import EquipTable from '../../../components/EquipTable.astro';
-import EquipPhoto from '../../../components/EquipPhoto.astro';
 import EquipTip from '../../../components/EquipTip.astro';
 
 const lang = 'zh' as const;
 
-const featured = [
-  {
-    img: '/equipment-photos/niles-zp30.jpg',
-    name: 'NILES ZP30',
-    spec: 'M50 × Φ3000（外齿）/ Φ2500（内齿）',
-    desc: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。',
-    flagship: true,
-  },
-  {
-    img: '/equipment-photos/niles-zp20.jpg',
-    name: 'NILES ZP20',
-    spec: 'M50 × Φ2000（外齿）',
-    desc: '大型齿轮磨齿设备，广泛用于风电与矿用齿轮。',
-  },
-  {
-    img: '/equipment-photos/niles-ze1200.jpg',
-    name: 'NILES ZE1200',
-    spec: 'M25 × Φ1200（外齿）',
-    desc: '大型内外齿磨齿设备，满足直径 1200 mm 以内齿轮的批量精磨。',
-  },
-  {
-    img: '/equipment-photos/niles-ze800.jpg',
-    name: 'NILES ZE800',
-    spec: 'M20 × Φ800',
-    desc: '大模数圆柱齿轮成形磨齿，兼顾效率与精度。',
-  },
-  {
-    img: '/equipment-photos/niles-ze400s.jpg',
-    name: 'NILES ZE400S',
-    spec: 'M20 × Φ400',
-    desc: '精密成形磨齿机，适合中小模数齿轮精加工，齿面高精度、低噪声。',
-  },
-  {
-    img: '/equipment-photos/ri1250.jpg',
-    name: 'Ri1250（德国霍夫曼）',
-    spec: 'M25 × Φ1200（外齿）',
-    desc: '高效成形磨齿机，适合大模数重载齿轮。',
-  },
-  {
-    img: '/equipment-photos/puma-480l.jpg',
-    name: 'DOOSAN PUMA 480L',
-    spec: 'Φ650 × 2000',
-    desc: '韩国斗山高刚性数控卧式车床，重载高效车削。',
-  },
-];
+const rows = [
+  { m: '磨齿设备', group: true, anchor: 'gear-grinding', i: '' },
+  { m: 'NILES ZE400S', r: 'M20 × Φ400', img: '/equipment-photos/niles-ze400s.jpg', i: '德国 NILES 精密成形磨齿机，适合中小模数齿轮精加工，齿面高精度、低噪声。' },
+  { m: 'NILES ZE800', r: 'M20 × Φ800', img: '/equipment-photos/niles-ze800.jpg', i: '德国 NILES 成形磨齿机，用于中大型圆柱齿轮的高效精磨。' },
+  { m: 'NILES ZE1200', r: 'M25 × Φ1200（外齿）/ Φ1080（内齿）', img: '/equipment-photos/niles-ze1200.jpg', i: '德国 NILES 内外齿磨齿设备，满足直径 1200 mm 以内齿轮批量精磨。' },
+  { m: 'NILES ZP20', r: 'M50 × Φ2000（外齿）/ Φ1480（内齿）', i: '大型齿轮磨齿设备，广泛用于风电与矿用齿轮。' },
+  { m: 'NILES ZP30', r: 'M50 × Φ3000（外齿）/ Φ2500（内齿）', img: '/equipment-photos/niles-zp30.jpg', i: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。' },
+  { m: 'Ri1250（德国霍夫曼）', r: 'M25 × Φ1200（外齿）', i: '高效成形磨齿机，适合大模数重载齿轮。' },
 
-const turning = [
-  { m: '数控卧车 DOOSAN PUMA 480L', r: 'Φ650 × 2000', i: '韩国斗山高刚性卧式车床，重载高效车削。' },
+  { m: '车削设备', group: true, anchor: 'turning', i: '' },
+  { m: '数控卧车 DOOSAN PUMA 480L', r: 'Φ650 × 2000', img: '/equipment-photos/puma-480l.jpg', i: '韩国斗山高刚性卧式车床，重载高效车削。' },
   { m: '数控卧车 CKBP6180/2', r: 'Φ800 × 2000', i: '安阳鑫盛数控卧式车床，用于大中型轴类零件加工。' },
   { m: '数控卧车 CK61125E/3', r: 'Φ1250 × 3000', i: '安阳鑫盛重型卧式车床，适合长轴类零件加工。' },
   { m: '数控立车 HONOR VL-160C', r: '工作台 Φ1600，回转 Φ2000 × 1250', i: '荣田精机数控立式车床，高效车削大型回转体零件。' },
   { m: '数控立车 SZ1600ATC', r: '工作台 Φ1600，回转 Φ2000 × 1250', i: '苏州三众数控立车，带刀库，自动化程度高。' },
   { m: '数控立车 C5225×16/10', r: '工作台 Φ2000，回转 Φ2500 × 1600', i: '齐一大型双柱立式车床，最大加工直径 2500 mm。' },
   { m: '普通车床 CA6266C / CW6180B / CW61125', r: 'Φ660–1250 × 3000', i: '沈阳机床等普通车床共 5 台，用于粗加工与辅助工序。' },
-];
 
-const gearMachines = [
+  { m: '齿轮加工机床', group: true, anchor: 'gear-cutting', i: '' },
   { m: '数控铣齿机 YK31500L', r: 'M50 × Φ5000', i: '齐重数控大型铣齿机，最大模数 50、直径 5000 mm，服务超大齿轮成形铣削。' },
   { m: '数控铣齿机 YK83200', r: 'M26/32 × Φ2500，承重 10 t', i: '宜昌长机数控铣齿机，配备内外铣头，兼顾内齿加工。' },
   { m: '数控滚齿机 Y31200CNC', r: 'M32 × Φ2500', i: '河北卓昊数控滚齿机，用于大模数圆柱齿轮加工。' },
@@ -73,15 +34,13 @@ const gearMachines = [
   { m: '插齿机 YK5150B', r: 'M8 × Φ500（外）/ Φ625（内）', i: '南京博程插齿机，用于中小内齿零件加工。' },
   { m: '倒角机 YKDV150B', r: 'M32 × Φ1500', i: '陕西虢西倒角机，用于齿轮端面与齿棱倒角。' },
   { m: '刃磨机床 M6425', r: '滚刀 Φ50–250', i: '武汉机床厂滚刀刃磨机床，保障滚刀精度。' },
-];
 
-const machiningCenters = [
+  { m: '加工中心', group: true, anchor: 'machining-centers', i: '' },
   { m: '龙门加工中心 SK-LMX2030', r: '3000 × 2000 × 1000', i: '南京高传四开大型龙门加工中心，适合大型结构件铣削。' },
   { m: '加工中心 SK-VM1580', r: '1500 × 800 × 800', i: '南京高传四开立式加工中心，用于通用精密铣削。' },
   { m: '加工中心 HCMC-1370', r: '1300 × 700 × 660', i: '协鸿工业四轴加工中心，一次装夹完成多面加工。' },
-];
 
-const grinding = [
+  { m: '磨床', group: true, anchor: 'grinding-machines', i: '' },
   { m: '数控立磨 MG28100', r: 'Φ1200 × 800', i: '无锡明鑫立式数控磨床，用于大型盘类、环类零件精密磨削。' },
   { m: '外圆磨床 M1332B×1500', r: 'Φ320 × 1500', i: '上海机床厂外圆磨床，用于轴类零件外圆精密磨削。' },
   { m: '曲轴磨床 MQ8260', r: 'Φ580 × 1600', i: '汉江机床厂曲轴磨床，用于曲轴类零件磨削。' },
@@ -108,8 +67,8 @@ const otherMachining = [
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">服务与设备 · 机械加工</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">机械加工设备</h1>
       <p class="mt-5 max-w-2xl text-lg text-slate-300">
-        50 余台套机械加工设备，从德国 NILES 磨齿机到韩国斗山数控车床，
-        覆盖车、铣、滚、插、磨全序加工，最大磨齿能力模数 50 × 直径 3000 毫米。
+        50 余台套机械加工设备，覆盖车、铣、滚、插、磨全序加工，
+        最大磨齿能力模数 50 × 直径 3000 毫米。悬停设备名称可查看简介。
       </p>
     </div>
   </section>
@@ -117,58 +76,18 @@ const otherMachining = [
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">主力设备</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">德国 NILES 磨齿机群与韩国斗山车床</h2>
-      </div>
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((f) => (
-          <div class:list={['rounded-3xl border border-slate-100 bg-white p-4 shadow-sm', f.flagship && 'sm:col-span-2']}>
-            <EquipPhoto
-              src={f.img}
-              name={f.name}
-              class:list={[f.flagship ? 'aspect-[16/9]' : 'aspect-[4/3]']}
-            />
-            <p class="mt-4 font-display text-lg font-bold text-ink">{f.name}</p>
-            <p class="mt-0.5 text-sm font-medium text-accent-500">{f.spec}</p>
-            <p class="mt-2 text-sm leading-relaxed text-slate-600">{f.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-steel-50 py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl space-y-12 px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备明细</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">全部机械加工设备清单</h2>
+        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备清单</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">机械加工设备一览</h2>
       </div>
 
       <EquipTable
-        id="gear-grinding"
-        title="磨齿设备"
-        note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 3000 毫米（外齿）。"
         head={['设备型号', '加工范围']}
-        rows={featured.slice(0, 6).map((f) => ({ m: f.name, r: f.spec, i: f.desc }))}
+        rows={rows}
+        photoHead="照片"
+        note="磨齿最大模数 50 × 直径 3000 毫米；滚铣最大模数 50 × 直径 5000 毫米。"
       />
 
-      <div class="grid items-start gap-12 lg:grid-cols-2">
-        <EquipTable id="turning" title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
-        <EquipTable
-          id="gear-cutting"
-          title="齿轮加工机床"
-          note="滚齿、铣齿、插齿、倒角、刃磨，最大滚铣能力模数 50 × 5000 毫米。"
-          head={['设备型号', '加工范围']}
-          rows={gearMachines}
-        />
-      </div>
-
-      <div class="grid items-start gap-12 lg:grid-cols-2">
-        <EquipTable id="machining-centers" title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
-        <EquipTable id="grinding-machines" title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
-      </div>
-
-      <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+      <div id="other-machining" class="scroll-mt-24 mt-8 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
         <h3 class="font-display text-lg font-bold text-ink">其他机加设备</h3>
         <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
           {otherMachining.map((p) => (
