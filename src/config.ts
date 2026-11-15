@@ -6,8 +6,8 @@ export const SITE = {
   taglineEn: 'Changsheng — “Long Rising”: gears & thermal processing since 2006',
   url: 'https://njcsjx.com',
   email: 'sales@njcsjx.com',
-  addressZh: '江苏省南京市（详细地址待补充）',
-  addressEn: 'Nanjing, Jiangsu, China (address to be added)',
+  addressZh: '江苏省南京市江宁区铜井镇汤铜路16号',
+  addressEn: 'No. 16 Tangtong Road, Tongjin Town, Jiangning District, Nanjing, Jiangsu, China',
   phone: '+86 (25) 0000-0000',
 };
 

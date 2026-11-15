@@ -7,98 +7,144 @@ import EquipTip from '../../components/EquipTip.astro';
 const lang = 'zh' as const;
 
 const gearGrinding = [
-  { m: 'NILES ZE400S', r: 'M18 × Φ400', i: '精密成形磨齿机，适合中小模数齿轮的精加工，保证齿面高精度与低噪声。' },
-  { m: 'NILES ZE800', r: 'M32 × Φ800', i: '大模数圆柱齿轮成形磨齿，兼顾效率与精度。' },
-  { m: 'NILES ZE1200', r: 'M40 × Φ1200（外齿）/ M12 × Φ1100（内齿）', i: '大型内外齿磨齿设备，满足直径 1200 mm 以内齿轮的批量精磨。' },
-  { m: 'Rapid1250', r: 'M50 × Φ1250（外齿）', i: '高效成形磨齿机，加工范围达模数 50，适合大模数重载齿轮。' },
-  { m: 'NILES ZP20', r: 'M50 × Φ2000（外齿）/ M32 × Φ1500（内齿）', i: '大型齿轮磨齿设备，外齿直径达 2000 mm，广泛用于风电与矿用齿轮。' },
-  { m: 'NILES ZP30', r: 'M50 × Φ3000（外齿）/ M50 × Φ2500（内齿）', i: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。' },
-];
-
-const grinding = [
-  { m: '数控立磨 MG28100', r: 'Φ1200 × 800', i: '立式数控磨床，用于大型盘类、环类零件的内圆与外圆精密磨削。' },
-  { m: '外圆磨床 M1350B', r: 'Φ630 × 3000', i: '外圆磨床，用于轴类零件外圆的精密磨削。' },
-  { m: '平面磨床 M7160H', r: '600 × 2000', i: '平面磨床，用于零件平面的精密磨削。' },
+  { m: 'NILES ZE400S', r: 'M20 × Φ400', i: '德国 NILES 精密成形磨齿机，适合中小模数齿轮精加工，保证齿面高精度与低噪声。' },
+  { m: 'NILES ZE800', r: 'M20 × Φ800', i: '德国 NILES 成形磨齿机，用于中大型圆柱齿轮的高效精磨。' },
+  { m: 'NILES ZE1200', r: 'M25 × Φ1200（外齿）/ Φ1080（内齿）', i: '德国 NILES 内外齿磨齿设备，覆盖直径 1200 mm 以内齿轮批量精磨。' },
+  { m: 'Ri1250（德国霍夫曼）', r: 'M25 × Φ1200（外齿）', i: '德国霍夫曼高效成形磨齿机，适合大模数重载齿轮。' },
+  { m: 'NILES ZP20', r: 'M50 × Φ2000（外齿）/ Φ1480（内齿）', i: '大型齿轮磨齿设备，外齿直径达 2000 mm，广泛用于风电与矿用齿轮。' },
+  { m: 'NILES ZP30', r: 'M50 × Φ3000（外齿）/ Φ2500（内齿）', i: '厂内最大磨齿设备，外齿直径达 3000 mm，服务海洋钻井平台等超大齿轮。' },
 ];
 
 const turning = [
-  { m: '数控车铣复合 COVL-200CM', r: 'Φ2000 × 1600', i: '车铣复合加工中心，一次装夹完成车、铣、钻多道工序。' },
-  { m: '数控立车 C5225-16/10', r: 'Φ2500 × 1600', i: '大型双柱立式车床，最大加工直径 2500 mm。' },
-  { m: '数控立车 VL-160C', r: 'Φ2000', i: '数控立式车床，高效车削大型回转体零件。' },
-  { m: '数控立车 SZ-160ATC', r: 'Φ1600 × 1250', i: '带刀库的数控立车，自动化程度高。' },
-  { m: '数控卧车 CK61125E/3000', r: 'Φ1250 × 3000', i: '重型卧式车床，适合长轴类零件的加工。' },
-  { m: '数控卧车 斗山 PUMA 480L', r: 'Φ900 × 2042', i: '斗山高刚性卧式车床，重载高效车削。' },
-  { m: '数控卧车 CKBP6180/200', r: 'Φ800 × 2000', i: '数控卧式车床，用于中小型轴类零件加工。' },
-  { m: '摇臂钻 Z3080×25 / Z3050×16 / Z3132B', r: 'Φ80×2500 / Φ50×1600 / Φ32×1000', i: '摇臂钻床，用于大型零件的钻孔与攻丝。' },
-];
-
-const machiningCenters = [
-  { m: '加工中心 LMY2030（三轴）', r: '2000 × 3000 × 1500', i: '大型龙门加工中心，工作台 2000 × 3000，适合大型结构件铣削。' },
-  { m: '加工中心 VM-1580（三轴）', r: '1500 × 800 × 700', i: '立式加工中心，用于通用精密铣削。' },
-  { m: '加工中心 HCMC-1370（四轴）', r: '1300 × 700 × 660', i: '四轴加工中心，一次装夹完成多面加工。' },
-  { m: '五轴线切割 BM150×130', r: '1500 × 1900', i: '五轴慢走丝线切割，用于复杂曲面与精密模具加工。' },
+  { m: '数控卧车 DOOSAN PUMA 480L', r: 'Φ650 × 2000', i: '韩国斗山高刚性卧式车床，重载高效车削。' },
+  { m: '数控卧车 CKBP6180/2', r: 'Φ800 × 2000', i: '安阳鑫盛数控卧式车床，用于大中型轴类零件加工。' },
+  { m: '数控卧车 CK61125E/3', r: 'Φ1250 × 3000', i: '安阳鑫盛重型卧式车床，适合长轴类零件加工。' },
+  { m: '数控立车 HONOR VL-160C', r: '工作台 Φ1600，回转 Φ2000 × 1250', i: '荣田精机数控立式车床，高效车削大型回转体零件。' },
+  { m: '数控立车 SZ1600ATC', r: '工作台 Φ1600，回转 Φ2000 × 1250', i: '苏州三众数控立车，带刀库，自动化程度高。' },
+  { m: '数控立车 C5225×16/10', r: '工作台 Φ2000，回转 Φ2500 × 1600', i: '齐一大型双柱立式车床，最大加工直径 2500 mm。' },
+  { m: '普通车床 CA6266C / CW6180B / CW61125', r: 'Φ660–1250 × 3000', i: '沈阳机床等普通车床共 5 台，用于粗加工与辅助工序。' },
 ];
 
 const gearMachines = [
-  { m: '数控铣齿机 YK83500A', r: 'M50 × 5000', i: '数控铣齿机，最大模数 50，适合特大型齿轮的成形铣削。' },
-  { m: '数控铣齿机 YK83200A', r: 'M32 × 2000', i: '数控铣齿机，用于大模数圆柱齿轮成形铣削。' },
-  { m: '数控滚铣复合 YK31200', r: 'M32 × 2000', i: '数控滚铣复合机床，滚齿、铣齿一体化加工。' },
-  { m: '数控插齿机 YKHL51160', r: 'M20 × 1600', i: '数控插齿机，用于内齿与盲孔齿轮的加工。' },
-  { m: '数控斜花键插齿机 YKEL5350', r: 'M20 × 1600', i: '数控斜花键插齿机，用于斜花键与内齿加工。' },
-  { m: '滚齿机 Y31125', r: 'M18 × Φ1250', i: '滚齿机，用于圆柱齿轮的成形加工。' },
-  { m: '倒角机 YKDV-150B', r: 'M32 × 1500', i: '倒角机，用于齿轮端面与齿棱的倒角。' },
-  { m: '强力抛丸机 KXS-2000P', r: 'Φ1600 × 1250', i: '强力抛丸机，用于齿面强化与表面清理。' },
+  { m: '数控铣齿机 YK31500L', r: 'M50 × Φ5000', i: '齐重数控大型铣齿机，最大模数 50、直径 5000 mm，服务超大齿轮成形铣削。' },
+  { m: '数控铣齿机 YK83200', r: 'M26/32 × Φ2500，承重 10 t', i: '宜昌长机数控铣齿机，配备内外铣头，兼顾内齿加工。' },
+  { m: '数控滚齿机 Y31200CNC', r: 'M32 × Φ2500', i: '河北卓昊数控滚齿机，用于大模数圆柱齿轮加工。' },
+  { m: '滚齿机 Y3180H ×3', r: 'M10 × Φ800', i: '重庆机床滚齿机 3 台，用于中小模数圆柱齿轮成形加工。' },
+  { m: '滚齿机 YA31125 / Y31125E', r: 'M16 × Φ1250', i: '重庆机床滚齿机，用于中大模数圆柱齿轮加工。' },
+  { m: '数控插齿机 YKHL51160', r: 'M20 × Φ1600（外）/ Φ2000（内）', i: '武汉格威数控插齿机，用于大直径内齿与盲孔齿轮加工。' },
+  { m: '插齿机 YK5150B', r: 'M8 × Φ500（外）/ Φ625（内）', i: '南京博程插齿机，用于中小内齿零件加工。' },
+  { m: '倒角机 YKDV150B', r: 'M32 × Φ1500', i: '陕西虢西倒角机，用于齿轮端面与齿棱倒角。' },
+  { m: '刃磨机床 M6425', r: '滚刀 Φ50–250', i: '武汉机床厂滚刀刃磨机床，保障滚刀精度。' },
 ];
 
-const heatFurnaces = [
-  { m: '大型井式渗碳炉', r: 'Φ1600 × 5500', i: '大型井式渗碳炉，适合长轴类零件的深层渗碳。' },
-  { m: '大型井式渗碳炉', r: 'Φ1600 × 4000', i: '井式渗碳炉，用于轴类与大型零件的渗碳。' },
-  { m: '大型井式渗碳炉', r: 'Φ4000 × 2500', i: '超大型井式渗碳炉，适合大直径零件的渗碳淬火。' },
-  { m: '大型井式渗碳炉', r: 'Φ1500 × 4000', i: '井式渗碳炉，用于各类轴件的渗碳处理。' },
-  { m: '箱式多用炉生产线', r: '—', i: '可控气氛箱式多用炉，用于渗碳、碳氮共渗、调质等热处理。' },
-  { m: '炉膛尺寸', r: '3000×3000×1500 / 2500×2500×2500 / 2500×2500×1500 / 1200×2000×1000', i: '多规格箱式炉膛，覆盖各类中小零件的批量热处理。' },
+const machiningCenters = [
+  { m: '龙门加工中心 SK-LMX2030', r: '3000 × 2000 × 1000', i: '南京高传四开大型龙门加工中心，适合大型结构件铣削。' },
+  { m: '加工中心 SK-VM1580', r: '1500 × 800 × 800', i: '南京高传四开立式加工中心，用于通用精密铣削。' },
+  { m: '加工中心 HCMC-1370', r: '1300 × 700 × 660', i: '协鸿工业四轴加工中心，一次装夹完成多面加工。' },
 ];
 
-const heatProcesses = [
-  '正火、退火',
-  '调质',
-  '渗碳淬火与碳氮共渗',
-  '氮化与氮碳共渗',
-  '真空油淬与高压气淬',
-  '分级与等温淬火',
-  '高、中、超音频局部与表面淬火',
-  '表面喷丸、发黑处理',
+const grinding = [
+  { m: '数控立磨 MG28100', r: 'Φ1200 × 800', i: '无锡明鑫立式数控磨床，用于大型盘类、环类零件精密磨削。' },
+  { m: '外圆磨床 M1332B×1500', r: 'Φ320 × 1500', i: '上海机床厂外圆磨床，用于轴类零件外圆精密磨削。' },
+  { m: '曲轴磨床 MQ8260', r: 'Φ580 × 1600', i: '汉江机床厂曲轴磨床，用于曲轴类零件磨削。' },
+  { m: '内圆磨床 M250A', r: 'Φ150–500 × 450', i: '无锡机床内圆磨床，用于内孔精密磨削。' },
+  { m: '平面磨床 M7160×20/HZ', r: '600 × 2000', i: '杭州机床厂平面磨床，用于零件平面精密磨削。' },
+];
+
+const otherMachining = [
+  '摇臂钻床 ZN3050×16 / ZQ3080×20 / Z3050×16/1',
+  '锯床 GW4028B / GB4250',
+  '强化抛丸机 KXS-2000P（Φ1600 工作台）',
+  '粗加工分厂：卧车 C6136A-D、CA6266C、C6140D、CW6180B、CW61125、CA6140A、C6150D、CK6280B、CK6140、C5116A',
+  '粗加工分厂：龙门铣 SW-4200、万能铣 X6140、端面铣镗 CL-A64110、卧式铣镗床 TPX6111B',
+];
+
+const vacuumFurnaces = [
+  { m: '真空油淬炉 VQG-200', r: '600 × 420 × 300', i: '沈阳真研真空油淬炉，最高 1300 ℃，油淬装炉量 300 kg，气淬 400 kg。' },
+  { m: '真空油淬炉 VQG-557', r: '500 × 500 × 700', i: '威途真空油淬炉，最高 1300 ℃，油淬 300 kg，气淬 400 kg。' },
+  { m: '高压气淬炉 VOG-557', r: '500 × 500 × 700', i: '威途真空高压气淬炉，气淬压力 10 bar，装炉量 400 kg。' },
+  { m: '高压气淬炉 VOG-669', r: '600 × 600 × 900', i: '沈阳真研高压气淬炉，气淬压力 6 bar，装炉量 600 kg。' },
+  { m: '真空回火炉 VPT-669', r: '600 × 600 × 900', i: '沈阳佳誉真空回火炉，最高 800 ℃，一次装炉量 600 kg。' },
+];
+
+const carburizingFurnaces = [
+  { m: '井式渗碳炉 TL160×550', r: 'Φ1600 × 5500', i: '天龙炉业超大型井式渗碳炉，一次装炉量 50 t，适合长轴类零件深层渗碳。' },
+  { m: '井式渗碳炉 TL400×240', r: 'Φ4000 × 2000', i: '天龙炉业超大型井式渗碳炉，一次装炉量 50 t，适合超大直径零件渗碳淬火。' },
+  { m: '井式渗碳炉 TL150×400', r: 'Φ1500 × 4000', i: '天龙炉业井式渗碳炉，一次装炉量 35 t。' },
+  { m: '井式渗碳炉 AXL180×400', r: 'Φ1800 × 4000', i: '爱协林井式渗碳炉，一次装炉量 30 t。' },
+  { m: '井式渗碳炉 AXL250×300 ×2', r: 'Φ2500 × 3000', i: '爱协林井式渗碳炉 2 台，一次装炉量各 30 t。' },
+  { m: '井式渗碳炉 SS250×200 ×2', r: 'Φ2500 × 2000', i: '摄山炉业井式渗碳炉 2 台，一次装炉量各 30 t。' },
+  { m: '井式渗碳炉 MS160×350', r: 'Φ1600 × 3500', i: '民生炉业井式渗碳炉，一次装炉量 30 t。' },
+  { m: '井式渗碳炉 HFS160×200 ×2', r: 'Φ1600 × 2000', i: '赫菲斯炉业井式渗碳炉 2 台，一次装炉量各 15 t。' },
+];
+
+const multiFurnaces = [
+  { m: '多用炉主炉 VKES5/2A-CN ×4', r: '900 × 900 × 1500', i: '爱协林可控气氛多用炉主炉 4 台，一次装炉量 1.5 t，用于渗碳、碳氮共渗、调质。' },
+  { m: '多用炉预热炉 VKHE5/2A-CN ×4', r: '900 × 900 × 1500', i: '爱协林预热炉 4 台，用于预热与低温回火。' },
+  { m: '多用炉清洗机 KEKTE5/2A-CN ×2', r: '900 × 900 × 1500', i: '爱协林清洗机 2 台。' },
+  { m: '赫菲斯生产线 NDS-RM ×2 / NDS-GH ×2', r: '1500 × 1200 × 1200', i: '赫菲斯炉业主炉与预热炉各 2 台，一次装炉量 3 t，单件 ≤2500 kg。' },
+];
+
+const nitridingFurnaces = [
+  { m: '井式氮化炉 RNS-350×200', r: 'Φ3500 × 2000', i: '摄山炉业大型井式氮化炉，一次装炉量 15 t。' },
+  { m: '井式氮化炉 RNS-280×250 / RNS-270×200 / RNS-210×400', r: 'Φ2700–2800 × 2000–4000', i: '摄山、亨通炉业大型氮化炉共 3 台，一次装炉量最高 30 t。' },
+  { m: '井式氮化炉 RNS-180×230 / RNS-160×230 / RNS-160×450 / RNS-100×800', r: 'Φ1000–1800 × 2300–8000', i: '摄山炉业氮化炉 4 台，含 8 m 深长轴专用氮化炉。' },
+  { m: 'QPQ 生产线（液体氮化/氧化/预热）', r: 'Φ650–800 × 1500–2000', i: '亨通炉业 QPQ 生产线 3 台，用于中低碳合金结构钢表面强化。' },
+];
+
+const otherHeatTreat = [
+  '井式加热炉 RJ2 系列 7 台（950 ℃，装炉量最高 20 t）',
+  '高温淬火炉 RLM-160-12（1200 ℃）',
+  '台车回火炉 RT2-320-6 / CL-180-3 / GFG3 系列共 8 台（装炉量最高 30 t）',
+  '感应淬火 GGC-80-0.3/2 ×2、爱协林 ECM400（硬化层 1–8 mm）',
+  '盐浴炉生产线 5 台（等温、分级淬火）',
+  '深冷炉 SLX10M-R（一次装炉量 40 t）',
+  '抛丸机 2 台（Φ5000×3000 大型抛丸机）',
+  '淬火油槽 2 台 + PAG 淬火槽（最大冷却能力 30 t/次）',
+  '校直机 100 t / 250 t、井式清洗机（15 t）',
 ];
 
 const cmms = [
-  { m: '三坐标测量仪（海克斯康 Hexagon）', r: '1500 × 1000 × 1200', n: '最大工件重量 1000 kg', i: '海克斯康三坐标测量仪，检测平行度、同轴度、圆度等形位公差及齿部精度。' },
-  { m: '三坐标测量仪（意大利 DEA）', r: '2500 × 2000 × 1200', n: '最大工件重量 5000 kg', i: '意大利 DEA 三坐标测量仪，适合大型零件的形位公差检测。' },
-  { m: '三坐标测量仪（VENUS 20.33.14）', r: '2000 × 3000 × 1400', n: '最大工件重量 3000 kg', i: 'VENUS 三坐标测量仪，大行程精密测量。' },
+  { m: '三坐标测量仪 Hexagon 15.22.10', r: '1500 × 2200 × 1000', i: '海克斯康三坐标测量仪，检测平行度、同轴度、圆度等形位公差及齿部精度。' },
+  { m: '三坐标测量仪 DEA Delta20.33.15', r: '3300 × 2000 × 1500', i: '意大利 DEA 三坐标测量仪，适合大型零件形位公差检测。' },
+  { m: '三坐标测量仪 VENUS20.33.14', r: '3300 × 2000 × 1400', i: '上海灿栎 VENUS 三坐标测量仪，大行程精密测量。' },
 ];
 
-const inspection = [
-  '超声波探伤仪 OMNISX / USM36S',
-  '直读式光谱仪 DE-2000',
-  '卧式 / 立式磁粉探伤机',
-  '齿面烧伤检测线',
-  '洛氏 / 布氏 / 维氏硬度计',
-  '显微硬度计',
-  '金相显微镜',
-  '拉伸 / 冲击试验机',
+const ndt = [
+  '超声波探伤仪 OMNISX（奥林巴斯）/ USM36S（GE）',
+  '磁粉探伤机 CJW-10000（齿面探伤）',
+  '直读式光谱仪 DE-2000（检测 28 个合金元素）',
+  '齿面烧伤检测线（酸洗检测）',
+  '剩磁仪 HT20A / 粗糙度仪 三丰 178-560 ×4',
+];
+
+const hardnessMetallography = [
+  '里氏硬度计 9 台 / 布氏硬度计 4 台 / 洛氏硬度计 4 台',
+  '维氏硬度计 2 台 / 显微硬度计 HV-1000AT 2 台',
+  '金相显微镜 4XC / XJX-1 / 德国蔡司 XJG-04 大型金相显微镜',
+  '金相制样设备：镶嵌 XQ-1、切割 QG-5A、预磨 YM-2A、抛光 PG-2B',
+];
+
+const mechanicalTests = [
+  '万能试验机 WDW-300（抗拉、屈服、延伸率）',
+  '冲击试验机 JB-300B + 低温箱 DWY-60A',
+  '缺口拉床 L71-UV / 缺口投影仪 XD-50 / 标距仪 DX-400',
+  '电子天平 FA1004B / 快速碳势测定仪 GM-1A',
+  '箱式实验炉 RJJ-950 / RJS-300（工艺验证）',
 ];
 ---
 
 <Base
   lang={lang}
   title="能力与设备 — 南京长升机械工程有限公司"
-  description="长升机械加工与检测设备：NILES 磨齿机最大模数50×直径3000毫米、大型井式渗碳炉、Gleason齿轮测量仪、海克斯康/DEA三坐标等。"
+  description="长升集团设备：NILES 磨齿机最大模数50×直径3000毫米、爱协林/天龙大型井式渗碳炉、真空高压气淬炉、Gleason齿轮测量仪、海克斯康/DEA三坐标、ABS认可热处理设施等。"
 >
   <section class="bg-ink">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">能力与设备</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">设备先进，检测完备。</h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-        50 余台套机械加工设备、100 余台套热处理设备与专业计量实验室，保障每一件产品的精度与质量。
+        集团机加设备 50 余台套、热处理设备 100 余台套与专业计量实验室，保障每一件产品的精度与质量。
         将鼠标悬停在设备名称上，可查看设备简介。
       </p>
     </div>
@@ -108,34 +154,81 @@ const inspection = [
     <div class="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
       <EquipTable
         title="磨齿设备"
-        note="德国 NILES 系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
+        note="德国 NILES / 霍夫曼系列成形磨齿机，最大模数 50 × 直径 3000 毫米（外齿）。"
         head={['设备型号', '加工范围']}
         rows={gearGrinding}
       />
 
+      <EquipTable title="车削设备" note="数控卧车、数控立车与普通车床。" head={['设备型号', '加工范围']} rows={turning} />
+
+      <EquipTable
+        title="齿轮加工机床"
+        note="滚齿、铣齿、插齿、倒角、刃磨，最大滚铣能力模数 50 × 直径 5000 毫米。"
+        head={['设备型号', '加工范围']}
+        rows={gearMachines}
+      />
+
+      <EquipTable title="加工中心" head={['设备型号', '加工范围']} rows={machiningCenters} />
+
       <EquipTable title="磨床" head={['设备型号', '加工范围']} rows={grinding} />
 
-      <EquipTable title="车削设备" head={['设备型号', '加工范围']} rows={turning} />
-
-      <EquipTable title="加工中心与线切割" head={['设备型号', '加工范围']} rows={machiningCenters} />
-
-      <EquipTable title="齿轮加工机床" head={['设备型号', '加工范围']} rows={gearMachines} />
+      <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <h3 class="font-display text-lg font-bold text-ink">其他机加设备</h3>
+        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+          {otherMachining.map((p) => (
+            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <!-- Heat treatment -->
       <div class="rounded-[2rem] bg-ink p-8 sm:p-12">
         <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">热处理设备与工艺</h2>
-        <p class="mt-2 text-slate-400">100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨。</p>
-        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <p class="mt-2 text-slate-400">
+          100 余台套热处理设备，单件 0.1 kg – 30 t，年产能约 5 万吨；通过 ABS 船级社热处理设施认可。
+        </p>
+        <div class="mt-8 space-y-8">
+          <EquipTable title="真空热处理炉" head={['设备', '有效工作区']} rows={vacuumFurnaces} variant="dark" />
+          <EquipTable
+            title="井式渗碳炉"
+            note="9 台大型井式渗碳炉，最大 Φ4000 × 2000，一次装炉量最高 50 t。"
+            head={['设备', '规格']}
+            rows={carburizingFurnaces}
+            variant="dark"
+          />
+          <EquipTable title="多用炉生产线" head={['设备', '有效工作区']} rows={multiFurnaces} variant="dark" />
+          <EquipTable title="氮化设备与 QPQ 生产线" head={['设备', '规格']} rows={nitridingFurnaces} variant="dark" />
           <div>
-            <h3 class="font-display text-lg font-bold text-accent-400">主要炉型</h3>
-            <div class="mt-4">
-              <EquipTable title="" head={['设备', '规格']} rows={heatFurnaces} variant="dark" />
-            </div>
+            <h3 class="font-display text-lg font-bold text-accent-400">其他热处理设备</h3>
+            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+              {otherHeatTreat.map((p) => (
+                <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
             <h3 class="font-display text-lg font-bold text-accent-400">热处理工艺</h3>
             <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {heatProcesses.map((p) => (
+              {[
+                '正火、退火',
+                '调质',
+                '渗碳淬火与碳氮共渗',
+                '氮化与氮碳共渗',
+                '真空油淬与高压气淬',
+                '分级与等温淬火',
+                '高、中、超音频局部与表面淬火',
+                '表面喷丸、发黑处理',
+              ].map((p) => (
                 <li class="flex items-start gap-2 rounded-xl bg-white/5 px-3.5 py-2.5 text-sm text-slate-300 ring-1 ring-white/10">
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
@@ -154,8 +247,8 @@ const inspection = [
         <p class="mt-2 text-slate-600">齿轮测量、三坐标检测、无损探伤与理化实验室。</p>
 
         <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-          <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量仪</h3>
-          <p class="mt-2 text-sm text-slate-600">国际先进的齿轮测量设备，覆盖模数 1–56 的圆柱齿轮全参数检测。</p>
+          <h3 class="font-display text-lg font-bold text-ink">Gleason 1000GMS 齿轮测量中心</h3>
+          <p class="mt-2 text-sm text-slate-600">国际先进的齿轮测量设备，最大检测直径 1000 mm、最大检测高度 1200 mm。</p>
           <div class="mt-4 grid gap-2.5 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
             {[
               ['模数', '1 – 56'],
@@ -178,18 +271,46 @@ const inspection = [
           <EquipTable
             title="三坐标测量仪"
             note="检测范围：平行度、同轴度、圆度等形位公差；齿部 Fp、Fr、Fα、Fβ 等精度指标。"
-            head={['仪器', '行程范围（X × Y × Z）', '备注']}
+            head={['仪器', '行程范围（X × Y × Z）']}
             rows={cmms}
           />
         </div>
 
-        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {inspection.map((i) => (
-            <div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 text-sm font-medium text-ink shadow-sm">
-              <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
-              {i}
-            </div>
-          ))}
+        <div class="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+          <h3 class="font-display text-lg font-bold text-ink">无损探伤与材质分析</h3>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {ndt.map((i) => (
+              <div class="flex items-center gap-3 rounded-2xl bg-steel-50 p-4 text-sm font-medium text-ink">
+                <span class="h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+                {i}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-3 md:grid-cols-2">
+          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <h3 class="font-display text-lg font-bold text-ink">硬度与金相</h3>
+            <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
+              {hardnessMetallography.map((i) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
+                  {i}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <h3 class="font-display text-lg font-bold text-ink">力学性能与工艺试验</h3>
+            <ul class="mt-4 grid gap-2.5 text-sm text-slate-600">
+              {mechanicalTests.map((i) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
+                  {i}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
