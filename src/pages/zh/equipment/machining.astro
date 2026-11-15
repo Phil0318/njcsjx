@@ -164,33 +164,116 @@ const sawingRough = [
   description="长升机械加工设备：德国 NILES 磨齿机最大模数50×直径3000毫米、韩国斗山 PUMA 480L、数控立车、滚齿/铣齿/插齿机床、龙门加工中心等 50 余台套。"
 >
   <section class="bg-ink">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24">
-      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">服务与设备 · 机械加工</p>
-      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">机械加工设备</h1>
-      <p class="mt-5 max-w-2xl text-lg text-slate-300">
-        从粗加工、齿部切削到精密磨削与最终检测，覆盖齿轮及重型工业零件的全流程制造。
-      </p>
-      <ul class="mx-auto mt-6 grid max-w-3xl gap-x-8 gap-y-2.5 text-left text-sm text-slate-300 sm:grid-cols-2">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-16 sm:pt-24 sm:pb-20">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.13em] text-accent-400">工业机械加工能力</p>
+          <h1 class="mt-6 max-w-xl font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl">
+            从齿轮毛坯到精密成品。
+          </h1>
+          <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            面向大型齿轮、轴类与关键工业零件的一体化加工能力——
+            从数控车削、齿轮切削到精密磨削与最终检测。
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-6">
+            <a
+              href={`/${lang}/contact`}
+              class="rounded-md bg-accent-500 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-accent-600"
+            >
+              立即询价 ↗
+            </a>
+            <a
+              href="#capabilities"
+              class="border-b border-slate-500 pb-0.5 text-sm font-semibold text-slate-300 transition-colors hover:border-accent-400 hover:text-accent-400"
+            >
+              浏览加工能力 ↓
+            </a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-7 sm:p-8">
+          <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">制造流程</p>
+          <h3 class="mt-3 font-display text-xl font-bold text-white">一条连贯的制造流程</h3>
+          <ol class="mt-5">
+            {['粗加工', '齿轮切削', '热处理', '精密磨削', '最终检测'].map((s, idx) => (
+              <li class="flex items-center gap-4 border-t border-white/10 py-3 text-sm text-slate-200">
+                <span class="w-6 font-display text-xs font-bold text-accent-400">{String(idx + 1).padStart(2, '0')}</span>
+                {s}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-slate-100 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid py-8 sm:grid-cols-3">
         {[
-          ['齿轮磨削', 'NILES / 霍夫曼设备，外齿与内齿精密成形磨削'],
-          ['齿轮切削', '数控铣齿、滚齿、插齿、倒角及配套刃磨'],
-          ['数控车削', '卧式与立式车削，覆盖轴类、齿坯、齿圈等回转件'],
-          ['加工中心', '三轴、四轴与龙门加工，复杂零件多面加工'],
-          ['精密磨削', '内圆、外圆、平面与曲轴磨削'],
-          ['镗削与钻削', '大型镗孔与摇臂钻削'],
-          ['其他机械加工', '线切割、锯切与粗加工等'],
-        ].map(([k, v]) => (
-          <li class="flex items-start gap-2">
-            <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span><span class="font-semibold text-white">{k}</span>：{v}</span>
-          </li>
+          ['50+', '台套机械加工设备（按设备清单）'],
+          ['Φ3000 mm', '最大外齿磨齿直径'],
+          ['M50', '最大磨齿模数'],
+        ].map(([num, label], idx) => (
+          <div class:list={[
+            'px-2 py-3 sm:border-r sm:border-slate-100 sm:px-8',
+            idx === 0 && 'sm:pl-0',
+            idx === 2 && 'sm:border-r-0',
+          ]}>
+            <p class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">{num}</p>
+            <p class="mt-1 text-xs text-slate-500 sm:text-sm">{label}</p>
+          </div>
         ))}
-      </ul>
-      <p class="mx-auto mt-6 max-w-2xl text-sm text-slate-400">
-        欢迎提交图纸、材质、尺寸、数量与质量要求，洽谈制造可行性。
-      </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities" class="scroll-mt-24 bg-steel-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-accent-500">我们能做什么</p>
+          <h2 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">机械加工能力</h2>
+        </div>
+        <p class="max-w-md text-sm leading-relaxed text-slate-600">
+          为您的零件找到合适的工艺。下方各节提供详细设备清单与加工范围。
+        </p>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          ['01', '磨齿设备', '外齿与内齿成形磨削，最高模数 50。', 'gear-grinding'],
+          ['02', '齿轮加工机床', '滚齿、插齿、数控铣齿与倒角。', 'gear-cutting'],
+          ['03', '数控车削', '卧式与立式车削，覆盖轴类、齿坯与齿圈。', 'turning'],
+          ['04', '加工中心', '三轴、四轴与龙门加工。', 'machining-centers'],
+          ['05', '精密磨削', '内圆、外圆、平面与曲轴磨削。', 'grinding-machines'],
+          ['06', '其他机械加工', '镗削、钻削、线切割与锯切。', 'additional-machining'],
+        ].map(([num, title, desc, anchor]) => (
+          <a
+            href={`#${anchor}`}
+            class="group rounded-xl border border-slate-200 bg-white p-6 transition-colors hover:border-steel-300"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold tracking-wider text-accent-500">{num}</span>
+              <svg class="h-4 w-4 text-slate-300 transition-colors group-hover:text-accent-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 7l-10 10M7 7h10v10"></path>
+              </svg>
+            </div>
+            <h3 class="mt-4 font-display text-lg font-bold text-ink">{title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
+          </a>
+        ))}
+      </div>
+      <div class="mt-10 flex flex-col items-start justify-between gap-6 border-t border-slate-200 pt-8 sm:flex-row sm:items-center">
+        <div>
+          <p class="font-display text-lg font-bold text-ink">手头有零件图纸？</p>
+          <p class="mt-1.5 text-sm text-slate-600">分享尺寸、材料、公差与数量，评估制造可行性。</p>
+        </div>
+        <a
+          href={`/${lang}/contact`}
+          class="whitespace-nowrap rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-ink transition-colors hover:border-accent-500 hover:text-accent-600"
+        >
+          咨询您的项目 ↗
+        </a>
+      </div>
     </div>
   </section>
 
