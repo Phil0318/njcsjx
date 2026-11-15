@@ -37,7 +37,7 @@ const categories = [
   },
   {
     id: 'turning',
-    title: '车削设备',
+    title: '数控车削',
     note: '数控卧车、数控立车与普通车床。',
     photos: [
       {
@@ -119,8 +119,8 @@ const categories = [
   },
   {
     id: 'grinding-machines',
-    title: '磨床',
-    note: '',
+    title: '精密磨削',
+    note: '内圆、外圆、平面与曲轴磨削。',
     photos: [
       {
         img: '/equipment-photos/mg28100.jpg',
@@ -139,12 +139,18 @@ const categories = [
   },
 ];
 
-const otherMachining = [
-  '摇臂钻床 ZN3050×16 / ZQ3080×20 / Z3050×16/1',
+const boringDrilling = [
+  { m: '卧式铣镗床 TPX6111B', r: '镗轴 Φ110，加工范围 1000 × 900 × 900', i: '中捷钻镗床厂卧式铣镗床，用于大型箱体类零件镗孔与铣面。' },
+  { m: '端面铣镗床 CL-A64110', r: '切削长度 4000，镗孔深度 1000，高度 1350', i: '上海陵城端面铣镗床，用于大型结构件端面加工与深孔镗削。' },
+  { m: '摇臂钻床 ZN3050×16', r: '最大钻孔 Φ50，跨距 1600', i: '江苏南京第四机床摇臂钻床，用于大型零件钻孔与攻丝。' },
+  { m: '摇臂钻床 ZQ3080×20', r: '最大钻孔 Φ80，跨距 2000', i: '桂林第二机床厂摇臂钻床。' },
+  { m: '摇臂钻床 Z3050×16/1', r: '最大钻孔 Φ50，跨距 1500', i: '中捷钻镗床厂摇臂钻床。' },
+];
+
+const sawingRough = [
   '锯床 GW4028B / GB4250',
-  '强化抛丸机 KXS-2000P（Φ1600 工作台）',
   '粗加工分厂：卧车 C6136A-D、CA6266C、C6140D、CW6180B、CW61125、CA6140A、C6150D、CK6280B、CK6140、C5116A',
-  '粗加工分厂：龙门铣 SW-4200、万能铣 X6140、端面铣镗 CL-A64110、卧式铣镗床 TPX6111B',
+  '粗加工分厂：龙门铣 SW-4200（4000 × 2000 × 1350）、万能铣 X6140',
 ];
 ---
 
@@ -158,8 +164,28 @@ const otherMachining = [
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">服务与设备 · 机械加工</p>
       <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">机械加工设备</h1>
       <p class="mt-5 max-w-2xl text-lg text-slate-300">
-        50 余台套机械加工设备，覆盖车、铣、滚、插、磨全序加工，
-        最大磨齿能力模数 50 × 直径 3000 毫米。悬停设备名称可查看简介。
+        从粗加工、齿部切削到精密磨削与最终检测，覆盖齿轮及重型工业零件的全流程制造。
+      </p>
+      <ul class="mx-auto mt-6 grid max-w-3xl gap-x-8 gap-y-2.5 text-left text-sm text-slate-300 sm:grid-cols-2">
+        {[
+          ['齿轮磨削', 'NILES / 霍夫曼设备，外齿与内齿精密成形磨削'],
+          ['齿轮切削', '数控铣齿、滚齿、插齿、倒角及配套刃磨'],
+          ['数控车削', '卧式与立式车削，覆盖轴类、齿坯、齿圈等回转件'],
+          ['加工中心', '三轴、四轴与龙门加工，复杂零件多面加工'],
+          ['精密磨削', '内圆、外圆、平面与曲轴磨削'],
+          ['镗削与钻削', '大型镗孔与摇臂钻削'],
+          ['其他机械加工', '线切割、锯切与粗加工等'],
+        ].map(([k, v]) => (
+          <li class="flex items-start gap-2">
+            <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span><span class="font-semibold text-white">{k}</span>：{v}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mx-auto mt-6 max-w-2xl text-sm text-slate-400">
+        欢迎提交图纸、材质、尺寸、数量与质量要求，洽谈制造可行性。
       </p>
     </div>
   </section>
@@ -193,18 +219,24 @@ const otherMachining = [
         </div>
       ))}
 
-      <div id="other-machining" class="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
-        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">其他机加设备</h2>
-        <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
-          {otherMachining.map((p) => (
-            <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
-              <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-              </svg>
-              {p}
-            </li>
-          ))}
-        </ul>
+      <div id="additional-machining" class="scroll-mt-24">
+        <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">其他机械加工</h2>
+        <div class="mt-6 space-y-8">
+          <EquipTable title="镗削与钻削" head={['设备型号', '加工范围']} rows={boringDrilling} />
+          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+            <h3 class="font-display text-lg font-bold text-ink">锯切与粗加工</h3>
+            <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+              {sawingRough.map((p) => (
+                <li class="flex items-start gap-2 rounded-xl bg-steel-50 px-3.5 py-2.5 text-sm text-slate-600">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
