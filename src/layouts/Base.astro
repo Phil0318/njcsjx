@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { ui, type Lang } from '../i18n/ui';
-import { SITE, GA_MEASUREMENT_ID } from '../config';
+import { SITE, GTM_CONTAINER_ID } from '../config';
 
 interface Props {
   lang: Lang;
@@ -68,22 +68,35 @@ const isActive = (href: string) =>
       rel="stylesheet"
     />
     {
-      GA_MEASUREMENT_ID && (
-        <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
-          <script define:vars={{ GA_MEASUREMENT_ID }}>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', GA_MEASUREMENT_ID);
-          </script>
-        </>
+      GTM_CONTAINER_ID && (
+        <script define:vars={{ GTM_CONTAINER_ID }}>
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
+        </script>
       )
     }
   </head>
   <body class="min-h-screen flex flex-col bg-white">
+    {
+      GTM_CONTAINER_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+          ></iframe>
+        </noscript>
+      )
+    }
     <a class="skip-link" href="#main-content">{lang === 'zh' ? '跳至正文' : 'Skip to content'}</a>
     <header class="sticky top-0 z-50 bg-ink text-white">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
