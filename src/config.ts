@@ -12,3 +12,7 @@ export const SITE = {
 };
 
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljbrlbd';
+
+// Google Analytics 4 measurement ID (e.g. 'G-XXXXXXXXXX').
+// Leave empty to keep analytics disabled.
+export const GA_MEASUREMENT_ID = '';

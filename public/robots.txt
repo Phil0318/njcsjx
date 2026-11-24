@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://changshengjx.com/sitemap-index.xml
+Sitemap: https://njcsjx.com/sitemap-index.xml
