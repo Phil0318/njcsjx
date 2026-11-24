@@ -238,9 +238,10 @@ const t = labels[lang];
         form.reset();
         status.textContent = success;
         status.className = 'mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700';
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', { form: 'quote' });
-        }
+        // Track a successful lead without sending any personal data to analytics.
+        // GTM/GA4 receive only the event name and the generic form label.
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'generate_lead', form: 'quote' });
       } else {
         throw new Error(String(res.status));
       }
