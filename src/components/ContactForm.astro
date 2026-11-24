@@ -16,10 +16,21 @@ const labels = {
     emailPh: 'you@example.com',
     company: '公司名称',
     companyPh: '贵公司名称',
+    partType: '零件类型',
+    partTypePh: '如：齿轮 / 齿轮轴 / 齿圈 / 轴类',
+    material: '材质',
+    materialPh: '如：20CrMnTi / 42CrMo / 45钢',
+    quantity: '数量',
+    quantityPh: '如：5 件 / 年需求 100 件',
+    dimensions: '大致尺寸',
+    dimensionsPh: '如：模数 12 × Φ800 × 齿宽 120 mm',
     service: '咨询内容',
     serviceOptions: ['齿轮加工', '金属热处理', '两者都需要', '其他'],
     message: '需求描述',
     messagePh: '请描述零件图纸、材质、数量、交期等要求',
+    drawings: '图纸上传（可选）',
+    drawingsHint: '支持 PDF / DWG / STEP / IGS / DXF / 图片，单个文件 ≤ 25 MB，最多 10 个。图纸仅用于报价，严格保密。',
+    fileSizeError: '有文件超过 25 MB 限制，请压缩后重试。',
     submit: '提交询价',
     sending: '发送中…',
     success: '谢谢！您的询价已发送，我们会在 1–2 个工作日内回复。',
@@ -32,10 +43,21 @@ const labels = {
     emailPh: 'you@example.com',
     company: 'Company',
     companyPh: 'Your company name',
+    partType: 'Part type',
+    partTypePh: 'e.g. gear / gear shaft / ring gear / shaft',
+    material: 'Material',
+    materialPh: 'e.g. 20CrMnTi / 42CrMo / 1045',
+    quantity: 'Quantity',
+    quantityPh: 'e.g. 5 pcs / 100 pcs per year',
+    dimensions: 'Approx. dimensions',
+    dimensionsPh: 'e.g. module 12 × Ø800 × face width 120 mm',
     service: 'What do you need?',
     serviceOptions: ['Gear machining', 'Heat treatment', 'Both', 'Other'],
     message: 'Requirements',
     messagePh: 'Describe drawings, material, quantity, and timeline',
+    drawings: 'Drawings (optional)',
+    drawingsHint: 'PDF / DWG / STEP / IGS / DXF / images accepted — max 25 MB per file, up to 10 files. Drawings are used for quoting only and kept confidential.',
+    fileSizeError: 'A file exceeds the 25 MB limit. Please compress it and retry.',
     submit: 'Send Request',
     sending: 'Sending…',
     success: 'Thanks! Your request has been sent. We will reply within 1–2 business days.',
@@ -50,8 +72,10 @@ const t = labels[lang];
   id="quote-form"
   method="POST"
   action={FORMSPREE_ENDPOINT}
+  enctype="multipart/form-data"
   class="grid gap-5 sm:grid-cols-2"
 >
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
   <div>
     <label for="name" class="mb-1.5 block text-sm font-semibold text-ink">{t.name} *</label>
     <input
@@ -87,6 +111,46 @@ const t = labels[lang];
       class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
     />
   </div>
+  <div>
+    <label for="part-type" class="mb-1.5 block text-sm font-semibold text-ink">{t.partType}</label>
+    <input
+      id="part-type"
+      name="part_type"
+      type="text"
+      placeholder={t.partTypePh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div>
+    <label for="material" class="mb-1.5 block text-sm font-semibold text-ink">{t.material}</label>
+    <input
+      id="material"
+      name="material"
+      type="text"
+      placeholder={t.materialPh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div>
+    <label for="quantity" class="mb-1.5 block text-sm font-semibold text-ink">{t.quantity}</label>
+    <input
+      id="quantity"
+      name="quantity"
+      type="text"
+      placeholder={t.quantityPh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
+  <div>
+    <label for="dimensions" class="mb-1.5 block text-sm font-semibold text-ink">{t.dimensions}</label>
+    <input
+      id="dimensions"
+      name="dimensions"
+      type="text"
+      placeholder={t.dimensionsPh}
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"
+    />
+  </div>
   <div class="sm:col-span-2">
     <label for="service" class="mb-1.5 block text-sm font-semibold text-ink">{t.service} *</label>
     <select
@@ -109,6 +173,18 @@ const t = labels[lang];
       class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-steel-500 focus:ring-2 focus:ring-steel-500/20"></textarea>
   </div>
   <div class="sm:col-span-2">
+    <label for="attachment" class="mb-1.5 block text-sm font-semibold text-ink">{t.drawings}</label>
+    <input
+      id="attachment"
+      name="attachment"
+      type="file"
+      multiple
+      accept=".pdf,.dwg,.dxf,.step,.stp,.igs,.iges,.stl,.jpg,.jpeg,.png,.zip"
+      class="block w-full cursor-pointer rounded-xl border border-dashed border-slate-300 bg-white p-3 text-sm text-slate-500 file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-steel-700 file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white hover:file:bg-steel-800"
+    />
+    <p class="mt-2 text-xs leading-relaxed text-slate-500">{t.drawingsHint}</p>
+  </div>
+  <div class="sm:col-span-2">
     <button
       type="submit"
       class="rounded-full bg-accent-500 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-accent-600"
@@ -119,14 +195,33 @@ const t = labels[lang];
   </div>
 </form>
 
-<script define:vars={{ FORMSPREE_ENDPOINT, success: t.success, error: t.error, sending: t.sending }}>
-  const form = document.getElementById('quote-form');
+<script define:vars={{ FORMSPREE_ENDPOINT, success: t.success, error: t.error, sending: t.sending, fileSizeError: t.fileSizeError }}>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
-  const submitBtn = form?.querySelector('button[type="submit"]');
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+  const attachmentInput = document.getElementById('attachment') as HTMLInputElement | null;
+
+  const MAX_FILE_SIZE = 25 * 1024 * 1024;
+  const MAX_FILES = 10;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!form || !status || !submitBtn) return;
+
+    if (attachmentInput?.files) {
+      if (attachmentInput.files.length > MAX_FILES) {
+        status.textContent = error;
+        status.className = 'mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700';
+        return;
+      }
+      for (const file of attachmentInput.files) {
+        if (file.size > MAX_FILE_SIZE) {
+          status.textContent = fileSizeError;
+          status.className = 'mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700';
+          return;
+        }
+      }
+    }
 
     const originalLabel = submitBtn.textContent;
     submitBtn.disabled = true;
@@ -143,6 +238,9 @@ const t = labels[lang];
         form.reset();
         status.textContent = success;
         status.className = 'mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700';
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', { form: 'quote' });
+        }
       } else {
         throw new Error(String(res.status));
       }
