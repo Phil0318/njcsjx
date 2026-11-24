@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { ui, type Lang } from '../i18n/ui';
-import { SITE } from '../config';
+import { SITE, GTM_CONTAINER_ID } from '../config';
 
 interface Props {
   lang: Lang;
@@ -14,9 +14,9 @@ const t = ui[lang];
 const otherLang: Lang = lang === 'zh' ? 'en' : 'zh';
 
 const path = Astro.url.pathname.replace(/\/$/, '');
-let altUrl = otherLang === 'zh' ? '/zh' : '/en';
-if (path.startsWith('/zh/')) altUrl = path.replace(/^\/zh/, '/en');
-if (path.startsWith('/en/')) altUrl = path.replace(/^\/en/, '/zh');
+let altUrl = otherLang === 'zh' ? '/zh/' : '/en/';
+if (path.startsWith('/zh/')) altUrl = path.replace(/^\/zh/, '/en') + '/';
+if (path.startsWith('/en/')) altUrl = path.replace(/^\/en/, '/zh') + '/';
 
 const homeHref = `/${lang}/`;
 const navItems = [
@@ -53,6 +53,9 @@ const isActive = (href: string) =>
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={new URL(Astro.url.pathname, SITE.url).href} />
+    <link rel="alternate" hreflang={lang === 'zh' ? 'zh-CN' : 'en'} href={new URL(Astro.url.pathname, SITE.url).href} />
+    <link rel="alternate" hreflang={lang === 'zh' ? 'en' : 'zh-CN'} href={new URL(altUrl, SITE.url).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(altUrl, SITE.url).href} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={lang === 'zh' ? SITE.nameZh : SITE.nameEn} />
     <meta property="og:title" content={title} />
@@ -64,8 +67,36 @@ const isActive = (href: string) =>
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    {
+      GTM_CONTAINER_ID && (
+        <script define:vars={{ GTM_CONTAINER_ID }}>
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
+        </script>
+      )
+    }
   </head>
   <body class="min-h-screen flex flex-col bg-white">
+    {
+      GTM_CONTAINER_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+          ></iframe>
+        </noscript>
+      )
+    }
     <a class="skip-link" href="#main-content">{lang === 'zh' ? '跳至正文' : 'Skip to content'}</a>
     <header class="sticky top-0 z-50 bg-ink text-white">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">

@@ -12,3 +12,8 @@ export const SITE = {
 };
 
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xljbrlbd';
+
+// Google Tag Manager container ID.
+// All tags (including GA4 G-1N9F9CMV0L) are configured inside GTM,
+// so no standalone GA/gtag snippet is installed on the site.
+export const GTM_CONTAINER_ID = 'GTM-PRCNQP5V';
