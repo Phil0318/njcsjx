@@ -49,7 +49,7 @@ export const ui = {
     cta: {
       title: '专业的齿轮与热处理供应商 · 始于 2006',
       subtitle: '',
-      button: '联系我们',
+      button: '获取报价',
     },
   },
   en: {
@@ -100,7 +100,7 @@ export const ui = {
     cta: {
       title: 'Professional gear & heat-treatment supplier since 2006',
       subtitle: '',
-      button: 'Contact Us',
+      button: 'Get a Quote',
     },
   },
 } as const;

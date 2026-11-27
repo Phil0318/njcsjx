@@ -1,6 +1,6 @@
 ﻿---
 import Base from '../../layouts/Base.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import CTA from '../../components/CTA.astro';
 import fs from 'node:fs';
 
 const lang = 'zh' as const;
@@ -175,24 +175,6 @@ const certs = [
   { img: '/certificates/iso-9001-1.jpg', label: 'ISO 9001:2015', alt: 'ISO 9001:2015 证书' },
   { img: '/certificates/abs-ht-0579098-1.jpg', label: 'ABS 热处理认可', alt: 'ABS 热处理认可证书' },
   { img: '/certificates/ndt-cert-1.jpg', label: 'NDT 无损检测', alt: 'NDT 无损检测证书' },
-];
-
-const howSteps = [
-  {
-    n: '01',
-    title: '发送图纸',
-    body: '在联系表单上传 PDF、DWG、STEP、IGS 或图片图纸，并注明数量与材料。',
-  },
-  {
-    n: '02',
-    title: '可行性评估',
-    body: '我们的工程师对照机加工、热处理与磨削能力评估图纸。',
-  },
-  {
-    n: '03',
-    title: '获得报价',
-    body: '您将收到包含交期的成品零件报价。',
-  },
 ];
 ---
 
@@ -417,41 +399,8 @@ const howSteps = [
     </div>
   </section>
 
-  <!-- 7. How it works -->
-  <section id="how-it-works" class="b1-section">
-    <div class="b1-container">
-      <div class="b1-heading">
-        <h2>如何获得报价</h2>
-        <p>从图纸到报价，只需三步。</p>
-      </div>
-      <div class="b1-how">
-        {howSteps.map((s) => (
-          <div class="b1-how-step">
-            <span class="b1-how-num">{s.n}</span>
-            <h3>{s.title}</h3>
-            <p>{s.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Final RFQ -->
-  <section id="rfq" class="b1-rfq">
-    <div class="b1-container b1-rfq-inner">
-      <h2>立即询价</h2>
-      <p>
-        发送您的图纸、预计数量、材料与技术要求，我们将进行制造可行性评估并报价——
-        也承接客户来料的热处理。
-      </p>
-      <div class="b1-rfq-form">
-        <ContactForm lang={lang} />
-      </div>
-      <p class="b1-rfq-note">
-        <a href="mailto:sales@njcsjx.com">sales@njcsjx.com</a> · 我们会在 1–2 个工作日内回复。
-      </p>
-    </div>
-  </section>
+  <!-- 7. Contact -->
+  <CTA lang={lang} />
 
   <script>
     const track = document.getElementById('b1-gallery-track');
@@ -626,29 +575,5 @@ const howSteps = [
   }
   @media (max-width: 560px) {
     .b1-cert-cards { grid-template-columns: 1fr; }
-  }
-
-  /* How it works */
-  .b1-how { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .b1-how-step { position: relative; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 26px 24px; }
-  .b1-how-num { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-how-step h3 { margin-top: 10px; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
-  .b1-how-step p { margin-top: 10px; font-size: 14.5px; line-height: 1.7; color: #64748b; }
-  @media (max-width: 700px) {
-    .b1-how { grid-template-columns: 1fr; }
-  }
-
-  /* Final RFQ */
-  .b1-rfq { background: #eef2f7; color: #0b1a33; padding-block: 88px; }
-  .b1-rfq-inner { text-align: center; max-width: 860px; }
-  .b1-rfq h2 { font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.02em; color: #0b1a33; }
-  .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.8; color: #475569; }
-  .b1-rfq-form { margin-top: 36px; background: #fff; border: 1px solid #e8edf4; border-radius: 10px; padding: 28px; text-align: left; box-shadow: 0 12px 32px rgba(11, 26, 51, .08); }
-  .b1-rfq-note { margin-top: 26px !important; font-size: 14.5px !important; color: #64748b !important; }
-  .b1-rfq-note a { color: #215694; }
-  .b1-rfq-note a:hover { color: #0b1a33; }
-  @media (max-width: 767px) {
-    .b1-rfq { padding-block: 56px; }
-    .b1-rfq-form { padding: 18px; }
   }
 </style>
