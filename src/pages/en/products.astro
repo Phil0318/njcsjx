@@ -4,69 +4,172 @@ import CTA from '../../components/CTA.astro';
 
 const lang = 'en' as const;
 
-const products = [
+type Photo = { file: string; caption: string; fit?: 'cover' | 'contain' };
+
+const families = [
   {
-    title: 'Mud-pump gears / gear shafts',
-    desc: 'Core drive parts for offshore drilling-rig mud pumps, built for high loads and harsh conditions with carburizing and precision gear grinding.',
-    process: 'Process: carburizing · gear grinding',
+    id: 'gears-ring-gears',
+    name: 'Gears & Ring Gears',
+    desc: 'Internal and external ring gears, gear wheels, and specialty gear forms, machined and finish-ground to customer specification.',
+    process: 'Gear cutting · heat treatment · gear grinding',
+    photos: [
+      { file: 'IMG_0099_external-ring-gear.webp', caption: 'External ring gear' },
+      { file: 'IMG_0143_internal-ring-gear.webp', caption: 'Internal ring gear' },
+      { file: 'internal-ring-gear.webp', caption: 'Internal ring gear' },
+      { file: 'internal-tooth-ring.webp', caption: 'Internal tooth ring' },
+      { file: 'ring-gear-face.webp', caption: 'Ring gear, face view' },
+      { file: 'spoked-wheel.webp', caption: 'Spoked gear wheel' },
+      { file: 'large-helical-gear.webp', caption: 'Large helical gear' },
+      { file: 'helical-ring-stack.webp', caption: 'Helical ring gears' },
+      { file: 'gear-wheel-row.webp', caption: 'Gear wheels' },
+      { file: 'bored-gear.webp', caption: 'Bored gear' },
+      { file: 'IMG_0103_single-gear.webp', caption: 'Single gear' },
+    ] as Photo[],
   },
   {
-    title: 'Wind pitch gear shafts',
-    desc: 'Key components of wind-turbine pitch systems, demanding exceptional fatigue life and reliability.',
-    process: 'Process: carburizing · grinding · NDT',
+    id: 'pinions-gear-shafts',
+    name: 'Pinions & Gear Shafts',
+    desc: 'Pinions and gear shafts produced from blank through finished teeth, including jacking gear shafts for offshore platforms.',
+    process: 'Blank machining · gear cutting · heat treatment · finish grinding',
+    photos: [
+      { file: 'upright-pinion-shaft.webp', caption: 'Upright pinion shaft' },
+      { file: 'long-pinion-shaft.webp', caption: 'Long pinion shaft', fit: 'contain' },
+      { file: 'four-pinion-shafts.webp', caption: 'Pinion shafts' },
+      { file: 'IMG_0121_pinion-shafts-front.webp', caption: 'Pinion shafts, front view' },
+      { file: 'IMG_0122_pinion-shafts-overhead.webp', caption: 'Pinion shafts, overhead view' },
+      { file: 'coarse-pinion-batch.webp', caption: 'Pinion batch' },
+      { file: 'pinion-hub-detail.webp', caption: 'Pinion hub detail' },
+      { file: 'helical-pinion-and-wheel.webp', caption: 'Helical pinion and wheel' },
+      { file: 'IMG_0100_coarse-tooth-gear-shaft.webp', caption: 'Coarse-tooth gear shaft' },
+      { file: 'flanged-gear-shaft.webp', caption: 'Flanged gear shaft' },
+      { file: 'IMG_0130_jacking-shaft.webp', caption: 'Jacking gear shaft' },
+      { file: 'IMG_0131_jacking-shaft-side.webp', caption: 'Jacking gear shaft, side view' },
+    ] as Photo[],
   },
   {
-    title: 'Jacking system parts / jacking gear shafts',
-    desc: 'Large gear shafts and structural parts for offshore platform jacking systems.',
-    process: 'Process: Q&T · carburizing · grinding (ABS approved)',
+    id: 'planetary-compound',
+    name: 'Planetary, Compound & Specialty Gears',
+    desc: 'Planet carriers, sun gears, double gears, and compound assemblies for planetary and heavy drive systems.',
+    process: 'Hobbing · shaping · carburizing · gear grinding',
+    photos: [
+      { file: 'planet-carrier.webp', caption: 'Planet carrier' },
+      { file: 'planet-gear-pin.webp', caption: 'Planet gear pin' },
+      { file: 'sun-gear.webp', caption: 'Sun gear' },
+      { file: 'IMG_0129_wind-sun-gear.webp', caption: 'Sun gear for wind drive' },
+      { file: 'IMG_0125_double-gear.webp', caption: 'Double gear' },
+      { file: 'compound-gear-batch.webp', caption: 'Compound gears' },
+      { file: 'drum-gear-coupling.webp', caption: 'Drum gear coupling' },
+      { file: 'welded-gear.webp', caption: 'Welded gear' },
+      { file: 'eccentric-shaft.webp', caption: 'Eccentric shaft' },
+      { file: 'helical-gear-assembly.webp', caption: 'Helical gear assembly' },
+    ] as Photo[],
   },
   {
-    title: 'Electric-wheel double gears',
-    desc: 'Double gears for electric-wheel drive systems of mining haul trucks.',
-    process: 'Process: hobbing · carburizing · grinding',
-  },
-  {
-    title: 'Hollow shafts for building materials',
-    desc: 'Hollow shaft parts for large equipment in the building-materials industry.',
-    process: 'Process: turning · Q&T · precision grinding',
-  },
-  {
-    title: 'Custom part heat treatment',
-    desc: 'Normalizing, annealing, quenching & tempering, carburizing, nitriding, and induction hardening for ferrous, non-ferrous, and special materials.',
-    process: 'Process: vacuum oil/gas quench · nitriding · induction',
+    id: 'shafts-components',
+    name: 'Custom Shafts & Related Components',
+    desc: 'Shafts, sleeves, housings, and related components machined, heat-treated, and ground to drawing.',
+    process: 'Turning · Q&T · precision grinding',
+    photos: [
+      { file: 'support-shaft.webp', caption: 'Support shaft' },
+      { file: 'gear-shaft-and-sleeve.webp', caption: 'Gear shaft and sleeve' },
+      { file: 'gear-shaft-batch.webp', caption: 'Gear shafts' },
+      { file: 'stacked-shafts.webp', caption: 'Shafts' },
+      { file: 'painted-housing.webp', caption: 'Painted housing' },
+      { file: 'pin-batch.webp', caption: 'Pins' },
+      { file: 'packed-gears-side.webp', caption: 'Finished gears, packed' },
+      { file: 'packed-gears-top.webp', caption: 'Finished gears, packed (top view)' },
+    ] as Photo[],
   },
 ];
 ---
 
 <Base
   lang={lang}
-  title="Products — Nanjing Changsheng Machinery Engineering Co., Ltd."
-  description="Changsheng products: mud-pump gears and shafts, wind pitch gear shafts, offshore jacking parts, mining electric-wheel double gears, hollow shafts, and custom heat treatment."
+  title="Products — Industrial Gears & Shafts | Changsheng Machinery"
+  description="Gears and ring gears, pinions and gear shafts, planetary and compound gears, and custom shafts manufactured to drawing in Nanjing, China."
 >
   <section class="page-heading bg-ink">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
       <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">Products</p>
-      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Critical parts for heavy industry.</h1>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Gears &amp; shafts manufactured to your drawing.</h1>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
-        Core drive components for offshore drilling, wind power, mining, petrochemical,
-        metallurgy, and building-materials industries.
+        Representative components machined, heat-treated, ground, and inspected at the Changsheng Nanjing facility.
+        Every part below was produced to customer drawings.
       </p>
     </div>
   </section>
 
+  <!-- Family navigation -->
+  <nav aria-label="Product families" class="sticky top-16 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 flex gap-2 overflow-x-auto py-3">
+      {families.map((f) => (
+        <a
+          href={`#${f.id}`}
+          class="whitespace-nowrap rounded-full border border-steel-200 px-4 py-1.5 text-sm font-medium text-steel-700 transition-colors hover:border-steel-500 hover:bg-steel-50"
+        >
+          {f.name}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  {families.map((f, i) => (
+    <section id={f.id} class:list={['py-16 sm:py-20', i % 2 === 1 && 'bg-steel-50']}>
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="max-w-3xl">
+          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">{f.name}</h2>
+          <p class="mt-3 text-base leading-relaxed text-slate-600">{f.desc}</p>
+          <p class="mt-3 inline-block rounded-md bg-steel-50 px-2.5 py-1 text-xs font-medium text-steel-600">{f.process}</p>
+        </div>
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {f.photos.map((p) => (
+            <figure class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm">
+              <div class="aspect-[4/3] overflow-hidden bg-steel-100">
+                <img
+                  src={`/products/${p.file}`}
+                  alt={`${p.caption} manufactured by Changsheng`}
+                  loading="lazy"
+                  width="1448"
+                  height="1086"
+                  class:list={[
+                    'h-full w-full transition-transform duration-300 group-hover:scale-[1.02]',
+                    p.fit === 'contain' ? 'object-contain' : 'object-cover',
+                  ]}
+                />
+              </div>
+              <figcaption class="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-2.5">
+                <span class="text-sm font-medium text-ink">{p.caption}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <a href={`/${lang}/contact`} class="mt-8 inline-block text-sm font-semibold text-steel-700 hover:underline">
+          Request a quote for {f.name.toLowerCase()} →
+        </a>
+      </div>
+    </section>
+  ))}
+
+  <!-- Heat treatment: a service, not a product family -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {products.map((p) => (
-          <div class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm transition-all hover:border-steel-300 hover:shadow-md">
-            <div class="p-6 border-t-2 border-steel-600">
-              <h2 class="font-display text-lg font-bold text-ink">{p.title}</h2>
-              <p class="mt-2 text-sm leading-relaxed text-slate-600">{p.desc}</p>
-              <p class="mt-3 inline-block rounded-md bg-steel-50 px-2.5 py-1 text-xs font-medium text-steel-600">{p.process}</p>
-              <a href={`/${lang}/contact`} class="mt-6 block text-sm font-semibold text-steel-700 hover:underline">Discuss this component →</a>
-            </div>
+      <div class="rounded-lg border border-steel-200 bg-white p-8 sm:p-10">
+        <div class="flex flex-wrap items-start justify-between gap-6">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Service</p>
+            <h2 class="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">Standalone heat treatment for customer-supplied parts</h2>
+            <p class="mt-3 text-base leading-relaxed text-slate-600">
+              Normalizing, annealing, quenching &amp; tempering, carburizing, nitriding, and induction hardening —
+              offered separately from finished-component supply, with parts from 0.1&nbsp;kg to 30&nbsp;t.
+            </p>
           </div>
-        ))}
+          <a
+            href={`/${lang}/equipment/heat-treatment`}
+            class="rounded-full bg-steel-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-steel-800"
+          >
+            Heat treatment service →
+          </a>
+        </div>
       </div>
     </div>
   </section>
