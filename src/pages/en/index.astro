@@ -238,8 +238,18 @@ const industries = [
       </div>
 
       <div class="b1-process-gallery">
-        <p class="b1-gallery-note">Representative process photographs from the Changsheng workshop.</p>
-        <div class="b1-gallery-grid">
+        <div class="b1-gallery-head">
+          <p class="b1-gallery-note">Representative process photographs from the Changsheng workshop.</p>
+          <div class="b1-gallery-controls">
+            <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="Previous step">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </button>
+            <button type="button" class="b1-gallery-btn" id="b1-gallery-next" aria-label="Next step">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div class="b1-gallery-track" id="b1-gallery-track">
           {processPhotos.map((p) => (
             <figure class="b1-gallery-tile">
               {p.img ? (
@@ -340,6 +350,27 @@ const industries = [
       <p class="b1-rfq-note">PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).</p>
     </div>
   </section>
+
+  <script>
+    const track = document.getElementById('b1-gallery-track');
+    const prev = document.getElementById('b1-gallery-prev');
+    const next = document.getElementById('b1-gallery-next');
+    if (track && prev && next) {
+      const step = () => {
+        const tile = track.querySelector('.b1-gallery-tile');
+        return tile ? tile.offsetWidth + 14 : track.clientWidth * 0.8;
+      };
+      const update = () => {
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      };
+      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+  </script>
 </Base>
 
 <style>
@@ -437,19 +468,22 @@ const industries = [
 
   /* Process gallery */
   .b1-process-gallery { margin-top: 48px; }
+  .b1-gallery-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
   .b1-gallery-note { font-size: 13px; color: #64748b; }
-  .b1-gallery-grid { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-  .b1-gallery-tile { margin: 0; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
+  .b1-gallery-controls { display: flex; gap: 8px; }
+  .b1-gallery-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+  .b1-gallery-btn:hover { background: #eef4fb; border-color: #215694; }
+  .b1-gallery-btn:disabled { opacity: .4; cursor: default; }
+  .b1-gallery-track { margin-top: 16px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 2px; }
+  .b1-gallery-track::-webkit-scrollbar { display: none; }
+  .b1-gallery-tile { margin: 0; flex: 0 0 300px; scroll-snap-align: start; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
   .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
   .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
   .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
   .b1-gallery-label { font-size: 13.5px; font-weight: 600; color: #0b1a33; }
-  @media (max-width: 1000px) {
-    .b1-gallery-grid { grid-template-columns: repeat(3, 1fr); }
-  }
   @media (max-width: 560px) {
-    .b1-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .b1-gallery-tile { flex-basis: 76%; }
   }
 
   /* Applications */
