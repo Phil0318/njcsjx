@@ -441,16 +441,17 @@ const certs = [
   .b1-btn-ghost:hover { border-color: #215694; background: #eef4fb; }
 
   /* Hero */
-  .b1-hero { background: #e2ebf7; border-bottom: 1px solid #c0d4ec; }
+  .b1-hero { background: linear-gradient(160deg, #edf3fb 0%, #ddeaf8 45%, #c8ddf2 100%); border-bottom: 1px solid #b7cfe8; }
   .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 48px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
-  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #215694; text-transform: uppercase; }
+  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #1b4577; text-transform: uppercase; }
   .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4vw, 52px); font-weight: 700; line-height: 1.18; letter-spacing: -0.02em; color: #0b1a33; text-wrap: balance; }
-  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.8; color: #334155; max-width: 540px; }
+  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.8; color: #33425c; max-width: 540px; }
   .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
   .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
-  .b1-hero-envelope { margin-top: 24px; padding-top: 16px; border-top: 1px solid #c0d4ec; font-size: 14px; color: #475569; max-width: 540px; }
-  .b1-hero-envelope span { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #215694; }
-  .b1-hero-fig { margin: 0; background: #fff; border-radius: 6px; overflow: hidden; }
+  .b1-hero .b1-btn-ghost { background: rgba(255, 255, 255, .75); }
+  .b1-hero-envelope { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(33, 86, 148, .22); font-size: 14px; color: #3d4d68; max-width: 540px; }
+  .b1-hero-envelope span { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #1b4577; }
+  .b1-hero-fig { margin: 0; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 18px 44px rgba(11, 26, 51, .14); }
   .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
   @media (max-width: 900px) {
@@ -460,9 +461,9 @@ const certs = [
 
   /* Facts strip */
   .b1-facts { max-width: 1280px; margin-inline: auto; padding: 0 24px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .b1-fact { border-top: 1px solid #c0d4ec; padding-top: 16px; }
+  .b1-fact { border-top: 1px solid rgba(33, 86, 148, .22); padding-top: 16px; }
   .b1-fact strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
-  .b1-fact span { display: block; margin-top: 4px; font-size: 13px; color: #64748b; }
+  .b1-fact span { display: block; margin-top: 4px; font-size: 13px; color: #55688a; }
   @media (max-width: 767px) {
     .b1-facts { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
   }
