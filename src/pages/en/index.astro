@@ -1,243 +1,440 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CTA from '../../components/CTA.astro';
-import EquipPhoto from '../../components/EquipPhoto.astro';
 
 const lang = 'en' as const;
 
-const capabilities = [
+const families = [
   {
-    title: 'Full-process gear machining',
-    body: 'Turning, hobbing, milling, shaping, heat treatment, shot peening, gear grinding, internal grinding, and chamfering — all in one plant, with gear grinding up to module 50 × Ø3000 mm.',
-    points: ['6 NILES gear grinders (ZE400S–ZP30)', 'CNC vertical lathes up to Ø2500 mm', '3/4-axis machining centers, wire EDM'],
+    label: 'Gears & Ring Gears',
+    desc: 'Internal and external ring gears, gear wheels, and specialty gear forms machined and finish-ground to specification.',
+    img: '/products/internal-ring-gear.webp',
+    alt: 'Internal ring gear manufactured by Changsheng',
   },
   {
-    title: 'Metal heat treatment',
-    body: 'Normalizing, annealing, quenching & tempering, carburizing, carbonitriding, nitriding, nitrocarburizing, vacuum oil quenching, high-pressure gas quenching, induction hardening, shot peening, and blackening for ferrous, non-ferrous, and special materials.',
-    points: ['Single parts from 0.1 kg to 30 t', 'Annual capacity ~50,000 t', 'Large pit carburizing furnaces up to Φ4000 × 2500'],
+    label: 'Pinions & Gear Shafts',
+    desc: 'Pinions and gear shafts produced from blank machining through gear cutting and finish grinding.',
+    img: '/products/upright-pinion-shaft.webp',
+    alt: 'Pinion shaft manufactured by Changsheng',
   },
   {
-    title: 'Inspection & metrology',
-    body: 'Full quality control from raw material to finished part: gear measurement, CMM inspection, NDT, hardness & metallographic analysis, and mechanical testing.',
-    points: ['Gleason 1000GMS gear analyzer', 'Three CMMs (Hexagon / DEA / VENUS)', 'Ultrasonic & magnetic particle NDT, spectrometry'],
+    label: 'Planetary, Compound & Specialty Gears',
+    desc: 'Planet carriers, sun gears, double gears, and compound gear assemblies for heavy drive systems.',
+    img: '/products/planet-carrier.webp',
+    alt: 'Planetary gear component manufactured by Changsheng',
+  },
+  {
+    label: 'Custom Shafts & Related Components',
+    desc: 'Shafts, sleeves, and related components machined, heat-treated, and ground to customer drawings.',
+    img: '/products/gear-shaft-and-sleeve.webp',
+    alt: 'Gear shaft and sleeve manufactured by Changsheng',
   },
 ];
 
+const steps = [
+  { n: '01', label: 'Blank Machining', hint: 'Turning & milling' },
+  { n: '02', label: 'Gear Cutting', hint: 'Hobbing & shaping' },
+  { n: '03', label: 'Heat Treatment', hint: 'Carburizing & Q&T' },
+  { n: '04', label: 'Finish Grinding', hint: 'Gear & bore grinding' },
+  { n: '05', label: 'Final Inspection', hint: 'Measurement & NDT' },
+];
+
 const industries = [
-  { label: 'Offshore drilling', img: '/industries/offshore.png' },
-  { label: 'Wind power', img: '/industries/wind.png' },
-  { label: 'Petrochemical', img: '/industries/petrochemical.png' },
-  { label: 'Coal mining', img: '/industries/coal.png' },
-  { label: 'Metallurgy', img: '/industries/metallurgy.png' },
-  { label: 'Building materials', img: '/industries/building-materials.png' },
+  {
+    label: 'Offshore Drilling',
+    desc: 'Mud-pump gear sets and jacking-system components for offshore drilling rigs, produced to ABS-approved heat-treatment procedures.',
+    img: '/workshop/machining-line.webp',
+    alt: 'Machining line at the Changsheng workshop',
+  },
+  {
+    label: 'Wind Power',
+    desc: 'Sun gears and pitch-system shafts for wind turbines, carburized and finish-ground for fatigue-critical duty.',
+    img: '/products/wind-sun-gear.webp',
+    alt: 'Wind-turbine sun gear manufactured by Changsheng',
+  },
+  {
+    label: 'Mining Equipment',
+    desc: 'Electric-wheel double gears for mining haul trucks, hobbing, carburizing, and grinding completed in-house.',
+    img: '/products/double-gear.webp',
+    alt: 'Electric-wheel double gear manufactured by Changsheng',
+  },
 ];
 ---
 
 <Base
   lang={lang}
-  title="Nanjing Changsheng Machinery Engineering Co., Ltd. — Gears & Heat Treatment"
-  description="Nanjing Changsheng Machinery Engineering Co., Ltd. (est. 2006) specializes in full-process gear machining and metal heat treatment — gear grinding up to module 50 × Ø3000 mm, ~50,000 t annual heat-treatment capacity."
+  title="Custom Industrial Gears & Shafts | Changsheng Machinery"
+  description="Custom industrial gears and shafts manufactured to drawing in Nanjing, China. Gear machining, heat treatment, precision grinding, and inspection."
 >
-  <section class="home-hero">
-    <div class="hero-layout">
-      <div class="hero-copy">
-        <p class="eyebrow">CHANGSHENG · SINCE 2006</p>
-        <h1>Precision gears.<br /><span>Expert heat treatment.</span></h1>
-        <p class="hero-intro">Integrated machining, gear cutting, heat treatment and inspection for critical industrial components.</p>
-        <div class="hero-actions">
-          <a class="primary-action" href="/en/contact">Request a quote →</a>
-          <a class="secondary-action" href="#capabilities">Explore capabilities ↓</a>
+  <!-- 1. Hero -->
+  <section class="b1-hero">
+    <div class="b1-hero-grid">
+      <div class="b1-hero-copy">
+        <p class="b1-eyebrow">NANJING CHANGSHENG MACHINERY</p>
+        <h1>Custom gears and shafts built to your drawing</h1>
+        <p class="b1-hero-intro">
+          Changsheng manufactures industrial gears and shafts at its Nanjing facility, coordinating machining,
+          gear cutting, heat treatment, precision grinding, and inspection.
+        </p>
+        <p class="b1-hero-intro b1-hero-intro-2">
+          Send your drawing and quantity to request a finished-component quotation.
+        </p>
+        <div class="b1-hero-actions">
+          <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
+          <a class="b1-btn b1-btn-ghost" href="#product-families">Explore Gears &amp; Shafts</a>
         </div>
       </div>
-      <figure class="hero-photo">
-        <img src="/equipment-photos/niles-ze1200.jpg" alt="NILES ZE1200 gear grinding equipment" width="1200" height="900" fetchpriority="high" />
-        <figcaption><span>Precision gear grinding</span><span>NILES ZE1200</span></figcaption>
+      <figure class="b1-hero-fig">
+        <img
+          src="/products/external-ring-gear.webp"
+          alt="Large external ring gear at the Changsheng workshop"
+          width="1448"
+          height="1086"
+          fetchpriority="high"
+        />
+        <figcaption>External ring gear at the Changsheng workshop.</figcaption>
       </figure>
     </div>
-    <div class="hero-facts">
-      {[['2006', 'Established'], ['50+', 'Machine tools'], ['45,000', 'm² of factory space'], ['50,000', 't annual heat treatment capacity']].map(([value, label]) => (
-        <div><strong>{value}</strong><span>{label}</span></div>
-      ))}
-    </div>
   </section>
 
-  <!-- Capabilities -->
-  <section id="capabilities" class="services-section py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Services</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Three services, one complete gear-part process.</h2>
+  <!-- 2. Product Families -->
+  <section id="product-families" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>Industrial Gears &amp; Shafts Manufactured to Specification</h2>
+        <p>Explore representative gear and shaft components manufactured for heavy industrial applications.</p>
       </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {
-          capabilities.map((c) => (
-            <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-              <h3 class="font-display text-xl font-bold text-ink">{c.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-slate-600">{c.body}</p>
-              <ul class="mt-5 space-y-2.5 text-sm text-slate-500">
-                {c.points.map((p) => (
-                  <li class="flex items-start gap-2">
-                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    {p}
-                  </li>
-                ))}
-              </ul>
+      <div class="b1-families">
+        {families.map((f) => (
+          <a class="b1-family" href="/en/products/">
+            <div class="b1-family-img">
+              <img src={f.img} alt={f.alt} loading="lazy" width="1448" height="1086" />
             </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured equipment -->
-  <section class="py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Equipment</p>
-          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Equipment and capabilities.</h2>
-        </div>
-        <a href={`/${lang}/equipment`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
-          View all equipment →
-        </a>
-      </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/niles-zp30.jpg" name="NILES ZP30" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">NILES ZP30 gear grinder</p>
-          <p class="mt-1 text-sm text-accent-500">M50 × Φ3000 (external)</p>
-        </a>
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/puma-480l.jpg" name="DOOSAN PUMA 480L" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">DOOSAN PUMA 480L CNC lathe</p>
-          <p class="mt-1 text-sm text-accent-500">Shafts and rotational components</p>
-        </a>
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/hcmc-1370.jpg" name="HCMC-1370" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">HCMC-1370 machining center</p>
-          <p class="mt-1 text-sm text-accent-500">Milling, drilling and multi-operation machining</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Industries -->
-  <section class="bg-steel-50 py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Industries served</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Two decades in heavy-industry critical parts.</h2>
-      </div>
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {industries.map((i) => (
-          <div class="group overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
-            <div class="overflow-hidden bg-steel-100">
-              <img
-                src={i.img}
-                alt={i.label}
-                loading="lazy"
-                width="304"
-                height="228"
-                class="h-32 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+            <div class="b1-family-body">
+              <h3>{f.label}</h3>
+              <p>{f.desc}</p>
+              <span class="b1-family-link">View products →</span>
             </div>
-            <p class="px-5 py-3.5 font-semibold text-ink">{i.label}</p>
-          </div>
+          </a>
         ))}
       </div>
-      <div class="mt-10 rounded-lg bg-ink p-8 sm:p-10">
-        <div class="grid gap-6 sm:grid-cols-3">
-          {[
-            ['Mud-pump gears & shafts', 'Core drive parts for offshore drilling rigs'],
-            ['Wind pitch gear shafts', 'Key components for wind turbines'],
-            ['Electric-wheel double gears', 'Drive systems for mining vehicles'],
-          ].map(([title, desc]) => (
-            <div>
-              <p class="font-display text-lg font-bold text-white">{title}</p>
-              <p class="mt-1.5 text-sm text-slate-400">{desc}</p>
-            </div>
-          ))}
-        </div>
-        <a href={`/${lang}/products`} class="mt-8 inline-block rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400">
-          View products →
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- Culture -->
-  <section class="py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 grid items-center gap-12 lg:grid-cols-2">
-      <div>
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Company culture</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Rigorous · Efficient · Pragmatic · Innovative</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-600">
-          <span class="font-semibold text-ink">Teamwork, customer first, goal driven.</span>
-          Sharing success with customers, development with employees, and progress with society —
-          to be the professional gear and heat-treatment supplier.
+  <!-- 3. Integrated Manufacturing -->
+  <section id="manufacturing" class="b1-section">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>From Gear Blank to Final Inspection</h2>
+        <p>
+          Changsheng coordinates the key manufacturing processes needed to deliver finished gears and shafts
+          to customer specifications.
         </p>
-        <a href={`/${lang}/about`} class="mt-8 inline-block rounded-full bg-steel-700 px-7 py-3 font-semibold text-white transition-colors hover:bg-steel-800">
-          About Changsheng →
-        </a>
       </div>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {[
-          ['58', 'engineers & technicians'],
-          ['126', 'skilled workers'],
-          ['100', 'mu site area'],
-          ['50+', 'machining equipment'],
-        ].map(([num, label]) => (
-          <div class="rounded-lg border border-slate-100 bg-white p-7 text-center shadow-sm">
-            <p class="font-display text-3xl font-bold text-steel-600">{num}</p>
-            <p class="mt-2 text-sm text-slate-600">{label}</p>
+      <ol class="b1-process">
+        {steps.map((s) => (
+          <li>
+            <span class="b1-process-num">{s.n}</span>
+            <span class="b1-process-label">{s.label}</span>
+            <span class="b1-process-hint">{s.hint}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="b1-process-note">
+        <em>Typical process route shown. Actual manufacturing steps depend on component drawings and specifications.</em>
+      </p>
+      <div class="b1-manu-grid">
+        <figure class="b1-manu-fig">
+          <img
+            src="/workshop/machine-shop-floor.webp"
+            alt="Machine shop floor at the Changsheng Nanjing facility"
+            loading="lazy"
+            width="1448"
+            height="1086"
+          />
+          <figcaption>Machine shop at the Changsheng Nanjing facility.</figcaption>
+        </figure>
+        <div class="b1-manu-side">
+          <p>
+            A single facility covers the full route: gear grinding to module 50 × Ø3000&nbsp;mm, CNC turning to
+            Ø2500&nbsp;mm, and heat treatment of single parts from 0.1&nbsp;kg to 30&nbsp;t.
+          </p>
+          <ul class="b1-manu-links">
+            <li><a href="/en/equipment/machining">Machining &amp; gear cutting →</a></li>
+            <li><a href="/en/equipment/heat-treatment">Heat treatment →</a></li>
+            <li><a href="/en/equipment/inspection">Inspection &amp; metrology →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Featured Component -->
+  <section id="featured" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>Featured Component: Jacking Gear Shaft</h2>
+        <p>An example of a finished heavy-industrial component produced at the Changsheng facility.</p>
+      </div>
+      <div class="b1-featured">
+        <div class="b1-featured-photos">
+          <figure>
+            <img
+              src="/products/jacking-shaft.webp"
+              alt="Jacking gear shaft manufactured by Changsheng"
+              loading="lazy"
+              width="1448"
+              height="1086"
+            />
+          </figure>
+          <figure>
+            <img
+              src="/products/jacking-shaft-side.webp"
+              alt="Jacking gear shaft, side view"
+              loading="lazy"
+              width="1448"
+              height="1086"
+            />
+          </figure>
+        </div>
+        <div class="b1-featured-info">
+          <p class="b1-featured-desc">
+            Jacking gear shafts for offshore platform jacking systems. Produced through quenching &amp;
+            tempering, carburizing, and finish grinding, with heat treatment carried out under ABS approval.
+          </p>
+          <table class="b1-spec-table">
+            <tbody>
+              <tr><th scope="row">Component</th><td>Jacking gear shaft</td></tr>
+              <tr><th scope="row">Application</th><td>Offshore platform jacking systems</td></tr>
+              <tr><th scope="row">Process</th><td>Q&amp;T · carburizing · finish grinding</td></tr>
+              <tr><th scope="row">Quality approval</th><td>ABS heat treatment (HT-0579098)</td></tr>
+            </tbody>
+          </table>
+          <p class="b1-spec-note">Material, dimensions, and inspection data are published only after factory confirmation.</p>
+          <div class="b1-featured-actions">
+            <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote for This Part</a>
+            <a class="b1-btn b1-btn-ghost" href="/en/products/">More Components →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Industrial Applications -->
+  <section id="applications" class="b1-section">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>Industrial Applications</h2>
+        <p>Components manufactured for demanding drive systems across heavy industry.</p>
+      </div>
+      <div class="b1-apps">
+        {industries.map((i) => (
+          <div class="b1-app">
+            <div class="b1-app-img">
+              <img src={i.img} alt={i.alt} loading="lazy" width="1448" height="1086" />
+            </div>
+            <div class="b1-app-body">
+              <h3>{i.label}</h3>
+              <p>{i.desc}</p>
+              <a href="/en/products/">See related products →</a>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Quality assurance -->
-  <section class="bg-steel-50 py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Quality assurance</p>
-          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">Certifications & inspection capability.</h2>
-        </div>
-        <a href={`/${lang}/certificates`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
-          View certificates →
-        </a>
+  <!-- 6. Quality & Inspection -->
+  <section id="quality" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>Manufacturing Quality You Can Verify</h2>
+        <p>Inspection and certification evidence behind the finished components.</p>
       </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">ISO 9001</p>
-          <p class="mt-2 font-display font-bold text-ink">Quality management system</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">ISO 9001:2015 (cert. no. 02925Q3DR48R3S) covering gear machining and heat treatment.</p>
+      <div class="b1-quality-grid">
+        <div>
+          <ul class="b1-quality-list">
+            <li>
+              <strong>ISO 9001:2015</strong> — certified quality management for gear machining and heat treatment
+              (cert. no. 02925Q3DR48R3S).
+            </li>
+            <li>
+              <strong>ABS heat-treatment approval</strong> — marine component heat treatment under ABS approval
+              HT-0579098.
+            </li>
+            <li>
+              <strong>Gear measurement</strong> — Gleason 1000GMS gear analyzer with three CMMs for dimensional
+              verification.
+            </li>
+            <li>
+              <strong>NDT &amp; materials testing</strong> — qualified ultrasonic and magnetic-particle inspectors,
+              hardness and metallographic analysis.
+            </li>
+          </ul>
+          <div class="b1-quality-actions">
+            <a class="b1-btn b1-btn-primary" href="/en/certificates">View Certificates</a>
+            <a class="b1-btn b1-btn-ghost" href="/en/equipment/inspection">Inspection Equipment →</a>
+          </div>
         </div>
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">ABS</p>
-          <p class="mt-2 font-display font-bold text-ink">Heat-treatment facility approval</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">ABS approval HT-0579098 for marine components, valid until 2031.</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">NDT</p>
-          <p class="mt-2 font-display font-bold text-ink">Certified NDT inspectors</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">Qualified ultrasonic & magnetic particle inspectors for forgings and tooth flanks.</p>
-        </div>
+        <figure class="b1-quality-fig">
+          <img
+            src="/workshop/inspection-room.webp"
+            alt="Inspection room at the Changsheng facility"
+            loading="lazy"
+            width="1448"
+            height="1086"
+          />
+          <figcaption>Inspection room at the Changsheng facility.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <CTA lang={lang} />
+  <!-- 7. Final RFQ -->
+  <section id="rfq" class="b1-rfq">
+    <div class="b1-container b1-rfq-inner">
+      <h2>Have a Gear or Shaft Drawing?</h2>
+      <p>
+        Send us your drawing, estimated quantity, material, and technical requirements for a manufacturing
+        feasibility review and quotation.
+      </p>
+      <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
+      <p class="b1-rfq-note">PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).</p>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .b1-container { max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+
+  .b1-section { padding-block: 88px; }
+  .b1-section-gray { background: #f5f6f8; }
+  @media (max-width: 767px) {
+    .b1-section { padding-block: 56px; }
+  }
+
+  .b1-heading { max-width: 760px; }
+  .b1-heading h2 { font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; color: #0b1a33; letter-spacing: -0.02em; line-height: 1.2; }
+  .b1-heading p { margin-top: 14px; font-size: 17px; line-height: 1.75; color: #475569; }
+
+  .b1-btn { display: inline-block; padding: 14px 26px; border-radius: 4px; font-size: 15px; font-weight: 600; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+  .b1-btn-primary { background: #215694; color: #fff; }
+  .b1-btn-primary:hover { background: #1b4577; }
+  .b1-btn-ghost { border: 1px solid #c0d4ec; color: #215694; }
+  .b1-btn-ghost:hover { border-color: #215694; background: #eef4fb; }
+
+  /* Hero */
+  .b1-hero { background: #fff; border-bottom: 1px solid #e8edf4; }
+  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 64px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
+  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #215694; text-transform: uppercase; }
+  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4.2vw, 54px); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; color: #0b1a33; text-wrap: balance; }
+  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.7; color: #475569; max-width: 540px; }
+  .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
+  .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
+  .b1-hero-fig { margin: 0; background: #eef2f7; border-radius: 6px; overflow: hidden; }
+  .b1-hero-fig img { display: block; width: 100%; height: auto; object-fit: cover; }
+  .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-hero-grid { grid-template-columns: 1fr; padding-top: 48px; gap: 32px; }
+    .b1-hero-fig { order: 2; }
+  }
+
+  /* Product families */
+  .b1-families { margin-top: 44px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .b1-family { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: box-shadow .15s ease, border-color .15s ease; }
+  .b1-family:hover { border-color: #c0d4ec; box-shadow: 0 10px 28px rgba(11, 26, 51, .08); }
+  .b1-family-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f7; }
+  .b1-family-body { padding: 20px 22px 22px; }
+  .b1-family-body h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: #0b1a33; }
+  .b1-family-body p { margin-top: 8px; font-size: 14.5px; line-height: 1.65; color: #64748b; }
+  .b1-family-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; }
+  @media (max-width: 767px) {
+    .b1-families { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Process */
+  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
+  .b1-process li { position: relative; padding: 22px 18px 20px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; text-align: center; }
+  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -14px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; }
+  .b1-process-num { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-process-label { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #0b1a33; }
+  .b1-process-hint { display: block; margin-top: 6px; font-size: 13px; color: #64748b; }
+  .b1-process-note { margin-top: 22px; font-size: 14px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-process { grid-template-columns: 1fr; gap: 10px; }
+    .b1-process li { text-align: left; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 12px; padding: 16px 18px; }
+    .b1-process li:not(:last-child)::after { content: none; }
+    .b1-process-num { grid-row: 1 / 3; align-self: center; }
+    .b1-process-hint { margin-top: 2px; }
+  }
+
+  /* Manufacturing photo + links */
+  .b1-manu-grid { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 32px; align-items: start; }
+  .b1-manu-fig { margin: 0; }
+  .b1-manu-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-manu-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  .b1-manu-side p { font-size: 16px; line-height: 1.75; color: #334155; }
+  .b1-manu-links { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
+  .b1-manu-links a { font-size: 15px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-manu-links a:hover { text-decoration: underline; }
+  @media (max-width: 900px) {
+    .b1-manu-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Featured component */
+  .b1-featured { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .b1-featured-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .b1-featured-photos figure { margin: 0; }
+  .b1-featured-photos img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-featured-desc { font-size: 16.5px; line-height: 1.75; color: #334155; }
+  .b1-spec-table { margin-top: 24px; width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .b1-spec-table th, .b1-spec-table td { text-align: left; padding: 11px 12px; border-bottom: 1px solid #e8edf4; vertical-align: top; }
+  .b1-spec-table th { width: 38%; color: #64748b; font-weight: 500; }
+  .b1-spec-table td { color: #0b1a33; font-weight: 500; }
+  .b1-spec-note { margin-top: 14px; font-size: 13px; color: #94a3b8; }
+  .b1-featured-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
+  @media (max-width: 900px) {
+    .b1-featured { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 560px) {
+    .b1-featured-photos { grid-template-columns: 1fr; }
+  }
+
+  /* Applications */
+  .b1-apps { margin-top: 40px; display: grid; gap: 20px; }
+  .b1-app { display: grid; grid-template-columns: 260px 1fr; gap: 26px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 18px; align-items: center; }
+  .b1-app-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
+  .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: #64748b; max-width: 640px; }
+  .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-app-body a:hover { text-decoration: underline; }
+  @media (max-width: 700px) {
+    .b1-app { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Quality */
+  .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .b1-quality-list { list-style: none; display: grid; gap: 18px; }
+  .b1-quality-list li { position: relative; padding-left: 30px; font-size: 15.5px; line-height: 1.7; color: #334155; }
+  .b1-quality-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 50%; background: #e2ebf7; }
+  .b1-quality-list li::after { content: ''; position: absolute; left: 4.5px; top: 11.5px; width: 7px; height: 7px; border-radius: 50%; background: #215694; }
+  .b1-quality-list strong { color: #0b1a33; }
+  .b1-quality-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .b1-quality-fig { margin: 0; }
+  .b1-quality-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-quality-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-quality-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* Final RFQ */
+  .b1-rfq { background: #0b1a33; color: #fff; padding-block: 88px; }
+  .b1-rfq-inner { text-align: center; max-width: 760px; }
+  .b1-rfq h2 { font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
+  .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.75; color: #c4cedb; }
+  .b1-rfq .b1-btn-primary { margin-top: 30px; background: #ffffff; color: #0b1a33; }
+  .b1-rfq .b1-btn-primary:hover { background: #e2ebf7; }
+  .b1-rfq-note { margin-top: 22px !important; font-size: 13.5px !important; color: #8fa3bd !important; }
+  @media (max-width: 767px) {
+    .b1-rfq { padding-block: 56px; }
+  }
+</style>
