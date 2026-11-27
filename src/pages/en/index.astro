@@ -68,6 +68,12 @@ const processPhotos = [
     img: '/workshop/gear-inspection-setup.webp',
     alt: 'Gear inspection setup at the Changsheng facility',
   },
+  {
+    step: '06',
+    label: 'Finished Product',
+    img: '/products/IMG_0130_jacking-shaft.webp',
+    alt: 'Finished jacking gear shaft manufactured by Changsheng',
+  },
 ];
 
 const industries = [
@@ -201,25 +207,16 @@ const industries = [
   <section id="featured" class="b1-section b1-section-gray">
     <div class="b1-container">
       <div class="b1-heading">
-        <h2>Featured Component: Jacking Gear Shaft</h2>
-        <p>An example of a finished heavy-industrial component produced at the Changsheng facility.</p>
+        <h2>From Blank Machining to Finished Product</h2>
+        <p>Follow one component — a jacking gear shaft — through the manufacturing steps Changsheng coordinates in a single facility.</p>
       </div>
       <div class="b1-featured">
-        <div class="b1-featured-photos">
-          <figure>
-            <img
-              src="/products/IMG_0130_jacking-shaft.webp"
-              alt="Jacking gear shaft manufactured by Changsheng"
-              loading="lazy"
-              width="1448"
-              height="1086"
-            />
-          </figure>
-        </div>
         <div class="b1-featured-info">
           <p class="b1-featured-desc">
-            Jacking gear shafts for offshore platform jacking systems. Produced through quenching &amp;
-            tempering, carburizing, and finish grinding, with heat treatment carried out under ABS approval.
+            This jacking gear shaft illustrates the complete manufacturing route Changsheng offers: the blank
+            is machined, teeth are cut, heat treatment is carried out under ABS approval, the part is
+            finish-ground, and final inspection confirms it meets specification — one facility, from raw
+            blank to the finished component delivered to the customer.
           </p>
           <table class="b1-spec-table">
             <tbody>
@@ -239,7 +236,7 @@ const industries = [
 
       <div class="b1-process-gallery">
         <div class="b1-gallery-head">
-          <p class="b1-gallery-note">Representative process photographs from the Changsheng workshop.</p>
+          <p class="b1-gallery-note">The steps show the manufacturing route from blank machining to the final inspected product.</p>
           <div class="b1-gallery-controls">
             <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="Previous step">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
@@ -451,10 +448,7 @@ const industries = [
   }
 
   /* Featured component */
-  .b1-featured { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
-  .b1-featured-photos { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .b1-featured-photos figure { margin: 0; }
-  .b1-featured-photos img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-featured { margin-top: 44px; max-width: 880px; }
   .b1-featured-desc { font-size: 16.5px; line-height: 1.75; color: #334155; }
   .b1-spec-table { margin-top: 24px; width: 100%; border-collapse: collapse; font-size: 14.5px; }
   .b1-spec-table th, .b1-spec-table td { text-align: left; padding: 11px 12px; border-bottom: 1px solid #e8edf4; vertical-align: top; }
@@ -462,9 +456,6 @@ const industries = [
   .b1-spec-table td { color: #0b1a33; font-weight: 500; }
   .b1-spec-note { margin-top: 14px; font-size: 13px; color: #94a3b8; }
   .b1-featured-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
-  @media (max-width: 900px) {
-    .b1-featured { grid-template-columns: 1fr; gap: 28px; }
-  }
 
   /* Process gallery */
   .b1-process-gallery { margin-top: 48px; }
