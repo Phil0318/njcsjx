@@ -1,246 +1,508 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CTA from '../../components/CTA.astro';
-import EquipPhoto from '../../components/EquipPhoto.astro';
 
 const lang = 'zh' as const;
 
-const capabilities = [
+const families = [
   {
-    title: '齿轮全序加工',
-    href: '/zh/equipment/machining',
-    body: '车加工、滚齿、铣齿、插齿、热处理、抛丸喷丸、磨齿、内圆磨、倒角——一站式完成，最大磨齿能力达模数 50 × 直径 3000 毫米。',
-    points: ['NILES 磨齿机 6 台（ZE400S–ZP30）', '数控立车最大直径 2500 毫米', '三/四轴加工中心、线切割'],
+    label: '齿轮与齿圈',
+    desc: '内齿圈、外齿圈、齿轮盘及特种齿形件，按规格加工并精磨至成品。',
+    img: '/products/IMG_0099_external-ring-gear.webp',
+    alt: '南京长升制造的外齿圈',
+    href: '/zh/products/#gears-ring-gears',
   },
   {
-    title: '金属热处理',
-    href: '/zh/equipment/heat-treatment',
-    body: '黑色、有色金属及特殊材料的正火、退火、调质、渗碳淬火、碳氮共渗、氮化、真空油淬与高压气淬、分级等温淬火、高/中/超音频感应淬火、喷丸、发黑。',
-    points: ['单件 0.1 kg – 30 t', '年产能约 5 万吨', '大型井式渗碳炉最大 Φ4000×2500'],
+    label: '小齿轮与齿轮轴',
+    desc: '从毛坯机加工到齿部加工与精磨的小齿轮与齿轮轴。',
+    img: '/products/upright-pinion-shaft.webp',
+    alt: '南京长升制造的小齿轮轴',
+    href: '/zh/products/#pinions-gear-shafts',
   },
   {
-    title: '检测与计量',
-    href: '/zh/equipment/inspection',
-    body: '从原材料到成品全流程质量管控：齿轮测量、三坐标检测、无损探伤、硬度与金相分析、力学性能试验。',
-    points: ['Gleason 1000GMS 齿轮测量仪', '三台三坐标（Hexagon / DEA / VENUS）', '超声波、磁粉探伤与光谱分析'],
+    label: '行星、双联及特种齿轮',
+    desc: '行星架、太阳轮、双联齿轮及复合齿轮组件，用于重载驱动系统。',
+    img: '/products/planet-carrier.webp',
+    alt: '南京长升制造的行星齿轮零件',
+    href: '/zh/products/#planetary-compound',
+  },
+  {
+    label: '定制轴类及相关零件',
+    desc: '按图纸加工、热处理并磨削的轴、轴套及相关零件。',
+    img: '/products/gear-shaft-and-sleeve.webp',
+    alt: '南京长升制造的齿轮轴与轴套',
+    href: '/zh/products/#shafts-components',
+  },
+];
+
+const steps = [
+  { n: '01', label: '毛坯机加工', hint: '车削 · 铣削' },
+  { n: '02', label: '齿轮加工', hint: '滚齿 · 插齿' },
+  { n: '03', label: '热处理', hint: '渗碳 · 调质' },
+  { n: '04', label: '精磨', hint: '磨齿 · 磨孔' },
+  { n: '05', label: '成品检验', hint: '测量 · 探伤' },
+];
+
+const processPhotos = [
+  {
+    step: '01',
+    label: '毛坯机加工',
+    img: '/workshop/machine-shop-floor.webp',
+    alt: '长升工厂机加工车间',
+  },
+  {
+    step: '02',
+    label: '齿轮加工',
+    img: '/workshop/machining-line.webp',
+    alt: '长升工厂加工线',
+  },
+  { step: '03', label: '热处理', img: null, alt: '' },
+  {
+    step: '04',
+    label: '精磨',
+    img: '/equipment-photos/niles-zp30.jpg',
+    alt: '长升工厂 NILES ZP30 磨齿机',
+  },
+  {
+    step: '05',
+    label: '成品检验',
+    img: '/workshop/gear-inspection-setup.webp',
+    alt: '长升工厂齿轮检测工位',
+  },
+  {
+    step: '06',
+    label: '成品零件',
+    img: '/products/IMG_0130_jacking-shaft.webp',
+    alt: '南京长升制造的成品爬升齿轮轴',
   },
 ];
 
 const industries = [
-  { label: '海洋钻井平台', img: '/industries/offshore.png' },
-  { label: '风电行业', img: '/industries/wind.png' },
-  { label: '石化行业', img: '/industries/petrochemical.png' },
-  { label: '煤炭矿用行业', img: '/industries/coal.png' },
-  { label: '冶金行业', img: '/industries/metallurgy.png' },
-  { label: '建材行业', img: '/industries/building-materials.png' },
+  {
+    label: '海上钻井',
+    desc: '海上钻井平台泥浆泵齿轮组与爬升系统零件，按 ABS 认可的热处理程序生产。',
+    href: '/zh/products/#pinions-gear-shafts',
+  },
+  {
+    label: '风电',
+    desc: '风电太阳轮与变桨系统轴类，渗碳淬火并精磨，满足疲劳工况要求。',
+    href: '/zh/products/#planetary-compound',
+  },
+  {
+    label: '矿山设备',
+    desc: '矿用自卸车电动轮双联齿轮，滚齿、渗碳、磨齿全流程在厂内完成。',
+    href: '/zh/products/#planetary-compound',
+  },
 ];
 ---
 
 <Base
   lang={lang}
-  title="南京长升机械工程有限公司 — 专业齿轮加工与热处理供应商"
-  description="南京长升机械工程有限公司（2006年成立）专业从事齿轮全序加工与金属热处理：磨齿最大模数50×直径3000毫米，年热处理产能约5万吨，服务海洋钻井、风电、矿用、石化等行业。"
+  title="定制工业齿轮与轴类 | 南京长升机械"
+  description="按图纸定制工业齿轮与轴类零件：机加工、齿轮加工、热处理、精密磨削与检验，工厂位于江苏南京。"
 >
-  <section class="home-hero">
-    <div class="hero-layout">
-      <div class="hero-copy">
-        <p class="eyebrow">南京长升机械工程有限公司 · 始于 2006</p>
-        <h1>精于齿轮加工<br />专注<span>金属热处理</span></h1>
-        <p class="hero-intro">从毛坯加工、齿形制造到热处理与精密检测，为重工业关键零部件提供一体化制造服务。</p>
-        <div class="hero-actions">
-          <a class="primary-action" href="/zh/contact">提交图纸 · 咨询报价 →</a>
-          <a class="secondary-action" href="#capabilities">了解加工能力 ↓</a>
+  <!-- 1. Hero -->
+  <section class="b1-hero">
+    <div class="b1-hero-grid">
+      <div class="b1-hero-copy">
+        <p class="b1-eyebrow">南京长升机械</p>
+        <h1>从图纸到成品的一站式服务</h1>
+        <p class="b1-hero-intro">
+          机加工、齿轮加工、热处理、精密磨削与检验一厂完成，交付符合图纸要求的成品齿轮与轴类。
+        </p>
+        <p class="b1-hero-intro b1-hero-intro-2">
+          发送您的图纸与数量，即可获得成品零件报价。
+        </p>
+        <div class="b1-hero-actions">
+          <a class="b1-btn b1-btn-primary" href="/zh/contact">请求报价</a>
+          <a class="b1-btn b1-btn-ghost" href="#product-families">了解齿轮与轴类</a>
         </div>
       </div>
-      <figure class="hero-photo">
-        <img src="/equipment-photos/niles-ze1200.jpg" alt="NILES ZE1200 齿轮磨削设备" width="1200" height="900" fetchpriority="high" />
-        <figcaption><span>精密齿轮加工</span><span>NILES ZE1200</span></figcaption>
+      <figure class="b1-hero-fig">
+        <img
+          src="/equipment-photos/niles-ze1200.jpg"
+          alt="长升工厂的 NILES ZE1200 磨齿机"
+          width="1200"
+          height="900"
+          fetchpriority="high"
+        />
+        <figcaption>精密磨齿 — NILES ZE1200。</figcaption>
       </figure>
     </div>
-    <div class="hero-facts">
-      {[['2006', '年成立'], ['50+', '台套机械加工设备'], ['45,000', '平方米厂房'], ['5万', '吨年热处理产能']].map(([value, label]) => (
-        <div><strong>{value}</strong><span>{label}</span></div>
-      ))}
-    </div>
   </section>
 
-  <!-- Capabilities -->
-  <section id="capabilities" class="services-section py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">我们的服务</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">加工、热处理与检测，协同完成。</h2>
+  <!-- 2. Product Families -->
+  <section id="product-families" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>按规格制造的工业齿轮与轴类</h2>
+        <p>浏览为重型工业应用制造的代表性齿轮与轴类零件。</p>
       </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {
-          capabilities.map((c) => (
-            <div class="service-card">
-              <h3 class="font-display text-xl font-bold text-ink">{c.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-slate-600">{c.body}</p>
-              <ul class="mt-5 space-y-2.5 text-sm text-slate-500">
-                {c.points.map((p) => (
-                  <li class="flex items-start gap-2">
-                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <a class="service-link" href={c.href}>查看工艺与设备 →</a>
+      <div class="b1-families">
+        {families.map((f) => (
+          <a class="b1-family" href={f.href}>
+            <div class="b1-family-img">
+              <img src={f.img} alt={f.alt} loading="lazy" width="1448" height="1086" />
             </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured equipment -->
-  <section class="py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">设备一览</p>
-          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">设备与加工能力。</h2>
-        </div>
-        <a href={`/${lang}/equipment`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
-          查看全部设备 →
-        </a>
-      </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/niles-zp30.jpg" name="NILES ZP30" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">NILES ZP30 磨齿机</p>
-          <p class="mt-1 text-sm text-accent-500">M50 × Φ3000（外齿）</p>
-        </a>
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/puma-480l.jpg" name="DOOSAN PUMA 480L" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">DOOSAN PUMA 480L 数控车床</p>
-          <p class="mt-1 text-sm text-accent-500">轴类与回转体零件加工</p>
-        </a>
-        <a
-          href={`/${lang}/equipment/machining`}
-          class="group rounded-lg border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg"
-        >
-          <EquipPhoto src="/equipment-photos/hcmc-1370.jpg" name="HCMC-1370" class="aspect-[4/3]" fit="contain" />
-          <p class="mt-4 font-display text-lg font-bold text-ink">HCMC-1370 加工中心</p>
-          <p class="mt-1 text-sm text-accent-500">铣削、钻孔与多工序加工</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Industries -->
-  <section class="bg-steel-50 py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">服务行业</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">二十年，深耕重工业关键零部件。</h2>
-      </div>
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {industries.map((i) => (
-          <div class="group overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
-            <div class="overflow-hidden bg-steel-100">
-              <img
-                src={i.img}
-                alt={i.label}
-                loading="lazy"
-                width="304"
-                height="228"
-                class="h-32 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+            <div class="b1-family-body">
+              <h3>{f.label}</h3>
+              <p>{f.desc}</p>
+              <span class="b1-family-link">查看产品 →</span>
             </div>
-            <p class="px-5 py-3.5 font-semibold text-ink">{i.label}</p>
-          </div>
+          </a>
         ))}
       </div>
-      <div class="mt-10 rounded-lg bg-ink p-8 sm:p-10">
-        <div class="grid gap-6 sm:grid-cols-3">
-          {[
-            ['泥浆泵齿轮 / 齿轮轴', '海上钻井平台核心传动零件'],
-            ['风电变桨齿轮轴', '风力发电机组关键部件'],
-            ['电动轮双联齿轮', '矿用车辆驱动系统'],
-          ].map(([title, desc]) => (
-            <div>
-              <p class="font-display text-lg font-bold text-white">{title}</p>
-              <p class="mt-1.5 text-sm text-slate-400">{desc}</p>
-            </div>
+    </div>
+  </section>
+
+  <!-- 3. Integrated Manufacturing -->
+  <section id="manufacturing" class="b1-section">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>从毛坯到成品检验</h2>
+        <p>长升统筹交付成品齿轮与轴类所需的关键制造工序。</p>
+      </div>
+      <ol class="b1-process">
+        {steps.map((s) => (
+          <li>
+            <span class="b1-process-num">{s.n}</span>
+            <span class="b1-process-label">{s.label}</span>
+            <span class="b1-process-hint">{s.hint}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="b1-process-note">
+        <em>所示仅为典型工艺路线，实际工序取决于零件图纸与技术要求。</em>
+      </p>
+      <div class="b1-manu-grid">
+        <figure class="b1-manu-fig">
+          <img
+            src="/workshop/machine-shop-floor.webp"
+            alt="长升南京工厂机加工车间"
+            loading="lazy"
+            width="1448"
+            height="1086"
+          />
+          <figcaption>长升南京工厂机加工车间。</figcaption>
+        </figure>
+        <div class="b1-manu-side">
+          <p>
+            单一工厂覆盖全流程：磨齿最大模数 50 × Ø3000&nbsp;mm，数控车削至 Ø2500&nbsp;mm，热处理单件
+            0.1&nbsp;kg 至 30&nbsp;t。
+          </p>
+          <ul class="b1-manu-links">
+            <li><a href="/zh/equipment/machining">机加工与齿轮加工 →</a></li>
+            <li><a href="/zh/equipment/heat-treatment">热处理 →</a></li>
+            <li><a href="/zh/equipment/inspection">检测与计量 →</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Featured Component -->
+  <section id="featured" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>从毛坯机加工到成品零件</h2>
+        <p>跟随一个零件——爬升齿轮轴——走完长升在同一工厂内统筹的全部制造工序。</p>
+      </div>
+      <div class="b1-featured">
+        <div class="b1-featured-info">
+          <p class="b1-featured-desc">
+            这根爬升齿轮轴展示了长升提供的完整制造路线：毛坯机加工、齿部加工、按 ABS 认可执行的热处理、
+            精磨，以及确认满足技术要求的成品检验——一个工厂，从毛坯到交付客户的成品零件。
+          </p>
+          <table class="b1-spec-table">
+            <tbody>
+              <tr><th scope="row">零件</th><td>爬升齿轮轴</td></tr>
+              <tr><th scope="row">应用</th><td>海上平台爬升系统</td></tr>
+              <tr><th scope="row">工艺</th><td>调质 · 渗碳 · 精磨</td></tr>
+              <tr><th scope="row">质量认可</th><td>ABS 热处理（HT-0579098）</td></tr>
+            </tbody>
+          </table>
+          <p class="b1-spec-note">材料、尺寸与检验数据经工厂确认后公布。</p>
+          <div class="b1-featured-actions">
+            <a class="b1-btn b1-btn-primary" href="/zh/contact">询价该零件</a>
+            <a class="b1-btn b1-btn-ghost" href="/zh/products/#pinions-gear-shafts">更多零件 →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="b1-process-gallery">
+        <div class="b1-gallery-head">
+          <p class="b1-gallery-note">以下步骤展示从毛坯机加工到成品检验的制造路线。</p>
+          <div class="b1-gallery-controls">
+            <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="上一步">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </button>
+            <button type="button" class="b1-gallery-btn" id="b1-gallery-next" aria-label="下一步">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div class="b1-gallery-track" id="b1-gallery-track">
+          {processPhotos.map((p) => (
+            <figure class="b1-gallery-tile">
+              {p.img ? (
+                <img src={p.img} alt={p.alt} loading="lazy" width="1448" height="1086" />
+              ) : (
+                <div class="b1-gallery-ph">照片待补充</div>
+              )}
+              <figcaption>
+                <span class="b1-gallery-step">{p.step}</span>
+                <span class="b1-gallery-label">{p.label}</span>
+              </figcaption>
+            </figure>
           ))}
         </div>
-        <a href={`/${lang}/products`} class="mt-8 inline-block rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400 hover:text-accent-400">
-          查看产品展示 →
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Culture -->
-  <section class="py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 grid items-center gap-12 lg:grid-cols-2">
-      <div>
-        <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">企业文化</p>
-        <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">严谨 · 高效 · 求实 · 创新</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-600">
-          <span class="font-semibold text-ink">团队合作，客户至上，目标驱动。</span>
-          与用户共享成功，与员工共享发展，与社会共享进步——做专业的齿轮及热处理供应商。
-        </p>
-        <a href={`/${lang}/about`} class="mt-8 inline-block rounded-full bg-steel-700 px-7 py-3 font-semibold text-white transition-colors hover:bg-steel-800">
-          了解长升 →
-        </a>
+  <!-- 5. Industrial Applications -->
+  <section id="applications" class="b1-section">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>行业应用</h2>
+        <p>为重型工业关键传动系统制造的零件。</p>
       </div>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {[
-          ['58', '名工程技术人员'],
-          ['126', '名技术工人'],
-          ['100', '亩占地面积'],
-          ['50+', '台套机械加工设备'],
-        ].map(([num, label]) => (
-          <div class="rounded-lg border border-slate-100 bg-white p-7 text-center shadow-sm">
-            <p class="font-display text-3xl font-bold text-steel-600">{num}</p>
-            <p class="mt-2 text-sm text-slate-600">{label}</p>
+      <div class="b1-apps">
+        {industries.map((i) => (
+          <div class="b1-app">
+            <div class="b1-app-img">
+              <div class="b1-app-ph" aria-hidden="true">照片待补充</div>
+            </div>
+            <div class="b1-app-body">
+              <h3>{i.label}</h3>
+              <p>{i.desc}</p>
+              <a href={i.href}>查看相关产品 →</a>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Quality assurance -->
-  <section class="bg-steel-50 py-20 sm:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">质量保证</p>
-          <h2 class="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">资质认证与检测能力。</h2>
-        </div>
-        <a href={`/${lang}/certificates`} class="text-sm font-semibold text-accent-500 transition-colors hover:text-accent-600">
-          查看证书 →
-        </a>
+  <!-- 6. Quality & Inspection -->
+  <section id="quality" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>可验证的制造质量</h2>
+        <p>成品零件背后的检验与认证证据。</p>
       </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">ISO 9001</p>
-          <p class="mt-2 font-display font-bold text-ink">质量管理体系认证</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">ISO 9001:2015（证书编号 02925Q3DR48R3S），覆盖齿轮加工与热处理全流程。</p>
+      <div class="b1-quality-grid">
+        <div>
+          <ul class="b1-quality-list">
+            <li>
+              <strong>ISO 9001:2015</strong> — 齿轮加工与热处理质量管理体系认证（证书号 02925Q3DR48R3S）。
+            </li>
+            <li>
+              <strong>ABS 热处理认可</strong> — 船用零件热处理，ABS 认可号 HT-0579098。
+            </li>
+            <li>
+              <strong>齿轮测量</strong> — Gleason 1000GMS 齿轮测量中心及三台三坐标测量机进行尺寸验证。
+            </li>
+            <li>
+              <strong>探伤与材料检测</strong> — 持证超声与磁粉探伤人员，硬度与金相分析。
+            </li>
+          </ul>
+          <div class="b1-quality-actions">
+            <a class="b1-btn b1-btn-primary" href="/zh/certificates">查看证书</a>
+            <a class="b1-btn b1-btn-ghost" href="/zh/equipment/inspection">检测设备 →</a>
+          </div>
         </div>
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">ABS</p>
-          <p class="mt-2 font-display font-bold text-ink">船级社热处理设施认可</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">ABS 热处理设施与工艺认可 HT-0579098，服务海洋装备，有效期至 2031 年。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-white p-8 shadow-sm">
-          <p class="font-display text-2xl font-bold text-accent-500">NDT</p>
-          <p class="mt-2 font-display font-bold text-ink">探伤人员持证上岗</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">超声波、磁粉探伤人员持证，保障锻件与齿部探伤结果的权威性。</p>
-        </div>
+        <figure class="b1-quality-fig">
+          <img
+            src="/workshop/gear-inspection-setup.webp"
+            alt="长升工厂齿轮检测工位"
+            loading="lazy"
+            width="1448"
+            height="1086"
+          />
+          <figcaption>长升工厂齿轮检测工位。</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <CTA lang={lang} />
+  <!-- 7. Final RFQ -->
+  <section id="rfq" class="b1-rfq">
+    <div class="b1-container b1-rfq-inner">
+      <h2>有齿轮或轴类图纸？</h2>
+      <p>
+        发送您的图纸、预计数量、材料与技术要求，我们将进行制造可行性评估并报价。
+      </p>
+      <a class="b1-btn b1-btn-primary" href="/zh/contact">请求报价</a>
+      <p class="b1-rfq-note">可在联系表单中上传 PDF、DWG、STEP、IGS、DXF 或图片图纸（单文件不超过 25&nbsp;MB）。</p>
+    </div>
+  </section>
+
+  <script>
+    const track = document.getElementById('b1-gallery-track');
+    const prev = document.getElementById('b1-gallery-prev');
+    const next = document.getElementById('b1-gallery-next');
+    if (track && prev && next) {
+      const step = () => {
+        const tile = track.querySelector('.b1-gallery-tile');
+        return tile ? tile.offsetWidth + 14 : track.clientWidth * 0.8;
+      };
+      const update = () => {
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      };
+      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+  </script>
 </Base>
+
+<style>
+  .b1-container { max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+
+  .b1-section { padding-block: 88px; }
+  .b1-section-gray { background: #f5f6f8; }
+  @media (max-width: 767px) {
+    .b1-section { padding-block: 56px; }
+  }
+
+  .b1-heading { max-width: 760px; }
+  .b1-heading h2 { font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; color: #0b1a33; letter-spacing: -0.02em; line-height: 1.2; }
+  .b1-heading p { margin-top: 14px; font-size: 17px; line-height: 1.75; color: #475569; }
+
+  .b1-btn { display: inline-block; padding: 14px 26px; border-radius: 4px; font-size: 15px; font-weight: 600; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+  .b1-btn-primary { background: #215694; color: #fff; }
+  .b1-btn-primary:hover { background: #1b4577; }
+  .b1-btn-ghost { border: 1px solid #c0d4ec; color: #215694; }
+  .b1-btn-ghost:hover { border-color: #215694; background: #eef4fb; }
+
+  /* Hero */
+  .b1-hero { background: #fff; border-bottom: 1px solid #e8edf4; }
+  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 64px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
+  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #215694; text-transform: uppercase; }
+  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4.2vw, 54px); font-weight: 700; line-height: 1.18; letter-spacing: -0.02em; color: #0b1a33; text-wrap: balance; }
+  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.8; color: #475569; max-width: 540px; }
+  .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
+  .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
+  .b1-hero-fig { margin: 0; background: #e9edf0; border-radius: 6px; overflow: hidden; }
+  .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+  .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-hero-grid { grid-template-columns: 1fr; padding-top: 48px; gap: 32px; }
+    .b1-hero-fig { order: 2; }
+  }
+
+  /* Product families */
+  .b1-families { margin-top: 44px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .b1-family { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: box-shadow .15s ease, border-color .15s ease; }
+  .b1-family:hover { border-color: #c0d4ec; box-shadow: 0 10px 28px rgba(11, 26, 51, .08); }
+  .b1-family-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f7; }
+  .b1-family-body { padding: 20px 22px 22px; }
+  .b1-family-body h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: #0b1a33; }
+  .b1-family-body p { margin-top: 8px; font-size: 14.5px; line-height: 1.7; color: #64748b; }
+  .b1-family-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; }
+  @media (max-width: 767px) {
+    .b1-families { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Process */
+  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
+  .b1-process li { position: relative; padding: 22px 18px 20px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; text-align: center; }
+  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -14px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; }
+  .b1-process-num { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-process-label { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #0b1a33; }
+  .b1-process-hint { display: block; margin-top: 6px; font-size: 13px; color: #64748b; }
+  .b1-process-note { margin-top: 22px; font-size: 14px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-process { grid-template-columns: 1fr; gap: 10px; }
+    .b1-process li { text-align: left; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 12px; padding: 16px 18px; }
+    .b1-process li:not(:last-child)::after { content: none; }
+    .b1-process-num { grid-row: 1 / 3; align-self: center; }
+    .b1-process-hint { margin-top: 2px; }
+  }
+
+  /* Manufacturing photo + links */
+  .b1-manu-grid { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 32px; align-items: start; }
+  .b1-manu-fig { margin: 0; }
+  .b1-manu-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-manu-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  .b1-manu-side p { font-size: 16px; line-height: 1.8; color: #334155; }
+  .b1-manu-links { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
+  .b1-manu-links a { font-size: 15px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-manu-links a:hover { text-decoration: underline; }
+  @media (max-width: 900px) {
+    .b1-manu-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Featured component */
+  .b1-featured { margin-top: 44px; max-width: 880px; }
+  .b1-featured-desc { font-size: 16.5px; line-height: 1.85; color: #334155; }
+  .b1-spec-table { margin-top: 24px; width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .b1-spec-table th, .b1-spec-table td { text-align: left; padding: 11px 12px; border-bottom: 1px solid #e8edf4; vertical-align: top; }
+  .b1-spec-table th { width: 38%; color: #64748b; font-weight: 500; }
+  .b1-spec-table td { color: #0b1a33; font-weight: 500; }
+  .b1-spec-note { margin-top: 14px; font-size: 13px; color: #94a3b8; }
+  .b1-featured-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Process gallery */
+  .b1-process-gallery { margin-top: 48px; }
+  .b1-gallery-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .b1-gallery-note { font-size: 13px; color: #64748b; }
+  .b1-gallery-controls { display: flex; gap: 8px; }
+  .b1-gallery-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+  .b1-gallery-btn:hover { background: #eef4fb; border-color: #215694; }
+  .b1-gallery-btn:disabled { opacity: .4; cursor: default; }
+  .b1-gallery-track { margin-top: 16px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 2px; }
+  .b1-gallery-track::-webkit-scrollbar { display: none; }
+  .b1-gallery-tile { margin: 0; flex: 0 0 300px; scroll-snap-align: start; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
+  .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
+  .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
+  .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-gallery-label { font-size: 13.5px; font-weight: 600; color: #0b1a33; }
+  @media (max-width: 560px) {
+    .b1-gallery-tile { flex-basis: 76%; }
+  }
+
+  /* Applications */
+  .b1-apps { margin-top: 40px; display: grid; gap: 16px; }
+  .b1-app { display: grid; grid-template-columns: 260px 1fr; gap: 26px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 18px; align-items: center; }
+  .b1-app-img { margin: 0; }
+  .b1-app-ph { aspect-ratio: 4 / 3; background: #eef2f7; border: 1px dashed #c0d4ec; border-radius: 4px; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
+  .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
+  .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.75; color: #64748b; max-width: 760px; }
+  .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-app-body a:hover { text-decoration: underline; }
+  @media (max-width: 700px) {
+    .b1-app { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Quality */
+  .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .b1-quality-list { list-style: none; display: grid; gap: 18px; }
+  .b1-quality-list li { position: relative; padding-left: 30px; font-size: 15.5px; line-height: 1.8; color: #334155; }
+  .b1-quality-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 50%; background: #e2ebf7; }
+  .b1-quality-list li::after { content: ''; position: absolute; left: 4.5px; top: 11.5px; width: 7px; height: 7px; border-radius: 50%; background: #215694; }
+  .b1-quality-list strong { color: #0b1a33; }
+  .b1-quality-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .b1-quality-fig { margin: 0; }
+  .b1-quality-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  .b1-quality-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  @media (max-width: 900px) {
+    .b1-quality-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* Final RFQ */
+  .b1-rfq { background: #0b1a33; color: #fff; padding-block: 88px; }
+  .b1-rfq-inner { text-align: center; max-width: 760px; }
+  .b1-rfq h2 { font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
+  .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.8; color: #c4cedb; }
+  .b1-rfq .b1-btn-primary { margin-top: 30px; background: #ffffff; color: #0b1a33; }
+  .b1-rfq .b1-btn-primary:hover { background: #e2ebf7; }
+  .b1-rfq-note { margin-top: 22px !important; font-size: 13.5px !important; color: #8fa3bd !important; }
+  @media (max-width: 767px) {
+    .b1-rfq { padding-block: 56px; }
+  }
+</style>
