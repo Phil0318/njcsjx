@@ -1,8 +1,11 @@
 ﻿---
 import Base from '../../layouts/Base.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import fs from 'node:fs';
 
 const lang = 'en' as const;
+
+const hasFile = (p: string) => fs.existsSync('public' + p);
 
 const families = [
   {
@@ -71,36 +74,41 @@ const equipment = [
   },
 ];
 
-const processPhotos = [
+const processVideos = [
   {
     step: '01',
     label: 'Blank Machining',
-    img: '/workshop/machine-shop-floor.webp',
+    video: '/videos/01-blank-machining.mp4',
+    fallback: '/workshop/machine-shop-floor.webp',
     alt: 'Machine shop floor at the Changsheng facility',
   },
   {
     step: '02',
     label: 'Gear Cutting',
-    img: '/workshop/machining-line.webp',
+    video: '/videos/02-gear-cutting.mp4',
+    fallback: '/workshop/machining-line.webp',
     alt: 'Machining line at the Changsheng facility',
   },
-  { step: '03', label: 'Heat Treatment', img: null, alt: '' },
+  { step: '03', label: 'Heat Treatment', video: '/videos/03-heat-treatment.mp4', fallback: null, alt: '' },
   {
     step: '04',
     label: 'Finish Grinding',
-    img: '/equipment-photos/niles-zp30.jpg',
+    video: '/videos/04-finish-grinding.mp4',
+    fallback: '/equipment-photos/niles-zp30.jpg',
     alt: 'NILES ZP30 gear grinder at the Changsheng facility',
   },
   {
     step: '05',
     label: 'Final Inspection',
-    img: '/workshop/gear-inspection-setup.webp',
+    video: '/videos/05-final-inspection.mp4',
+    fallback: '/workshop/gear-inspection-setup.webp',
     alt: 'Gear inspection setup at the Changsheng facility',
   },
   {
     step: '06',
     label: 'Finished Product',
-    img: '/products/IMG_0130_jacking-shaft.webp',
+    video: '/videos/06-finished-product.mp4',
+    fallback: '/products/IMG_0130_jacking-shaft.webp',
     alt: 'Finished jacking gear shaft manufactured by Changsheng',
   },
 ];
@@ -291,7 +299,7 @@ const howSteps = [
 
       <div class="b1-process-gallery">
         <div class="b1-gallery-head">
-          <p class="b1-gallery-note">The steps show the manufacturing route from blank machining to the final inspected product.</p>
+          <p class="b1-gallery-note">The videos show the manufacturing route from blank machining to the final inspected product.</p>
           <div class="b1-gallery-controls">
             <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="Previous step">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
@@ -302,16 +310,18 @@ const howSteps = [
           </div>
         </div>
         <div class="b1-gallery-track" id="b1-gallery-track">
-          {processPhotos.map((p) => (
+          {processVideos.map((v) => (
             <figure class="b1-gallery-tile">
-              {p.img ? (
-                <img src={p.img} alt={p.alt} loading="lazy" width="1448" height="1086" />
+              {hasFile(v.video) ? (
+                <video src={v.video} controls playsinline preload="metadata" aria-label={`${v.label} video`}></video>
+              ) : v.fallback ? (
+                <img src={v.fallback} alt={v.alt} loading="lazy" width="1448" height="1086" />
               ) : (
-                <div class="b1-gallery-ph">Photo to be added</div>
+                <div class="b1-gallery-ph">Video to be added</div>
               )}
               <figcaption>
-                <span class="b1-gallery-step">{p.step}</span>
-                <span class="b1-gallery-label">{p.label}</span>
+                <span class="b1-gallery-step">{v.step}</span>
+                <span class="b1-gallery-label">{v.label}</span>
               </figcaption>
             </figure>
           ))}
@@ -556,6 +566,7 @@ const howSteps = [
   .b1-gallery-track::-webkit-scrollbar { display: none; }
   .b1-gallery-tile { margin: 0; flex: 0 0 300px; scroll-snap-align: start; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
   .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-gallery-tile video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #000; }
   .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
   .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
   .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
