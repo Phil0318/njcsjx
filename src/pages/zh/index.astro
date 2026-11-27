@@ -158,8 +158,8 @@ const howSteps = [
 
 <Base
   lang={lang}
-  title="定制工业齿轮与轴类 | 南京长升机械"
-  description="按图纸定制工业齿轮与轴类零件：机加工、齿轮加工、热处理、精密磨削与检验，工厂位于江苏南京。"
+  title="定制齿轮、轴类与热处理 | 南京长升机械"
+  description="按图纸定制齿轮、轴类与机加工零件，提供客户来料热处理服务，工厂位于江苏南京。"
 >
   <!-- 1. Hero -->
   <section class="b1-hero">
@@ -168,10 +168,10 @@ const howSteps = [
         <p class="b1-eyebrow">南京长升机械</p>
         <h1>从图纸到成品的一站式服务</h1>
         <p class="b1-hero-intro">
-          机加工、齿轮加工、热处理、精密磨削与检验一厂完成，交付符合图纸要求的成品齿轮与轴类。
+          机加工、齿轮加工、热处理、精密磨削与检验一厂完成，交付符合图纸要求的成品零件。
         </p>
         <p class="b1-hero-intro b1-hero-intro-2">
-          发送您的图纸，即可获得成品零件报价。
+          发送您的图纸获得成品报价——也承接客户来料的热处理。
         </p>
         <div class="b1-hero-actions">
           <a class="b1-btn b1-btn-primary" href="/zh/contact">请求报价</a>
@@ -203,8 +203,8 @@ const howSteps = [
   <section id="product-families" class="b1-section b1-section-gray">
     <div class="b1-container">
       <div class="b1-heading">
-        <h2>按规格制造的工业齿轮与轴类</h2>
-        <p>浏览为重型工业应用制造的代表性齿轮与轴类零件。</p>
+        <h2>按规格制造的工业零件</h2>
+        <p>重型工业应用的代表性零件——同时承接客户来料的热处理。</p>
       </div>
       <div class="b1-families">
         {families.map((f) => (
@@ -220,6 +220,9 @@ const howSteps = [
           </a>
         ))}
       </div>
+      <p class="b1-families-note">
+        <a href="/zh/equipment/heat-treatment">客户来料的热处理 →</a>
+      </p>
     </div>
   </section>
 
@@ -385,9 +388,10 @@ const howSteps = [
   <!-- 8. Final RFQ -->
   <section id="rfq" class="b1-rfq">
     <div class="b1-container b1-rfq-inner">
-      <h2>有齿轮或轴类图纸？</h2>
+      <h2>有图纸或来料加工需求？</h2>
       <p>
-        发送您的图纸、预计数量、材料与技术要求，我们将进行制造可行性评估并报价。
+        发送您的图纸、预计数量、材料与技术要求，我们将进行制造可行性评估并报价——
+        也承接客户来料的热处理。
       </p>
       <div class="b1-rfq-form">
         <ContactForm lang={lang} />
@@ -475,6 +479,9 @@ const howSteps = [
   .b1-family-body h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #0b1a33; }
   .b1-family-body p { margin-top: 8px; font-size: 13.5px; line-height: 1.65; color: #64748b; }
   .b1-family-link { display: inline-block; margin-top: 12px; font-size: 13.5px; font-weight: 600; color: #215694; }
+  .b1-families-note { margin-top: 22px; font-size: 14.5px; }
+  .b1-families-note a { font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-families-note a:hover { text-decoration: underline; }
   @media (max-width: 1100px) {
     .b1-families { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   }
