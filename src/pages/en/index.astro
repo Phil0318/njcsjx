@@ -34,12 +34,40 @@ const families = [
   },
 ];
 
+const facts = [
+  ['2006', 'In business since'],
+  ['ISO 9001:2015', 'Quality management certified'],
+  ['ABS HT-0579098', 'Marine heat-treatment approval'],
+  ['M50 × Ø3000', 'Maximum gear grinding capacity'],
+];
+
 const steps = [
   { n: '01', label: 'Blank Machining', hint: 'Turning & milling' },
   { n: '02', label: 'Gear Cutting', hint: 'Hobbing & shaping' },
   { n: '03', label: 'Heat Treatment', hint: 'Carburizing & Q&T' },
   { n: '04', label: 'Finish Grinding', hint: 'Gear & bore grinding' },
   { n: '05', label: 'Final Inspection', hint: 'Measurement & NDT' },
+];
+
+const equipment = [
+  {
+    img: '/equipment-photos/niles-ze1200.jpg',
+    alt: 'NILES ZE1200 gear grinder at the Changsheng workshop',
+    name: 'NILES ZE1200',
+    spec: 'Gear grinding',
+  },
+  {
+    img: '/equipment-photos/puma-480l.jpg',
+    alt: 'DOOSAN PUMA 480L CNC lathe at the Changsheng workshop',
+    name: 'DOOSAN PUMA 480L',
+    spec: 'CNC turning',
+  },
+  {
+    img: '/equipment-photos/hcmc-1370.jpg',
+    alt: 'HCMC-1370 machining center at the Changsheng workshop',
+    name: 'HCMC-1370',
+    spec: 'Machining center',
+  },
 ];
 
 const processPhotos = [
@@ -93,6 +121,30 @@ const industries = [
     href: '/en/products/planetary-compound',
   },
 ];
+
+const certs = [
+  { img: '/certificates/iso-9001-1.jpg', label: 'ISO 9001:2015', alt: 'ISO 9001:2015 certificate' },
+  { img: '/certificates/abs-ht-0579098-1.jpg', label: 'ABS heat treatment', alt: 'ABS heat treatment approval' },
+  { img: '/certificates/ndt-cert-1.jpg', label: 'NDT inspection', alt: 'NDT inspection certificate' },
+];
+
+const howSteps = [
+  {
+    n: '01',
+    title: 'Send your drawing',
+    body: 'Attach PDF, DWG, STEP, IGS, or image drawings on the contact form, with quantity and material.',
+  },
+  {
+    n: '02',
+    title: 'Feasibility review',
+    body: 'Our engineers check the drawing against machining, heat-treatment, and grinding capabilities.',
+  },
+  {
+    n: '03',
+    title: 'Quotation',
+    body: 'You receive a finished-component quotation, including lead time.',
+  },
+];
 ---
 
 <Base
@@ -105,29 +157,33 @@ const industries = [
     <div class="b1-hero-grid">
       <div class="b1-hero-copy">
         <p class="b1-eyebrow">NANJING CHANGSHENG MACHINERY</p>
-        <h1>Custom gears and shafts built to your drawing</h1>
+        <h1>Custom gears and shafts, from drawing to finished part</h1>
         <p class="b1-hero-intro">
-          Changsheng manufactures industrial gears and shafts at its Nanjing facility, coordinating machining,
-          gear cutting, heat treatment, precision grinding, and inspection.
+          Machining, gear cutting, heat treatment, grinding, and inspection in one Nanjing facility.
         </p>
         <p class="b1-hero-intro b1-hero-intro-2">
-          Send your drawing and quantity to request a finished-component quotation.
+          Send your drawing for a finished-component quote.
         </p>
         <div class="b1-hero-actions">
           <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
-          <a class="b1-btn b1-btn-ghost" href="#product-families">Explore Gears &amp; Shafts</a>
+          <a class="b1-btn b1-btn-ghost" href="#product-families">See Our Work</a>
         </div>
       </div>
       <figure class="b1-hero-fig">
         <img
-          src="/equipment-photos/niles-ze1200.jpg"
-          alt="NILES ZE1200 gear grinding machine at the Changsheng workshop"
-          width="1200"
-          height="900"
+          src="/products/gear-shaft-batch.webp"
+          alt="Gear shafts manufactured by Changsheng"
+          width="1448"
+          height="1086"
           fetchpriority="high"
         />
-        <figcaption>Precision gear grinding — NILES ZE1200.</figcaption>
+        <figcaption>Gear shafts at the Changsheng workshop.</figcaption>
       </figure>
+    </div>
+    <div class="b1-facts">
+      {facts.map(([value, label]) => (
+        <div class="b1-fact"><strong>{value}</strong><span>{label}</span></div>
+      ))}
     </div>
   </section>
 
@@ -177,29 +233,24 @@ const industries = [
       <p class="b1-process-note">
         <em>Typical process route shown. Actual manufacturing steps depend on component drawings and specifications.</em>
       </p>
-      <div class="b1-manu-grid">
-        <figure class="b1-manu-fig">
-          <img
-            src="/workshop/machine-shop-floor.webp"
-            alt="Machine shop floor at the Changsheng Nanjing facility"
-            loading="lazy"
-            width="1448"
-            height="1086"
-          />
-          <figcaption>Machine shop at the Changsheng Nanjing facility.</figcaption>
-        </figure>
-        <div class="b1-manu-side">
-          <p>
-            A single facility covers the full route: gear grinding to module 50 × Ø3000&nbsp;mm, CNC turning to
-            Ø2500&nbsp;mm, and heat treatment of single parts from 0.1&nbsp;kg to 30&nbsp;t.
-          </p>
-          <ul class="b1-manu-links">
-            <li><a href="/en/equipment/machining">Machining &amp; gear cutting →</a></li>
-            <li><a href="/en/equipment/heat-treatment">Heat treatment →</a></li>
-            <li><a href="/en/equipment/inspection">Inspection &amp; metrology →</a></li>
-          </ul>
-        </div>
+
+      <div class="b1-equip-head">
+        <h3>The machines behind the process</h3>
+        <a href="/en/equipment/machining">Full equipment list →</a>
       </div>
+      <div class="b1-equip-strip">
+        {equipment.map((e) => (
+          <a href="/en/equipment/machining" class="b1-equip-card">
+            <img src={e.img} alt={e.alt} loading="lazy" width="600" height="450" />
+            <span class="b1-equip-name">{e.name}</span>
+            <span class="b1-equip-spec">{e.spec}</span>
+          </a>
+        ))}
+      </div>
+      <p class="b1-capacity">
+        Gear grinding to module 50 × Ø3000&nbsp;mm · CNC turning to Ø2500&nbsp;mm · heat treatment of single
+        parts from 0.1&nbsp;kg to 30&nbsp;t.
+      </p>
     </div>
   </section>
 
@@ -207,8 +258,8 @@ const industries = [
   <section id="featured" class="b1-section b1-section-gray">
     <div class="b1-container">
       <div class="b1-heading">
-        <h2>From Blank Machining to Finished Product</h2>
-        <p>Follow one component — a jacking gear shaft — through the manufacturing steps Changsheng coordinates in a single facility.</p>
+        <h2>The Route, End to End</h2>
+        <p>One component — a jacking gear shaft — through the manufacturing steps Changsheng coordinates in a single facility.</p>
       </div>
       <div class="b1-featured">
         <div class="b1-featured-info">
@@ -275,9 +326,6 @@ const industries = [
       <div class="b1-apps">
         {industries.map((i) => (
           <div class="b1-app">
-            <div class="b1-app-img">
-              <div class="b1-app-ph" aria-hidden="true">Photo to be added</div>
-            </div>
             <div class="b1-app-body">
               <h3>{i.label}</h3>
               <p>{i.desc}</p>
@@ -321,21 +369,38 @@ const industries = [
             <a class="b1-btn b1-btn-ghost" href="/en/equipment/inspection">Inspection Equipment →</a>
           </div>
         </div>
-        <figure class="b1-quality-fig">
-          <img
-            src="/workshop/gear-inspection-setup.webp"
-            alt="Gear inspection setup at the Changsheng facility"
-            loading="lazy"
-            width="1448"
-            height="1086"
-          />
-          <figcaption>Gear inspection setup at the Changsheng facility.</figcaption>
-        </figure>
+        <div class="b1-cert-cards">
+          {certs.map((c) => (
+            <a class="b1-cert-card" href="/en/certificates">
+              <img src={c.img} alt={c.alt} loading="lazy" width="400" height="284" />
+              <span>{c.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. Final RFQ -->
+  <!-- 7. How it works -->
+  <section id="how-it-works" class="b1-section">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>How to Get a Quote</h2>
+        <p>Three steps from drawing to quotation.</p>
+      </div>
+      <div class="b1-how">
+        {howSteps.map((s) => (
+          <div class="b1-how-step">
+            <span class="b1-how-num">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Final RFQ -->
   <section id="rfq" class="b1-rfq">
     <div class="b1-container b1-rfq-inner">
       <h2>Have a Gear or Shaft Drawing?</h2>
@@ -344,7 +409,12 @@ const industries = [
         feasibility review and quotation.
       </p>
       <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
-      <p class="b1-rfq-note">PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).</p>
+      <p class="b1-rfq-note">
+        <a href="mailto:sales@njcsjx.com">sales@njcsjx.com</a> · We reply within 1–2 business days.
+      </p>
+      <p class="b1-rfq-note b1-rfq-note-2">
+        PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).
+      </p>
     </div>
   </section>
 
@@ -391,18 +461,27 @@ const industries = [
 
   /* Hero */
   .b1-hero { background: #fff; border-bottom: 1px solid #e8edf4; }
-  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 64px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
+  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 48px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
   .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #215694; text-transform: uppercase; }
-  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4.2vw, 54px); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; color: #0b1a33; text-wrap: balance; }
+  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4vw, 52px); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; color: #0b1a33; text-wrap: balance; }
   .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.7; color: #475569; max-width: 540px; }
   .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
   .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
-  .b1-hero-fig { margin: 0; background: #e9edf0; border-radius: 6px; overflow: hidden; }
-  .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+  .b1-hero-fig { margin: 0; background: #eef2f7; border-radius: 6px; overflow: hidden; }
+  .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
   @media (max-width: 900px) {
     .b1-hero-grid { grid-template-columns: 1fr; padding-top: 48px; gap: 32px; }
     .b1-hero-fig { order: 2; }
+  }
+
+  /* Facts strip */
+  .b1-facts { max-width: 1280px; margin-inline: auto; padding: 0 24px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .b1-fact { border-top: 1px solid #e8edf4; padding-top: 16px; }
+  .b1-fact strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
+  .b1-fact span { display: block; margin-top: 4px; font-size: 13px; color: #64748b; }
+  @media (max-width: 767px) {
+    .b1-facts { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
   }
 
   /* Product families */
@@ -434,17 +513,20 @@ const industries = [
     .b1-process-hint { margin-top: 2px; }
   }
 
-  /* Manufacturing photo + links */
-  .b1-manu-grid { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 32px; align-items: start; }
-  .b1-manu-fig { margin: 0; }
-  .b1-manu-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
-  .b1-manu-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
-  .b1-manu-side p { font-size: 16px; line-height: 1.75; color: #334155; }
-  .b1-manu-links { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
-  .b1-manu-links a { font-size: 15px; font-weight: 600; color: #215694; text-decoration: none; }
-  .b1-manu-links a:hover { text-decoration: underline; }
-  @media (max-width: 900px) {
-    .b1-manu-grid { grid-template-columns: 1fr; }
+  /* Equipment strip */
+  .b1-equip-head { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .b1-equip-head h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-head a { font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-equip-head a:hover { text-decoration: underline; }
+  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b1-equip-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
+  .b1-equip-card:hover { border-color: #c0d4ec; }
+  .b1-equip-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #f2f5f9; }
+  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 13px; color: #64748b; }
+  .b1-capacity { margin-top: 26px; font-size: 15px; color: #334155; }
+  @media (max-width: 700px) {
+    .b1-equip-strip { grid-template-columns: 1fr; }
   }
 
   /* Featured component */
@@ -479,16 +561,11 @@ const industries = [
 
   /* Applications */
   .b1-apps { margin-top: 40px; display: grid; gap: 16px; }
-  .b1-app { display: grid; grid-template-columns: 260px 1fr; gap: 26px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 18px; align-items: center; }
-  .b1-app-img { margin: 0; }
-  .b1-app-ph { aspect-ratio: 4 / 3; background: #eef2f7; border: 1px dashed #c0d4ec; border-radius: 4px; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
+  .b1-app { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 22px 26px; }
   .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: #64748b; max-width: 760px; }
   .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-app-body a:hover { text-decoration: underline; }
-  @media (max-width: 700px) {
-    .b1-app { grid-template-columns: 1fr; gap: 16px; }
-  }
 
   /* Quality */
   .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
@@ -498,11 +575,26 @@ const industries = [
   .b1-quality-list li::after { content: ''; position: absolute; left: 4.5px; top: 11.5px; width: 7px; height: 7px; border-radius: 50%; background: #215694; }
   .b1-quality-list strong { color: #0b1a33; }
   .b1-quality-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
-  .b1-quality-fig { margin: 0; }
-  .b1-quality-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
-  .b1-quality-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  .b1-cert-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .b1-cert-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
+  .b1-cert-card:hover { border-color: #c0d4ec; }
+  .b1-cert-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-cert-card span { display: block; padding: 10px 12px; font-size: 13px; font-weight: 600; color: #0b1a33; }
   @media (max-width: 900px) {
     .b1-quality-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 560px) {
+    .b1-cert-cards { grid-template-columns: 1fr; }
+  }
+
+  /* How it works */
+  .b1-how { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b1-how-step { position: relative; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 26px 24px; }
+  .b1-how-num { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-how-step h3 { margin-top: 10px; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
+  .b1-how-step p { margin-top: 10px; font-size: 14.5px; line-height: 1.65; color: #64748b; }
+  @media (max-width: 700px) {
+    .b1-how { grid-template-columns: 1fr; }
   }
 
   /* Final RFQ */
@@ -512,7 +604,10 @@ const industries = [
   .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.75; color: #c4cedb; }
   .b1-rfq .b1-btn-primary { margin-top: 30px; background: #ffffff; color: #0b1a33; }
   .b1-rfq .b1-btn-primary:hover { background: #e2ebf7; }
-  .b1-rfq-note { margin-top: 22px !important; font-size: 13.5px !important; color: #8fa3bd !important; }
+  .b1-rfq-note { margin-top: 22px !important; font-size: 14.5px !important; color: #aebfd6 !important; }
+  .b1-rfq-note a { color: #aebfd6; }
+  .b1-rfq-note a:hover { color: #fff; }
+  .b1-rfq-note-2 { margin-top: 10px !important; font-size: 13px !important; color: #8fa3bd !important; }
   @media (max-width: 767px) {
     .b1-rfq { padding-block: 56px; }
   }
