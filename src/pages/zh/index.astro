@@ -114,42 +114,30 @@ const equipment = [
   },
 ];
 
-const processVideos = [
+const capacityVideos = [
   {
-    step: '01',
-    label: '毛坯机加工',
-    video: '/videos/01-blank-machining.mp4',
-    fallback: '/workshop/machine-shop-floor.webp',
-    alt: '长升工厂机加工车间',
+    n: '01',
+    label: '全流程',
+    hint: '从毛坯机加工到成品零件',
+    video: '/videos/01-end-to-end.mp4',
   },
   {
-    step: '02',
-    label: '齿轮加工',
-    video: '/videos/02-gear-cutting.mp4',
-    fallback: '/workshop/machining-line.webp',
-    alt: '长升工厂加工线',
-  },
-  { step: '03', label: '热处理', video: '/videos/03-heat-treatment.mp4', fallback: null, alt: '' },
-  {
-    step: '04',
-    label: '精磨',
-    video: '/videos/04-finish-grinding.mp4',
-    fallback: '/equipment-photos/niles-zp30.jpg',
-    alt: '长升工厂 NILES ZP30 磨齿机',
+    n: '02',
+    label: '大型零件机加工',
+    hint: '车削、铣削与齿轮加工',
+    video: '/videos/02-large-part-machining.mp4',
   },
   {
-    step: '05',
-    label: '成品检验',
-    video: '/videos/05-final-inspection.mp4',
-    fallback: '/workshop/gear-inspection-setup.webp',
-    alt: '长升工厂齿轮检测工位',
+    n: '03',
+    label: '热处理',
+    hint: '渗碳、调质与感应淬火',
+    video: '/videos/03-heat-treatment.mp4',
   },
   {
-    step: '06',
-    label: '成品零件',
-    video: '/videos/06-finished-product.mp4',
-    fallback: '/products/IMG_0130_jacking-shaft.webp',
-    alt: '南京长升制造的成品爬升齿轮轴',
+    n: '04',
+    label: '精密磨削',
+    hint: '磨齿与磨孔',
+    video: '/videos/04-precision-grinding.mp4',
   },
 ];
 
@@ -295,42 +283,27 @@ const certs = [
     </div>
   </section>
 
-  <!-- 4. Featured Component -->
-  <section id="featured" class="b1-section b1-section-gray">
+  <!-- 4. Our Capacity -->
+  <section id="capacity" class="b1-section b1-section-gray">
     <div class="b1-container">
       <div class="b1-heading">
-        <h2>全流程，从毛坯到成品</h2>
+        <h2>生产能力</h2>
       </div>
-
-      <div class="b1-process-gallery">
-        <div class="b1-gallery-head">
-          <p class="b1-gallery-note">以下视频展示从毛坯机加工到成品检验的制造路线。</p>
-          <div class="b1-gallery-controls">
-            <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="上一步">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
-            </button>
-            <button type="button" class="b1-gallery-btn" id="b1-gallery-next" aria-label="下一步">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
-            </button>
-          </div>
-        </div>
-        <div class="b1-gallery-track" id="b1-gallery-track">
-          {processVideos.map((v) => (
-            <figure class="b1-gallery-tile">
-              {hasFile(v.video) ? (
-                <video src={v.video} controls playsinline preload="metadata" aria-label={`${v.label}视频`}></video>
-              ) : v.fallback ? (
-                <img src={v.fallback} alt={v.alt} loading="lazy" width="1448" height="1086" />
-              ) : (
-                <div class="b1-gallery-ph">视频待补充</div>
-              )}
-              <figcaption>
-                <span class="b1-gallery-step">{v.step}</span>
-                <span class="b1-gallery-label">{v.label}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      <div class="b1-videos">
+        {capacityVideos.map((v) => (
+          <figure class="b1-video-tile">
+            {hasFile(v.video) ? (
+              <video src={v.video} controls playsinline preload="metadata" aria-label={`${v.label}视频`}></video>
+            ) : (
+              <div class="b1-video-ph">视频待补充</div>
+            )}
+            <figcaption>
+              <span class="b1-video-num">{v.n}</span>
+              <span class="b1-video-label">{v.label}</span>
+              <span class="b1-video-hint">{v.hint}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
@@ -398,27 +371,6 @@ const certs = [
 
   <!-- 7. Contact -->
   <CTA lang={lang} />
-
-  <script>
-    const track = document.getElementById('b1-gallery-track');
-    const prev = document.getElementById('b1-gallery-prev');
-    const next = document.getElementById('b1-gallery-next');
-    if (track && prev && next) {
-      const step = () => {
-        const tile = track.querySelector('.b1-gallery-tile');
-        return tile ? tile.offsetWidth + 14 : track.clientWidth * 0.8;
-      };
-      const update = () => {
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-      };
-      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-      track.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    }
-  </script>
 </Base>
 
 <style>
@@ -523,25 +475,17 @@ const certs = [
     .b1-equip-strip { grid-template-columns: 1fr; }
   }
 
-  /* Featured component */
-  .b1-process-gallery { margin-top: 48px; }
-  .b1-gallery-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-  .b1-gallery-note { font-size: 13px; color: #64748b; }
-  .b1-gallery-controls { display: flex; gap: 8px; }
-  .b1-gallery-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-  .b1-gallery-btn:hover { background: #eef4fb; border-color: #215694; }
-  .b1-gallery-btn:disabled { opacity: .4; cursor: default; }
-  .b1-gallery-track { margin-top: 16px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 2px; }
-  .b1-gallery-track::-webkit-scrollbar { display: none; }
-  .b1-gallery-tile { margin: 0; flex: 0 0 300px; scroll-snap-align: start; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
-  .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
-  .b1-gallery-tile video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #000; }
-  .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
-  .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
-  .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-gallery-label { font-size: 13.5px; font-weight: 600; color: #0b1a33; }
-  @media (max-width: 560px) {
-    .b1-gallery-tile { flex-basis: 76%; }
+  /* Capacity videos */
+  .b1-videos { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .b1-video-tile { margin: 0; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
+  .b1-video-tile video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+  .b1-video-ph { aspect-ratio: 16 / 9; display: grid; place-items: center; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; color: #94a3b8; font-size: 14px; }
+  .b1-video-tile figcaption { padding: 14px 16px 16px; }
+  .b1-video-num { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-video-label { display: block; margin-top: 6px; font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #0b1a33; }
+  .b1-video-hint { display: block; margin-top: 4px; font-size: 13px; color: #64748b; }
+  @media (max-width: 640px) {
+    .b1-videos { grid-template-columns: 1fr; }
   }
 
   /* Applications */
