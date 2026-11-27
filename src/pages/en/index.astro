@@ -1,5 +1,6 @@
 ﻿---
 import Base from '../../layouts/Base.astro';
+import ContactForm from '../../components/ContactForm.astro';
 
 const lang = 'en' as const;
 
@@ -168,6 +169,9 @@ const howSteps = [
           <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
           <a class="b1-btn b1-btn-ghost" href="#product-families">See Our Work</a>
         </div>
+        <p class="b1-hero-envelope">
+          <span>Part envelope</span> Gears to module 50 × Ø3000&nbsp;mm · Shafts to Ø2500&nbsp;mm · Parts 0.1&nbsp;kg–30&nbsp;t
+        </p>
       </div>
       <figure class="b1-hero-fig">
         <img
@@ -408,12 +412,11 @@ const howSteps = [
         Send us your drawing, estimated quantity, material, and technical requirements for a manufacturing
         feasibility review and quotation.
       </p>
-      <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
+      <div class="b1-rfq-form">
+        <ContactForm lang={lang} />
+      </div>
       <p class="b1-rfq-note">
         <a href="mailto:sales@njcsjx.com">sales@njcsjx.com</a> · We reply within 1–2 business days.
-      </p>
-      <p class="b1-rfq-note b1-rfq-note-2">
-        PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).
       </p>
     </div>
   </section>
@@ -467,6 +470,8 @@ const howSteps = [
   .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.7; color: #475569; max-width: 540px; }
   .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
   .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
+  .b1-hero-envelope { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e8edf4; font-size: 14px; color: #475569; max-width: 540px; }
+  .b1-hero-envelope span { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #215694; }
   .b1-hero-fig { margin: 0; background: #eef2f7; border-radius: 6px; overflow: hidden; }
   .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
@@ -599,16 +604,15 @@ const howSteps = [
 
   /* Final RFQ */
   .b1-rfq { background: #0b1a33; color: #fff; padding-block: 88px; }
-  .b1-rfq-inner { text-align: center; max-width: 760px; }
+  .b1-rfq-inner { text-align: center; max-width: 860px; }
   .b1-rfq h2 { font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
   .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.75; color: #c4cedb; }
-  .b1-rfq .b1-btn-primary { margin-top: 30px; background: #ffffff; color: #0b1a33; }
-  .b1-rfq .b1-btn-primary:hover { background: #e2ebf7; }
-  .b1-rfq-note { margin-top: 22px !important; font-size: 14.5px !important; color: #aebfd6 !important; }
+  .b1-rfq-form { margin-top: 36px; background: #fff; border-radius: 10px; padding: 28px; text-align: left; }
+  .b1-rfq-note { margin-top: 26px !important; font-size: 14.5px !important; color: #aebfd6 !important; }
   .b1-rfq-note a { color: #aebfd6; }
   .b1-rfq-note a:hover { color: #fff; }
-  .b1-rfq-note-2 { margin-top: 10px !important; font-size: 13px !important; color: #8fa3bd !important; }
   @media (max-width: 767px) {
     .b1-rfq { padding-block: 56px; }
+    .b1-rfq-form { padding: 18px; }
   }
 </style>
