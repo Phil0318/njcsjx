@@ -45,12 +45,52 @@ const facts = [
   ['M50 × Ø3000', '最大磨齿能力'],
 ];
 
-const steps = [
-  { n: '01', label: '毛坯机加工', hint: '车削 · 铣削' },
-  { n: '02', label: '齿轮加工', hint: '滚齿 · 插齿' },
-  { n: '03', label: '热处理', hint: '渗碳 · 调质' },
-  { n: '04', label: '精磨', hint: '磨齿 · 磨孔' },
-  { n: '05', label: '成品检验', hint: '测量 · 探伤' },
+const processSteps = [
+  {
+    n: '01',
+    label: '毛坯机加工',
+    hint: '车削 · 铣削',
+    capability: '数控车削至 Ø2500 mm · 加工中心',
+    img: '/equipment-photos/vl-160c.jpg',
+    alt: '长升工厂数控立车',
+    href: '/zh/equipment/machining',
+  },
+  {
+    n: '02',
+    label: '齿轮加工',
+    hint: '滚齿 · 插齿',
+    capability: '滚齿与插齿，可加工内外齿',
+    img: '/equipment-photos/y31125.jpg',
+    alt: '长升工厂滚齿机',
+    href: '/zh/equipment/machining',
+  },
+  {
+    n: '03',
+    label: '热处理',
+    hint: '渗碳 · 调质',
+    capability: '井式炉至 Φ4000 × 2500 mm · 单件 0.1 kg–30 t',
+    img: null,
+    alt: '',
+    href: '/zh/equipment/heat-treatment',
+  },
+  {
+    n: '04',
+    label: '精磨',
+    hint: '磨齿 · 磨孔',
+    capability: '磨齿最大模数 50 × Ø3000 mm · 6 台 NILES 磨齿机',
+    img: '/equipment-photos/niles-ze400s.jpg',
+    alt: '长升工厂 NILES ZE400S 磨齿机',
+    href: '/zh/equipment/machining',
+  },
+  {
+    n: '05',
+    label: '成品检验',
+    hint: '测量 · 探伤',
+    capability: 'Gleason 1000GMS · 三台三坐标 · 超声/磁粉探伤',
+    img: '/workshop/inspection-room.webp',
+    alt: '长升工厂检测室',
+    href: '/zh/equipment/inspection',
+  },
 ];
 
 const equipment = [
@@ -234,11 +274,22 @@ const howSteps = [
         <p>长升统筹交付成品齿轮与轴类所需的关键制造工序。</p>
       </div>
       <ol class="b1-process">
-        {steps.map((s) => (
+        {processSteps.map((s) => (
           <li>
-            <span class="b1-process-num">{s.n}</span>
-            <span class="b1-process-label">{s.label}</span>
-            <span class="b1-process-hint">{s.hint}</span>
+            <a class="b1-process-card" href={s.href}>
+              <span class="b1-process-media">
+                {s.img ? (
+                  <img src={s.img} alt={s.alt} loading="lazy" width="600" height="450" />
+                ) : (
+                  <span class="b1-process-ph">照片待补充</span>
+                )}
+              </span>
+              <span class="b1-process-num">{s.n}</span>
+              <span class="b1-process-label">{s.label}</span>
+              <span class="b1-process-hint">{s.hint}</span>
+              <span class="b1-process-cap">{s.capability}</span>
+              <span class="b1-process-cta">了解更多 →</span>
+            </a>
           </li>
         ))}
       </ol>
@@ -248,7 +299,7 @@ const howSteps = [
 
       <div class="b1-equip-head">
         <h3>支撑全流程的设备</h3>
-        <a href="/zh/equipment/machining">查看完整设备清单 →</a>
+        <a href="/zh/equipment">设备总览 →</a>
       </div>
       <div class="b1-equip-strip">
         {equipment.map((e) => (
@@ -490,19 +541,26 @@ const howSteps = [
   }
 
   /* Process */
-  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
-  .b1-process li { position: relative; padding: 22px 18px 20px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; text-align: center; }
-  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -14px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; }
-  .b1-process-num { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-process-label { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #0b1a33; }
-  .b1-process-hint { display: block; margin-top: 6px; font-size: 13px; color: #64748b; }
+  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .b1-process li { position: relative; }
+  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 42%; right: -15px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; z-index: 1; }
+  .b1-process-card { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
+  .b1-process-card:hover { border-color: #8fb2dc; box-shadow: 0 10px 24px rgba(11, 26, 51, .08); }
+  .b1-process-media { display: block; }
+  .b1-process-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-process-ph { display: grid; place-items: center; aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; color: #94a3b8; font-size: 13px; }
+  .b1-process-num { display: block; padding: 14px 16px 0; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-process-label { display: block; padding: 6px 16px 0; font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #0b1a33; }
+  .b1-process-hint { display: block; padding: 2px 16px 0; font-size: 12.5px; color: #64748b; }
+  .b1-process-cap { display: block; padding: 8px 16px 0; font-size: 13px; line-height: 1.6; color: #334155; }
+  .b1-process-cta { display: block; margin-top: auto; padding: 12px 16px 14px; font-size: 13px; font-weight: 600; color: #215694; }
   .b1-process-note { margin-top: 22px; font-size: 14px; color: #64748b; }
-  @media (max-width: 900px) {
-    .b1-process { grid-template-columns: 1fr; gap: 10px; }
-    .b1-process li { text-align: left; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 12px; padding: 16px 18px; }
+  @media (max-width: 1100px) {
+    .b1-process { grid-template-columns: repeat(3, 1fr); }
     .b1-process li:not(:last-child)::after { content: none; }
-    .b1-process-num { grid-row: 1 / 3; align-self: center; }
-    .b1-process-hint { margin-top: 2px; }
+  }
+  @media (max-width: 640px) {
+    .b1-process { grid-template-columns: 1fr; }
   }
 
   /* Equipment strip */

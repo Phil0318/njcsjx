@@ -45,12 +45,52 @@ const facts = [
   ['M50 × Ø3000', 'Maximum gear grinding capacity'],
 ];
 
-const steps = [
-  { n: '01', label: 'Blank Machining', hint: 'Turning & milling' },
-  { n: '02', label: 'Gear Cutting', hint: 'Hobbing & shaping' },
-  { n: '03', label: 'Heat Treatment', hint: 'Carburizing & Q&T' },
-  { n: '04', label: 'Finish Grinding', hint: 'Gear & bore grinding' },
-  { n: '05', label: 'Final Inspection', hint: 'Measurement & NDT' },
+const processSteps = [
+  {
+    n: '01',
+    label: 'Blank Machining',
+    hint: 'Turning & milling',
+    capability: 'CNC turning to Ø2500 mm · machining centers',
+    img: '/equipment-photos/vl-160c.jpg',
+    alt: 'CNC vertical lathe at the Changsheng workshop',
+    href: '/en/equipment/machining',
+  },
+  {
+    n: '02',
+    label: 'Gear Cutting',
+    hint: 'Hobbing & shaping',
+    capability: 'Hobbing and shaping for external and internal gears',
+    img: '/equipment-photos/y31125.jpg',
+    alt: 'Gear hobbing machine at the Changsheng workshop',
+    href: '/en/equipment/machining',
+  },
+  {
+    n: '03',
+    label: 'Heat Treatment',
+    hint: 'Carburizing & Q&T',
+    capability: 'Pit furnaces to Φ4000 × 2500 mm · parts 0.1 kg–30 t',
+    img: null,
+    alt: '',
+    href: '/en/equipment/heat-treatment',
+  },
+  {
+    n: '04',
+    label: 'Finish Grinding',
+    hint: 'Gear & bore grinding',
+    capability: 'Gear grinding to module 50 × Ø3000 mm · 6 NILES grinders',
+    img: '/equipment-photos/niles-ze400s.jpg',
+    alt: 'NILES ZE400S gear grinder at the Changsheng workshop',
+    href: '/en/equipment/machining',
+  },
+  {
+    n: '05',
+    label: 'Final Inspection',
+    hint: 'Measurement & NDT',
+    capability: 'Gleason 1000GMS · three CMMs · UT/MT NDT',
+    img: '/workshop/inspection-room.webp',
+    alt: 'Inspection room at the Changsheng facility',
+    href: '/en/equipment/inspection',
+  },
 ];
 
 const equipment = [
@@ -237,11 +277,22 @@ const howSteps = [
         </p>
       </div>
       <ol class="b1-process">
-        {steps.map((s) => (
+        {processSteps.map((s) => (
           <li>
-            <span class="b1-process-num">{s.n}</span>
-            <span class="b1-process-label">{s.label}</span>
-            <span class="b1-process-hint">{s.hint}</span>
+            <a class="b1-process-card" href={s.href}>
+              <span class="b1-process-media">
+                {s.img ? (
+                  <img src={s.img} alt={s.alt} loading="lazy" width="600" height="450" />
+                ) : (
+                  <span class="b1-process-ph">Photo to be added</span>
+                )}
+              </span>
+              <span class="b1-process-num">{s.n}</span>
+              <span class="b1-process-label">{s.label}</span>
+              <span class="b1-process-hint">{s.hint}</span>
+              <span class="b1-process-cap">{s.capability}</span>
+              <span class="b1-process-cta">Learn more →</span>
+            </a>
           </li>
         ))}
       </ol>
@@ -251,7 +302,7 @@ const howSteps = [
 
       <div class="b1-equip-head">
         <h3>The machines behind the process</h3>
-        <a href="/en/equipment/machining">Full equipment list →</a>
+        <a href="/en/equipment">Full equipment overview →</a>
       </div>
       <div class="b1-equip-strip">
         {equipment.map((e) => (
@@ -498,19 +549,26 @@ const howSteps = [
   }
 
   /* Process */
-  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
-  .b1-process li { position: relative; padding: 22px 18px 20px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; text-align: center; }
-  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -14px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; }
-  .b1-process-num { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-process-label { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #0b1a33; }
-  .b1-process-hint { display: block; margin-top: 6px; font-size: 13px; color: #64748b; }
+  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .b1-process li { position: relative; }
+  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 42%; right: -15px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; z-index: 1; }
+  .b1-process-card { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
+  .b1-process-card:hover { border-color: #8fb2dc; box-shadow: 0 10px 24px rgba(11, 26, 51, .08); }
+  .b1-process-media { display: block; }
+  .b1-process-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-process-ph { display: grid; place-items: center; aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; color: #94a3b8; font-size: 13px; }
+  .b1-process-num { display: block; padding: 14px 16px 0; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-process-label { display: block; padding: 6px 16px 0; font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #0b1a33; }
+  .b1-process-hint { display: block; padding: 2px 16px 0; font-size: 12.5px; color: #64748b; }
+  .b1-process-cap { display: block; padding: 8px 16px 0; font-size: 13px; line-height: 1.55; color: #334155; }
+  .b1-process-cta { display: block; margin-top: auto; padding: 12px 16px 14px; font-size: 13px; font-weight: 600; color: #215694; }
   .b1-process-note { margin-top: 22px; font-size: 14px; color: #64748b; }
-  @media (max-width: 900px) {
-    .b1-process { grid-template-columns: 1fr; gap: 10px; }
-    .b1-process li { text-align: left; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 12px; padding: 16px 18px; }
+  @media (max-width: 1100px) {
+    .b1-process { grid-template-columns: repeat(3, 1fr); }
     .b1-process li:not(:last-child)::after { content: none; }
-    .b1-process-num { grid-row: 1 / 3; align-self: center; }
-    .b1-process-hint { margin-top: 2px; }
+  }
+  @media (max-width: 640px) {
+    .b1-process { grid-template-columns: 1fr; }
   }
 
   /* Equipment strip */
