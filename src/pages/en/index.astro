@@ -42,6 +42,34 @@ const steps = [
   { n: '05', label: 'Final Inspection', hint: 'Measurement & NDT' },
 ];
 
+const processPhotos = [
+  {
+    step: '01',
+    label: 'Blank Machining',
+    img: '/workshop/machine-shop-floor.webp',
+    alt: 'Machine shop floor at the Changsheng facility',
+  },
+  {
+    step: '02',
+    label: 'Gear Cutting',
+    img: '/workshop/machining-line.webp',
+    alt: 'Machining line at the Changsheng facility',
+  },
+  { step: '03', label: 'Heat Treatment', img: null, alt: '' },
+  {
+    step: '04',
+    label: 'Finish Grinding',
+    img: '/equipment-photos/niles-zp30.jpg',
+    alt: 'NILES ZP30 gear grinder at the Changsheng facility',
+  },
+  {
+    step: '05',
+    label: 'Final Inspection',
+    img: '/workshop/gear-inspection-setup.webp',
+    alt: 'Gear inspection setup at the Changsheng facility',
+  },
+];
+
 const industries = [
   {
     label: 'Offshore Drilling',
@@ -208,6 +236,25 @@ const industries = [
           </div>
         </div>
       </div>
+
+      <div class="b1-process-gallery">
+        <p class="b1-gallery-note">Representative process photographs from the Changsheng workshop.</p>
+        <div class="b1-gallery-grid">
+          {processPhotos.map((p) => (
+            <figure class="b1-gallery-tile">
+              {p.img ? (
+                <img src={p.img} alt={p.alt} loading="lazy" width="1448" height="1086" />
+              ) : (
+                <div class="b1-gallery-ph">Photo to be added</div>
+              )}
+              <figcaption>
+                <span class="b1-gallery-step">{p.step}</span>
+                <span class="b1-gallery-label">{p.label}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -221,6 +268,9 @@ const industries = [
       <div class="b1-apps">
         {industries.map((i) => (
           <div class="b1-app">
+            <div class="b1-app-img">
+              <div class="b1-app-ph" aria-hidden="true">Photo to be added</div>
+            </div>
             <div class="b1-app-body">
               <h3>{i.label}</h3>
               <p>{i.desc}</p>
@@ -385,13 +435,35 @@ const industries = [
     .b1-featured { grid-template-columns: 1fr; gap: 28px; }
   }
 
+  /* Process gallery */
+  .b1-process-gallery { margin-top: 48px; }
+  .b1-gallery-note { font-size: 13px; color: #64748b; }
+  .b1-gallery-grid { margin-top: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .b1-gallery-tile { margin: 0; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
+  .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
+  .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
+  .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-gallery-label { font-size: 13.5px; font-weight: 600; color: #0b1a33; }
+  @media (max-width: 1000px) {
+    .b1-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .b1-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   /* Applications */
   .b1-apps { margin-top: 40px; display: grid; gap: 16px; }
-  .b1-app { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 22px 26px; }
+  .b1-app { display: grid; grid-template-columns: 260px 1fr; gap: 26px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 18px; align-items: center; }
+  .b1-app-img { margin: 0; }
+  .b1-app-ph { aspect-ratio: 4 / 3; background: #eef2f7; border: 1px dashed #c0d4ec; border-radius: 4px; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
   .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: #64748b; max-width: 760px; }
   .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-app-body a:hover { text-decoration: underline; }
+  @media (max-width: 700px) {
+    .b1-app { grid-template-columns: 1fr; gap: 16px; }
+  }
 
   /* Quality */
   .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
