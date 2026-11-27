@@ -1,0 +1,101 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { productFamilies } from '../../../data/product-families';
+
+export function getStaticPaths() {
+  return productFamilies.en.map((f) => ({ params: { slug: f.id } }));
+}
+
+const { slug } = Astro.params;
+const lang = 'en' as const;
+const families = productFamilies.en;
+const family = families.find((f) => f.id === slug)!;
+const index = families.findIndex((f) => f.id === slug);
+---
+
+<Base
+  lang={lang}
+  title={`${family.name} — Products | Changsheng Machinery`}
+  description={`${family.name} manufactured to drawing in Nanjing, China: ${family.desc}`}
+>
+  <section class="page-heading bg-ink">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 sm:pt-24 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-accent-400">
+        <a href={`/${lang}/products`} class="transition-colors hover:text-white">Products</a> · {family.name}
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">{family.name}</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-300">{family.desc}</p>
+      <p class="mt-4 inline-block rounded-md bg-white/10 px-3 py-1 text-xs font-medium text-slate-200">{family.process}</p>
+    </div>
+  </section>
+
+  <!-- Family navigation -->
+  <nav aria-label="Product families" class="sticky top-16 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 flex gap-2 overflow-x-auto py-3">
+      <a
+        href={`/${lang}/products`}
+        class="whitespace-nowrap rounded-full border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:border-steel-500 hover:bg-steel-50"
+      >
+        All products
+      </a>
+      {families.map((f) => (
+        <a
+          href={`/${lang}/products/${f.id}`}
+          class:list={[
+            'whitespace-nowrap rounded-full border px-4 py-1.5 text-sm font-medium transition-colors',
+            f.id === slug
+              ? 'border-steel-600 bg-steel-700 text-white'
+              : 'border-steel-200 text-steel-700 hover:border-steel-500 hover:bg-steel-50',
+          ]}
+        >
+          {f.name}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {family.photos.map((p) => (
+          <figure class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm">
+            <div class="aspect-[4/3] overflow-hidden bg-steel-100">
+              <img
+                src={`/products/${p.file}`}
+                alt={`${p.caption} manufactured by Changsheng`}
+                loading="lazy"
+                width="1448"
+                height="1086"
+                class:list={[
+                  'h-full w-full transition-transform duration-300 group-hover:scale-[1.02]',
+                  p.fit === 'contain' ? 'object-contain' : 'object-cover',
+                ]}
+              />
+            </div>
+            <figcaption class="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-2.5">
+              <span class="text-sm font-medium text-ink">{p.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-between gap-6">
+        <a href={`/${lang}/contact`} class="text-sm font-semibold text-steel-700 hover:underline">
+          Request a quote for {family.name.toLowerCase()} →
+        </a>
+        <a href={`/${lang}/products`} class="text-sm font-medium text-slate-500 hover:text-steel-700">
+          ← All products
+        </a>
+      </div>
+
+      {index < families.length - 1 && (
+        <div class="mt-12 rounded-lg border border-steel-200 bg-steel-50 p-6 sm:p-8">
+          <p class="text-sm font-semibold uppercase tracking-wider text-steel-600">Next family</p>
+          <a href={`/${lang}/products/${families[index + 1].id}`} class="mt-2 inline-block font-display text-xl font-bold text-ink hover:text-steel-700">
+            {families[index + 1].name} →
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

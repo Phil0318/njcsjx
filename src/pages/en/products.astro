@@ -1,80 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
+import { productFamilies } from '../../data/product-families';
 
 const lang = 'en' as const;
-
-type Photo = { file: string; caption: string; fit?: 'cover' | 'contain' };
-
-const families = [
-  {
-    id: 'gears-ring-gears',
-    name: 'Gears & Ring Gears',
-    desc: 'Internal and external ring gears, gear wheels, and specialty gear forms, machined and finish-ground to customer specification.',
-    process: 'Gear cutting · heat treatment · gear grinding',
-    photos: [
-      { file: 'IMG_0099_external-ring-gear.webp', caption: 'External ring gear' },
-      { file: 'IMG_0143_internal-ring-gear.webp', caption: 'Internal ring gear' },
-      { file: 'internal-ring-gear.webp', caption: 'Internal ring gear' },
-      { file: 'internal-tooth-ring.webp', caption: 'Internal tooth ring' },
-      { file: 'spoked-wheel.webp', caption: 'Spoked gear wheel' },
-      { file: 'large-helical-gear.webp', caption: 'Large helical gear' },
-      { file: 'helical-ring-stack.webp', caption: 'Helical ring gears' },
-      { file: 'gear-wheel-row.webp', caption: 'Gear wheels' },
-      { file: 'IMG_0103_single-gear.webp', caption: 'Single gear' },
-    ] as Photo[],
-  },
-  {
-    id: 'pinions-gear-shafts',
-    name: 'Pinions & Gear Shafts',
-    desc: 'Pinions and gear shafts produced from blank through finished teeth, including jacking gear shafts for offshore platforms.',
-    process: 'Blank machining · gear cutting · heat treatment · finish grinding',
-    photos: [
-      { file: 'upright-pinion-shaft.webp', caption: 'Upright pinion shaft' },
-      { file: 'long-pinion-shaft.webp', caption: 'Long pinion shaft', fit: 'contain' },
-      { file: 'four-pinion-shafts.webp', caption: 'Pinion shafts' },
-      { file: 'IMG_0121_pinion-shafts-front.webp', caption: 'Pinion shafts, front view' },
-      { file: 'coarse-pinion-batch.webp', caption: 'Pinion batch' },
-      { file: 'pinion-hub-detail.webp', caption: 'Pinion hub detail' },
-      { file: 'helical-pinion-and-wheel.webp', caption: 'Helical pinion and wheel' },
-      { file: 'flanged-gear-shaft.webp', caption: 'Flanged gear shaft' },
-      { file: 'IMG_0130_jacking-shaft.webp', caption: 'Jacking gear shaft' },
-    ] as Photo[],
-  },
-  {
-    id: 'planetary-compound',
-    name: 'Planetary, Compound & Specialty Gears',
-    desc: 'Planet carriers, sun gears, double gears, and compound assemblies for planetary and heavy drive systems.',
-    process: 'Hobbing · shaping · carburizing · gear grinding',
-    photos: [
-      { file: 'planet-carrier.webp', caption: 'Planet carrier' },
-      { file: 'planet-gear-pin.webp', caption: 'Planet gear pin' },
-      { file: 'sun-gear.webp', caption: 'Sun gear' },
-      { file: 'IMG_0129_wind-sun-gear.webp', caption: 'Sun gear for wind drive' },
-      { file: 'IMG_0125_double-gear.webp', caption: 'Double gear' },
-      { file: 'compound-gear-batch.webp', caption: 'Compound gears' },
-      { file: 'drum-gear-coupling.webp', caption: 'Drum gear coupling' },
-      { file: 'welded-gear.webp', caption: 'Welded gear' },
-      { file: 'eccentric-shaft.webp', caption: 'Eccentric shaft' },
-    ] as Photo[],
-  },
-  {
-    id: 'shafts-components',
-    name: 'Custom Shafts & Related Components',
-    desc: 'Shafts, sleeves, housings, and related components machined, heat-treated, and ground to drawing.',
-    process: 'Turning · Q&T · precision grinding',
-    photos: [
-      { file: 'support-shaft.webp', caption: 'Support shaft' },
-      { file: 'gear-shaft-and-sleeve.webp', caption: 'Gear shaft and sleeve' },
-      { file: 'gear-shaft-batch.webp', caption: 'Gear shafts' },
-      { file: 'stacked-shafts.webp', caption: 'Shafts' },
-      { file: 'painted-housing.webp', caption: 'Painted housing' },
-      { file: 'pin-batch.webp', caption: 'Pins' },
-      { file: 'packed-gears-side.webp', caption: 'Finished gears, packed' },
-      { file: 'packed-gears-top.webp', caption: 'Finished gears, packed (top view)' },
-    ] as Photo[],
-  },
-];
+const families = productFamilies.en;
 ---
 
 <Base
@@ -93,56 +23,36 @@ const families = [
     </div>
   </section>
 
-  <!-- Family navigation -->
-  <nav aria-label="Product families" class="sticky top-16 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 flex gap-2 overflow-x-auto py-3">
-      {families.map((f) => (
-        <a
-          href={`#${f.id}`}
-          class="whitespace-nowrap rounded-full border border-steel-200 px-4 py-1.5 text-sm font-medium text-steel-700 transition-colors hover:border-steel-500 hover:bg-steel-50"
-        >
-          {f.name}
-        </a>
-      ))}
-    </div>
-  </nav>
-
-  {families.map((f, i) => (
-    <section id={f.id} class:list={['py-16 sm:py-20', i % 2 === 1 && 'bg-steel-50']}>
-      <div class="mx-auto max-w-6xl px-4 sm:px-6">
-        <div class="max-w-3xl">
-          <h2 class="font-display text-2xl font-bold text-ink sm:text-3xl">{f.name}</h2>
-          <p class="mt-3 text-base leading-relaxed text-slate-600">{f.desc}</p>
-          <p class="mt-3 inline-block rounded-md bg-steel-50 px-2.5 py-1 text-xs font-medium text-steel-600">{f.process}</p>
-        </div>
-        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {f.photos.map((p) => (
-            <figure class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm">
-              <div class="aspect-[4/3] overflow-hidden bg-steel-100">
-                <img
-                  src={`/products/${p.file}`}
-                  alt={`${p.caption} manufactured by Changsheng`}
-                  loading="lazy"
-                  width="1448"
-                  height="1086"
-                  class:list={[
-                    'h-full w-full transition-transform duration-300 group-hover:scale-[1.02]',
-                    p.fit === 'contain' ? 'object-contain' : 'object-cover',
-                  ]}
-                />
-              </div>
-              <figcaption class="flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-2.5">
-                <span class="text-sm font-medium text-ink">{p.caption}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <a href={`/${lang}/contact`} class="mt-8 inline-block text-sm font-semibold text-steel-700 hover:underline">
-          Request a quote for {f.name.toLowerCase()} →
-        </a>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        {families.map((f) => (
+          <a
+            href={`/${lang}/products/${f.id}`}
+            class="group overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm transition-all hover:border-steel-300 hover:shadow-md"
+          >
+            <div class="aspect-[4/3] overflow-hidden bg-steel-100">
+              <img
+                src={`/products/${f.photos[0].file}`}
+                alt={`${f.photos[0].caption} manufactured by Changsheng`}
+                loading="lazy"
+                width="1448"
+                height="1086"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
+            <div class="p-6">
+              <h2 class="font-display text-xl font-bold text-ink">{f.name}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">{f.desc}</p>
+              <p class="mt-4 flex items-center justify-between text-sm font-semibold text-steel-700">
+                <span>{f.photos.length} photos · View family →</span>
+              </p>
+            </div>
+          </a>
+        ))}
       </div>
-    </section>
-  ))}
+    </div>
+  </section>
 
   <!-- Heat treatment: a service, not a product family -->
   <section class="py-16 sm:py-20">
