@@ -141,22 +141,10 @@ const capacityVideos = [
   },
 ];
 
-const industries = [
-  {
-    label: '海上钻井',
-    desc: '海上钻井平台泥浆泵齿轮组与爬升系统零件，按 ABS 认可的热处理程序生产。',
-    href: '/zh/products/pinions-gear-shafts',
-  },
-  {
-    label: '风电',
-    desc: '风电太阳轮与变桨系统轴类，渗碳淬火并精磨，满足疲劳工况要求。',
-    href: '/zh/products/planetary-compound',
-  },
-  {
-    label: '矿山设备',
-    desc: '矿用自卸车电动轮双联齿轮，滚齿、渗碳、磨齿全流程在厂内完成。',
-    href: '/zh/products/planetary-compound',
-  },
+const partners = [
+  { name: '太原重工', field: '重型装备 · 矿山机械' },
+  { name: '远景能源', field: '风电' },
+  { name: '三一重工', field: '工程与矿山机械' },
 ];
 
 const certs = [
@@ -308,20 +296,17 @@ const certs = [
     </div>
   </section>
 
-  <!-- 5. Industrial Applications -->
+  <!-- 5. Our Partners -->
   <section id="applications" class="b1-section">
     <div class="b1-container">
       <div class="b1-heading">
         <h2>我们的合作伙伴</h2>
       </div>
-      <div class="b1-apps">
-        {industries.map((i) => (
-          <div class="b1-app">
-            <div class="b1-app-body">
-              <h3>{i.label}</h3>
-              <p>{i.desc}</p>
-              <a href={i.href}>查看相关产品 →</a>
-            </div>
+      <div class="b1-partners">
+        {partners.map((p) => (
+          <div class="b1-partner">
+            <p class="b1-partner-name">{p.name}</p>
+            <p class="b1-partner-field">{p.field}</p>
           </div>
         ))}
       </div>
@@ -487,13 +472,14 @@ const certs = [
     .b1-videos { grid-template-columns: 1fr; }
   }
 
-  /* Applications */
-  .b1-apps { margin-top: 40px; display: grid; gap: 16px; }
-  .b1-app { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 22px 26px; }
-  .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
-  .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.75; color: #64748b; max-width: 760px; }
-  .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
-  .b1-app-body a:hover { text-decoration: underline; }
+  /* Partners */
+  .b1-partners { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b1-partner { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 30px 24px; text-align: center; }
+  .b1-partner-name { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: #0b1a33; }
+  .b1-partner-field { margin-top: 8px; font-size: 14px; color: #64748b; }
+  @media (max-width: 700px) {
+    .b1-partners { grid-template-columns: 1fr; }
+  }
 
   /* Quality */
   .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
