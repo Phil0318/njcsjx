@@ -267,9 +267,19 @@ const certs = [
 
       <div class="b1-equip-head">
         <h3>The machines behind the process</h3>
-        <a href="/en/equipment">Full equipment overview →</a>
+        <div class="b1-equip-head-right">
+          <div class="b1-equip-controls">
+            <button type="button" class="b1-equip-btn" id="b1-equip-prev" aria-label="Previous equipment">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </button>
+            <button type="button" class="b1-equip-btn" id="b1-equip-next" aria-label="Next equipment">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </button>
+          </div>
+          <a href="/en/equipment">Full equipment overview →</a>
+        </div>
       </div>
-      <div class="b1-equip-strip">
+      <div class="b1-equip-track" id="b1-equip-track">
         {equipment.map((e) => (
           <a href="/en/equipment/machining" class="b1-equip-card">
             <img src={e.img} alt={e.alt} loading="lazy" width="600" height="450" />
@@ -377,6 +387,27 @@ const certs = [
 
   <!-- 7. Contact -->
   <CTA lang={lang} />
+
+  <script>
+    const eqTrack = document.getElementById('b1-equip-track');
+    const eqPrev = document.getElementById('b1-equip-prev');
+    const eqNext = document.getElementById('b1-equip-next');
+    if (eqTrack && eqPrev && eqNext) {
+      const step = () => {
+        const card = eqTrack.querySelector('.b1-equip-card');
+        return card ? card.offsetWidth + 14 : eqTrack.clientWidth * 0.8;
+      };
+      const update = () => {
+        eqPrev.disabled = eqTrack.scrollLeft <= 2;
+        eqNext.disabled = eqTrack.scrollLeft >= eqTrack.scrollWidth - eqTrack.clientWidth - 2;
+      };
+      eqPrev.addEventListener('click', () => eqTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+      eqNext.addEventListener('click', () => eqTrack.scrollBy({ left: step(), behavior: 'smooth' }));
+      eqTrack.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+  </script>
 </Base>
 
 <style>
@@ -465,25 +496,25 @@ const certs = [
   }
 
   /* Equipment strip */
-  .b1-equip-head { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .b1-equip-head { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
   .b1-equip-head h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-equip-head a { font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-equip-head a:hover { text-decoration: underline; }
-  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .b1-equip-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
+  .b1-equip-head-right { display: flex; align-items: center; gap: 16px; }
+  .b1-equip-controls { display: flex; gap: 8px; }
+  .b1-equip-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+  .b1-equip-btn:hover { background: #eef4fb; border-color: #215694; }
+  .b1-equip-btn:disabled { opacity: .4; cursor: default; }
+  .b1-equip-track { margin-top: 20px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 4px; }
+  .b1-equip-track::-webkit-scrollbar { display: none; }
+  .b1-equip-card { flex: 0 0 250px; scroll-snap-align: start; display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
   .b1-equip-card:hover { border-color: #c0d4ec; }
   .b1-equip-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #f2f5f9; }
   .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: #0b1a33; }
   .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 12.5px; color: #64748b; }
   .b1-capacity { margin-top: 26px; font-size: 15px; color: #334155; }
-  @media (max-width: 1100px) {
-    .b1-equip-strip { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 760px) {
-    .b1-equip-strip { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 480px) {
-    .b1-equip-strip { grid-template-columns: 1fr; }
+  @media (max-width: 560px) {
+    .b1-equip-card { flex-basis: 78%; }
   }
 
   /* Capacity videos */
