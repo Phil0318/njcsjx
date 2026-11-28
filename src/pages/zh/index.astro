@@ -94,24 +94,20 @@ const processSteps = [
 ];
 
 const equipment = [
-  {
-    img: '/equipment-photos/niles-ze1200.jpg',
-    alt: '长升工厂的 NILES ZE1200 磨齿机',
-    name: 'NILES ZE1200',
-    spec: '磨齿',
-  },
-  {
-    img: '/equipment-photos/puma-480l.jpg',
-    alt: '长升工厂的 DOOSAN PUMA 480L 数控车床',
-    name: 'DOOSAN PUMA 480L',
-    spec: '数控车削',
-  },
-  {
-    img: '/equipment-photos/hcmc-1370.jpg',
-    alt: '长升工厂的 HCMC-1370 加工中心',
-    name: 'HCMC-1370',
-    spec: '加工中心',
-  },
+  { img: '/equipment-photos/niles-zp30.jpg', alt: '长升工厂 NILES ZP30 磨齿机', name: 'NILES ZP30 磨齿机', spec: '模数 50 × Ø3000（外）/ Ø2500（内）' },
+  { img: '/equipment-photos/niles-ze800.jpg', alt: '长升工厂 NILES ZE800 磨齿机', name: 'NILES ZE800 磨齿机', spec: '模数 32 × Ø800' },
+  { img: '/equipment-photos/niles-ze400s.jpg', alt: '长升工厂 NILES ZE400S 磨齿机', name: 'NILES ZE400S 磨齿机', spec: '模数 18 × Ø400' },
+  { img: '/equipment-photos/niles-ze1200.jpg', alt: '长升工厂 NILES ZE1200 磨齿机', name: 'NILES ZE1200 磨齿机', spec: '磨齿' },
+  { img: '/equipment-photos/puma-480l.jpg', alt: '长升工厂 DOOSAN PUMA 480L 数控车床', name: 'DOOSAN PUMA 480L 数控车床', spec: 'Ø900 × 2042' },
+  { img: '/equipment-photos/vl-160c.jpg', alt: '长升工厂数控立车 VL-160C', name: '数控立车 VL-160C', spec: '立式车削' },
+  { img: '/equipment-photos/y31125.jpg', alt: '长升工厂 Y31125 滚齿机', name: 'Y31125 滚齿机', spec: '模数 18 × Ø1250' },
+  { img: '/equipment-photos/ykhl51160.jpg', alt: '长升工厂 YKHL51160 插齿机', name: 'YKHL51160 插齿机', spec: '模数 20 × Ø1600（外）/ Ø2000（内）' },
+  { img: '/equipment-photos/vm1580.jpg', alt: '长升工厂 SK-VM1580 加工中心', name: 'SK-VM1580 加工中心', spec: '1500 × 800 × 700' },
+  { img: '/equipment-photos/hcmc-1370.jpg', alt: '长升工厂 HCMC-1370 加工中心', name: 'HCMC-1370 加工中心', spec: '1300 × 700 × 660' },
+  { img: '/equipment-photos/mg28100.jpg', alt: '长升工厂 MG28100 数控立磨', name: 'MG28100 数控立磨', spec: 'Ø2000 × 800' },
+  { img: '/equipment-photos/gleason-1000gms.webp', alt: '长升工厂 Gleason 1000GMS 齿轮测量中心', name: 'Gleason 1000GMS 齿轮测量中心', spec: '齿轮测量' },
+  { img: '/equipment-photos/dea-cmm.webp', alt: '长升工厂 DEA 三坐标测量机', name: 'DEA Delta20.33.15 三坐标', spec: '3300 × 2000 × 1500' },
+  { img: '/equipment-photos/venus-cmm.webp', alt: '长升工厂 VENUS 三坐标测量机', name: 'VENUS20.33.14 三坐标', spec: '3300 × 2000 × 1400' },
 ];
 
 const capacityVideos = [
@@ -441,7 +437,7 @@ const certs = [
   /* Process */
   .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: 1fr; gap: 10px; }
   .b1-process li { position: relative; }
-  .b1-process li:not(:last-child)::after { content: '↓'; display: block; text-align: center; color: #8fb2dc; font-size: 16px; line-height: 1; margin-top: 4px; }
+  .b1-process li:not(:last-child)::after { content: '↓'; display: block; text-align: center; color: #5689c6; font-size: 26px; font-weight: 700; line-height: 1; margin: 6px 0 2px; }
   .b1-process-card { display: flex; align-items: stretch; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
   .b1-process-card:hover { border-color: #8fb2dc; box-shadow: 0 10px 24px rgba(11, 26, 51, .08); }
   .b1-process-media { flex: 0 0 280px; display: block; }
@@ -465,14 +461,20 @@ const certs = [
   .b1-equip-head h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-equip-head a { font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-equip-head a:hover { text-decoration: underline; }
-  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .b1-equip-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
   .b1-equip-card:hover { border-color: #c0d4ec; }
   .b1-equip-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #f2f5f9; }
-  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #0b1a33; }
-  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 13px; color: #64748b; }
+  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 12.5px; color: #64748b; }
   .b1-capacity { margin-top: 26px; font-size: 15px; color: #334155; }
-  @media (max-width: 700px) {
+  @media (max-width: 1100px) {
+    .b1-equip-strip { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .b1-equip-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
     .b1-equip-strip { grid-template-columns: 1fr; }
   }
 

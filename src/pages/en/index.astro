@@ -94,24 +94,20 @@ const processSteps = [
 ];
 
 const equipment = [
-  {
-    img: '/equipment-photos/niles-ze1200.jpg',
-    alt: 'NILES ZE1200 gear grinder at the Changsheng workshop',
-    name: 'NILES ZE1200',
-    spec: 'Gear grinding',
-  },
-  {
-    img: '/equipment-photos/puma-480l.jpg',
-    alt: 'DOOSAN PUMA 480L CNC lathe at the Changsheng workshop',
-    name: 'DOOSAN PUMA 480L',
-    spec: 'CNC turning',
-  },
-  {
-    img: '/equipment-photos/hcmc-1370.jpg',
-    alt: 'HCMC-1370 machining center at the Changsheng workshop',
-    name: 'HCMC-1370',
-    spec: 'Machining center',
-  },
+  { img: '/equipment-photos/niles-zp30.jpg', alt: 'NILES ZP30 gear grinder at the Changsheng workshop', name: 'NILES ZP30', spec: 'M50 × Ø3000 (ext.) / Ø2500 (int.)' },
+  { img: '/equipment-photos/niles-ze800.jpg', alt: 'NILES ZE800 gear grinder at the Changsheng workshop', name: 'NILES ZE800', spec: 'M32 × Ø800' },
+  { img: '/equipment-photos/niles-ze400s.jpg', alt: 'NILES ZE400S gear grinder at the Changsheng workshop', name: 'NILES ZE400S', spec: 'M18 × Ø400' },
+  { img: '/equipment-photos/niles-ze1200.jpg', alt: 'NILES ZE1200 gear grinder at the Changsheng workshop', name: 'NILES ZE1200', spec: 'Gear grinding' },
+  { img: '/equipment-photos/puma-480l.jpg', alt: 'DOOSAN PUMA 480L CNC lathe at the Changsheng workshop', name: 'DOOSAN PUMA 480L', spec: 'Ø900 × 2042' },
+  { img: '/equipment-photos/vl-160c.jpg', alt: 'CNC vertical lathe at the Changsheng workshop', name: 'VL-160C vertical lathe', spec: 'Vertical turning' },
+  { img: '/equipment-photos/y31125.jpg', alt: 'Gear hobbing machine at the Changsheng workshop', name: 'Y31125 gear hobber', spec: 'M18 × Ø1250' },
+  { img: '/equipment-photos/ykhl51160.jpg', alt: 'Gear shaping machine at the Changsheng workshop', name: 'YKHL51160 gear shaper', spec: 'M20 × Ø1600 ext. / Ø2000 int.' },
+  { img: '/equipment-photos/vm1580.jpg', alt: 'SK-VM1580 machining center at the Changsheng workshop', name: 'SK-VM1580 machining center', spec: '1500 × 800 × 700' },
+  { img: '/equipment-photos/hcmc-1370.jpg', alt: 'HCMC-1370 machining center at the Changsheng workshop', name: 'HCMC-1370 machining center', spec: '1300 × 700 × 660' },
+  { img: '/equipment-photos/mg28100.jpg', alt: 'MG28100 CNC vertical grinder at the Changsheng workshop', name: 'MG28100 vertical grinder', spec: 'Ø2000 × 800' },
+  { img: '/equipment-photos/gleason-1000gms.webp', alt: 'Gleason 1000GMS gear analyzer at the Changsheng facility', name: 'Gleason 1000GMS', spec: 'Gear analysis' },
+  { img: '/equipment-photos/dea-cmm.webp', alt: 'DEA coordinate measuring machine at the Changsheng facility', name: 'CMM DEA Delta20.33.15', spec: '3300 × 2000 × 1500' },
+  { img: '/equipment-photos/venus-cmm.webp', alt: 'VENUS coordinate measuring machine at the Changsheng facility', name: 'CMM VENUS20.33.14', spec: '3300 × 2000 × 1400' },
 ];
 
 const capacityVideos = [
@@ -449,7 +445,7 @@ const certs = [
   /* Process */
   .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: 1fr; gap: 10px; }
   .b1-process li { position: relative; }
-  .b1-process li:not(:last-child)::after { content: '↓'; display: block; text-align: center; color: #8fb2dc; font-size: 16px; line-height: 1; margin-top: 4px; }
+  .b1-process li:not(:last-child)::after { content: '↓'; display: block; text-align: center; color: #5689c6; font-size: 26px; font-weight: 700; line-height: 1; margin: 6px 0 2px; }
   .b1-process-card { display: flex; align-items: stretch; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
   .b1-process-card:hover { border-color: #8fb2dc; box-shadow: 0 10px 24px rgba(11, 26, 51, .08); }
   .b1-process-media { flex: 0 0 280px; display: block; }
@@ -473,14 +469,20 @@ const certs = [
   .b1-equip-head h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-equip-head a { font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-equip-head a:hover { text-decoration: underline; }
-  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b1-equip-strip { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .b1-equip-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
   .b1-equip-card:hover { border-color: #c0d4ec; }
   .b1-equip-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #f2f5f9; }
-  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #0b1a33; }
-  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 13px; color: #64748b; }
+  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 12.5px; color: #64748b; }
   .b1-capacity { margin-top: 26px; font-size: 15px; color: #334155; }
-  @media (max-width: 700px) {
+  @media (max-width: 1100px) {
+    .b1-equip-strip { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .b1-equip-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
     .b1-equip-strip { grid-template-columns: 1fr; }
   }
 
