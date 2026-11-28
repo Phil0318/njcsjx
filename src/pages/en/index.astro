@@ -1,7 +1,11 @@
 ﻿---
 import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import fs from 'node:fs';
 
 const lang = 'en' as const;
+
+const hasFile = (p: string) => fs.existsSync('public' + p);
 
 const families = [
   {
@@ -34,45 +38,103 @@ const families = [
   },
 ];
 
-const steps = [
-  { n: '01', label: 'Blank Machining', hint: 'Turning & milling' },
-  { n: '02', label: 'Gear Cutting', hint: 'Hobbing & shaping' },
-  { n: '03', label: 'Heat Treatment', hint: 'Carburizing & Q&T' },
-  { n: '04', label: 'Finish Grinding', hint: 'Gear & bore grinding' },
-  { n: '05', label: 'Final Inspection', hint: 'Measurement & NDT' },
+const facts = [
+  ['2006', 'In business since'],
+  ['ISO 9001:2015', 'Quality management certified'],
+  ['ABS HT-0579098', 'Marine heat-treatment approval'],
+  ['M50 × Ø3000', 'Maximum gear grinding capacity'],
 ];
 
-const processPhotos = [
+const processSteps = [
   {
-    step: '01',
+    n: '01',
     label: 'Blank Machining',
-    img: '/workshop/machine-shop-floor.webp',
-    alt: 'Machine shop floor at the Changsheng facility',
+    hint: 'Turning & milling',
+    capability: 'CNC turning to Ø2500 mm · machining centers',
+    img: '/equipment-photos/vl-160c.jpg',
+    alt: 'CNC vertical lathe at the Changsheng workshop',
+    href: '/en/equipment/machining',
   },
   {
-    step: '02',
+    n: '02',
     label: 'Gear Cutting',
-    img: '/workshop/machining-line.webp',
-    alt: 'Machining line at the Changsheng facility',
+    hint: 'Hobbing & shaping',
+    capability: 'Hobbing and shaping for external and internal gears',
+    img: '/equipment-photos/y31125.jpg',
+    alt: 'Gear hobbing machine at the Changsheng workshop',
+    href: '/en/equipment/machining',
   },
-  { step: '03', label: 'Heat Treatment', img: null, alt: '' },
   {
-    step: '04',
+    n: '03',
+    label: 'Heat Treatment',
+    hint: 'Carburizing & Q&T',
+    capability: 'Pit furnaces to Φ4000 × 2500 mm · parts 0.1 kg–30 t',
+    img: null,
+    alt: '',
+    href: '/en/equipment/heat-treatment',
+  },
+  {
+    n: '04',
     label: 'Finish Grinding',
-    img: '/equipment-photos/niles-zp30.jpg',
-    alt: 'NILES ZP30 gear grinder at the Changsheng facility',
+    hint: 'Gear & bore grinding',
+    capability: 'Gear grinding to module 50 × Ø3000 mm · 6 NILES grinders',
+    img: '/equipment-photos/niles-ze400s.jpg',
+    alt: 'NILES ZE400S gear grinder at the Changsheng workshop',
+    href: '/en/equipment/machining',
   },
   {
-    step: '05',
+    n: '05',
     label: 'Final Inspection',
-    img: '/workshop/gear-inspection-setup.webp',
-    alt: 'Gear inspection setup at the Changsheng facility',
+    hint: 'Measurement & NDT',
+    capability: 'Gleason 1000GMS · three CMMs · UT/MT NDT',
+    img: '/workshop/inspection-room.webp',
+    alt: 'Inspection room at the Changsheng facility',
+    href: '/en/equipment/inspection',
+  },
+];
+
+const equipment = [
+  { img: '/equipment-photos/niles-zp30.jpg', alt: 'NILES ZP30 gear grinder at the Changsheng workshop', name: 'NILES ZP30', spec: 'M50 × Ø3000 (ext.) / Ø2500 (int.)' },
+  { img: '/equipment-photos/niles-ze800.jpg', alt: 'NILES ZE800 gear grinder at the Changsheng workshop', name: 'NILES ZE800', spec: 'M32 × Ø800' },
+  { img: '/equipment-photos/niles-ze400s.jpg', alt: 'NILES ZE400S gear grinder at the Changsheng workshop', name: 'NILES ZE400S', spec: 'M18 × Ø400' },
+  { img: '/equipment-photos/niles-ze1200.jpg', alt: 'NILES ZE1200 gear grinder at the Changsheng workshop', name: 'NILES ZE1200', spec: 'Gear grinding' },
+  { img: '/equipment-photos/puma-480l.jpg', alt: 'DOOSAN PUMA 480L CNC lathe at the Changsheng workshop', name: 'DOOSAN PUMA 480L', spec: 'Ø900 × 2042' },
+  { img: '/equipment-photos/vl-160c.jpg', alt: 'CNC vertical lathe at the Changsheng workshop', name: 'VL-160C vertical lathe', spec: 'Vertical turning' },
+  { img: '/equipment-photos/y31125.jpg', alt: 'Gear hobbing machine at the Changsheng workshop', name: 'Y31125 gear hobber', spec: 'M18 × Ø1250' },
+  { img: '/equipment-photos/ykhl51160.jpg', alt: 'Gear shaping machine at the Changsheng workshop', name: 'YKHL51160 gear shaper', spec: 'M20 × Ø1600 ext. / Ø2000 int.' },
+  { img: '/equipment-photos/vm1580.jpg', alt: 'SK-VM1580 machining center at the Changsheng workshop', name: 'SK-VM1580 machining center', spec: '1500 × 800 × 700' },
+  { img: '/equipment-photos/hcmc-1370.jpg', alt: 'HCMC-1370 machining center at the Changsheng workshop', name: 'HCMC-1370 machining center', spec: '1300 × 700 × 660' },
+  { img: '/equipment-photos/mg28100.jpg', alt: 'MG28100 CNC vertical grinder at the Changsheng workshop', name: 'MG28100 vertical grinder', spec: 'Ø2000 × 800' },
+  { img: '/equipment-photos/gleason-1000gms.webp', alt: 'Gleason 1000GMS gear analyzer at the Changsheng facility', name: 'Gleason 1000GMS', spec: 'Gear analysis' },
+  { img: '/equipment-photos/hexagon-cmm.webp', alt: 'Hexagon coordinate measuring machine at the Changsheng facility', name: 'CMM Hexagon 15.22.10', spec: '1500 × 2200 × 1000' },
+  { img: '/equipment-photos/dea-cmm.webp', alt: 'DEA coordinate measuring machine at the Changsheng facility', name: 'CMM DEA Delta20.33.15', spec: '3300 × 2000 × 1500' },
+  { img: '/equipment-photos/venus-cmm.webp', alt: 'VENUS coordinate measuring machine at the Changsheng facility', name: 'CMM VENUS20.33.14', spec: '3300 × 2000 × 1400' },
+];
+
+const capacityVideos = [
+  {
+    n: '01',
+    label: 'End to End',
+    hint: 'From blank machining to finished product',
+    video: '/videos/01-end-to-end.mp4',
   },
   {
-    step: '06',
-    label: 'Finished Product',
-    img: '/products/IMG_0130_jacking-shaft.webp',
-    alt: 'Finished jacking gear shaft manufactured by Changsheng',
+    n: '02',
+    label: 'Large Part Machining',
+    hint: 'Turning, milling and gear cutting',
+    video: '/videos/02-large-part-machining.mp4',
+  },
+  {
+    n: '03',
+    label: 'Heat Treatment',
+    hint: 'Carburizing, Q&T and induction hardening',
+    video: '/videos/03-heat-treatment.mp4',
+  },
+  {
+    n: '04',
+    label: 'Precision Grinding',
+    hint: 'Gear and bore grinding',
+    video: '/videos/04-precision-grinding.mp4',
   },
 ];
 
@@ -93,41 +155,50 @@ const industries = [
     href: '/en/products/planetary-compound',
   },
 ];
+
+const certs = [
+  { img: '/certificates/iso-9001-1.jpg', label: 'ISO 9001:2015', alt: 'ISO 9001:2015 certificate' },
+  { img: '/certificates/abs-ht-0579098-1.jpg', label: 'ABS heat treatment', alt: 'ABS heat treatment approval' },
+  { img: '/certificates/ndt-cert-1.jpg', label: 'NDT inspection', alt: 'NDT inspection certificate' },
+];
 ---
 
 <Base
   lang={lang}
-  title="Custom Industrial Gears & Shafts | Changsheng Machinery"
-  description="Custom industrial gears and shafts manufactured to drawing in Nanjing, China. Gear machining, heat treatment, precision grinding, and inspection."
+  title="Custom Gears, Shafts & Heat Treatment | Changsheng Machinery"
+  description="Custom gears, shafts, machined components, and heat treatment services manufactured in Nanjing, China. Machining, gear cutting, precision grinding, and inspection."
 >
   <!-- 1. Hero -->
   <section class="b1-hero">
     <div class="b1-hero-grid">
       <div class="b1-hero-copy">
         <p class="b1-eyebrow">NANJING CHANGSHENG MACHINERY</p>
-        <h1>Custom gears and shafts built to your drawing</h1>
+        <h1>Custom components, from drawing to finished part</h1>
         <p class="b1-hero-intro">
-          Changsheng manufactures industrial gears and shafts at its Nanjing facility, coordinating machining,
-          gear cutting, heat treatment, precision grinding, and inspection.
+          Machining, gear cutting, heat treatment, grinding, and inspection in one Nanjing facility.
         </p>
         <p class="b1-hero-intro b1-hero-intro-2">
-          Send your drawing and quantity to request a finished-component quotation.
+          Send your drawing for a finished-component quote — or send parts for heat treatment.
         </p>
         <div class="b1-hero-actions">
           <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
-          <a class="b1-btn b1-btn-ghost" href="#product-families">Explore Gears &amp; Shafts</a>
+          <a class="b1-btn b1-btn-ghost" href="#product-families">See Our Work</a>
         </div>
       </div>
       <figure class="b1-hero-fig">
         <img
-          src="/equipment-photos/niles-ze1200.jpg"
-          alt="NILES ZE1200 gear grinding machine at the Changsheng workshop"
-          width="1200"
-          height="900"
+          src="/products/gear-shaft-batch.webp"
+          alt="Gear shafts manufactured by Changsheng"
+          width="1448"
+          height="1086"
           fetchpriority="high"
         />
-        <figcaption>Precision gear grinding — NILES ZE1200.</figcaption>
       </figure>
+    </div>
+    <div class="b1-facts">
+      {facts.map(([value, label]) => (
+        <div class="b1-fact"><strong>{value}</strong><span>{label}</span></div>
+      ))}
     </div>
   </section>
 
@@ -135,8 +206,8 @@ const industries = [
   <section id="product-families" class="b1-section b1-section-gray">
     <div class="b1-container">
       <div class="b1-heading">
-        <h2>Industrial Gears &amp; Shafts Manufactured to Specification</h2>
-        <p>Explore representative gear and shaft components manufactured for heavy industrial applications.</p>
+        <h2>Industrial Components Manufactured to Specification</h2>
+        <p>Representative components for heavy industrial applications.</p>
       </div>
       <div class="b1-families">
         {families.map((f) => (
@@ -166,101 +237,82 @@ const industries = [
         </p>
       </div>
       <ol class="b1-process">
-        {steps.map((s) => (
+        {processSteps.map((s) => (
           <li>
-            <span class="b1-process-num">{s.n}</span>
-            <span class="b1-process-label">{s.label}</span>
-            <span class="b1-process-hint">{s.hint}</span>
+            <a class="b1-process-card" href={s.href}>
+              <span class="b1-process-media">
+                {s.img ? (
+                  <img src={s.img} alt={s.alt} loading="lazy" width="600" height="450" />
+                ) : (
+                  <span class="b1-process-ph">Photo to be added</span>
+                )}
+              </span>
+              <span class="b1-process-body">
+                <span class="b1-process-num">{s.n}</span>
+                <span class="b1-process-label">{s.label}</span>
+                <span class="b1-process-hint">{s.hint}</span>
+                <span class="b1-process-cap">{s.capability}</span>
+                <span class="b1-process-cta">Learn more →</span>
+              </span>
+            </a>
           </li>
         ))}
       </ol>
       <p class="b1-process-note">
         <em>Typical process route shown. Actual manufacturing steps depend on component drawings and specifications.</em>
       </p>
-      <div class="b1-manu-grid">
-        <figure class="b1-manu-fig">
-          <img
-            src="/workshop/machine-shop-floor.webp"
-            alt="Machine shop floor at the Changsheng Nanjing facility"
-            loading="lazy"
-            width="1448"
-            height="1086"
-          />
-          <figcaption>Machine shop at the Changsheng Nanjing facility.</figcaption>
-        </figure>
-        <div class="b1-manu-side">
-          <p>
-            A single facility covers the full route: gear grinding to module 50 × Ø3000&nbsp;mm, CNC turning to
-            Ø2500&nbsp;mm, and heat treatment of single parts from 0.1&nbsp;kg to 30&nbsp;t.
-          </p>
-          <ul class="b1-manu-links">
-            <li><a href="/en/equipment/machining">Machining &amp; gear cutting →</a></li>
-            <li><a href="/en/equipment/heat-treatment">Heat treatment →</a></li>
-            <li><a href="/en/equipment/inspection">Inspection &amp; metrology →</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 4. Featured Component -->
-  <section id="featured" class="b1-section b1-section-gray">
-    <div class="b1-container">
-      <div class="b1-heading">
-        <h2>From Blank Machining to Finished Product</h2>
-        <p>Follow one component — a jacking gear shaft — through the manufacturing steps Changsheng coordinates in a single facility.</p>
-      </div>
-      <div class="b1-featured">
-        <div class="b1-featured-info">
-          <p class="b1-featured-desc">
-            This jacking gear shaft illustrates the complete manufacturing route Changsheng offers: the blank
-            is machined, teeth are cut, heat treatment is carried out under ABS approval, the part is
-            finish-ground, and final inspection confirms it meets specification — one facility, from raw
-            blank to the finished component delivered to the customer.
-          </p>
-          <table class="b1-spec-table">
-            <tbody>
-              <tr><th scope="row">Component</th><td>Jacking gear shaft</td></tr>
-              <tr><th scope="row">Application</th><td>Offshore platform jacking systems</td></tr>
-              <tr><th scope="row">Process</th><td>Q&amp;T · carburizing · finish grinding</td></tr>
-              <tr><th scope="row">Quality approval</th><td>ABS heat treatment (HT-0579098)</td></tr>
-            </tbody>
-          </table>
-          <p class="b1-spec-note">Material, dimensions, and inspection data are published only after factory confirmation.</p>
-          <div class="b1-featured-actions">
-            <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote for This Part</a>
-            <a class="b1-btn b1-btn-ghost" href="/en/products/pinions-gear-shafts">More Components →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="b1-process-gallery">
-        <div class="b1-gallery-head">
-          <p class="b1-gallery-note">The steps show the manufacturing route from blank machining to the final inspected product.</p>
-          <div class="b1-gallery-controls">
-            <button type="button" class="b1-gallery-btn" id="b1-gallery-prev" aria-label="Previous step">
+      <div class="b1-equip-head">
+        <h3>The machines behind the process</h3>
+        <div class="b1-equip-head-right">
+          <div class="b1-equip-controls">
+            <button type="button" class="b1-equip-btn" id="b1-equip-prev" aria-label="Previous equipment">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
             </button>
-            <button type="button" class="b1-gallery-btn" id="b1-gallery-next" aria-label="Next step">
+            <button type="button" class="b1-equip-btn" id="b1-equip-next" aria-label="Next equipment">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
             </button>
           </div>
+          <a href="/en/equipment">Full equipment overview →</a>
         </div>
-        <div class="b1-gallery-track" id="b1-gallery-track">
-          {processPhotos.map((p) => (
-            <figure class="b1-gallery-tile">
-              {p.img ? (
-                <img src={p.img} alt={p.alt} loading="lazy" width="1448" height="1086" />
-              ) : (
-                <div class="b1-gallery-ph">Photo to be added</div>
-              )}
-              <figcaption>
-                <span class="b1-gallery-step">{p.step}</span>
-                <span class="b1-gallery-label">{p.label}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      </div>
+      <div class="b1-equip-track" id="b1-equip-track">
+        {equipment.map((e) => (
+          <a href="/en/equipment/machining" class="b1-equip-card">
+            <img src={e.img} alt={e.alt} loading="lazy" width="600" height="450" />
+            <span class="b1-equip-name">{e.name}</span>
+            <span class="b1-equip-spec">{e.spec}</span>
+          </a>
+        ))}
+      </div>
+      <p class="b1-capacity">
+        Gear grinding to module 50 × Ø3000&nbsp;mm · CNC turning to Ø2500&nbsp;mm · heat treatment of single
+        parts from 0.1&nbsp;kg to 30&nbsp;t.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. Our Capacity -->
+  <section id="capacity" class="b1-section b1-section-gray">
+    <div class="b1-container">
+      <div class="b1-heading">
+        <h2>Our Capacity</h2>
+      </div>
+      <div class="b1-videos">
+        {capacityVideos.map((v) => (
+          <figure class="b1-video-tile">
+            {hasFile(v.video) ? (
+              <video src={v.video} controls playsinline preload="metadata" aria-label={`${v.label} video`}></video>
+            ) : (
+              <div class="b1-video-ph">Video to be added</div>
+            )}
+            <figcaption>
+              <span class="b1-video-num">{v.n}</span>
+              <span class="b1-video-label">{v.label}</span>
+              <span class="b1-video-hint">{v.hint}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
@@ -275,9 +327,6 @@ const industries = [
       <div class="b1-apps">
         {industries.map((i) => (
           <div class="b1-app">
-            <div class="b1-app-img">
-              <div class="b1-app-ph" aria-hidden="true">Photo to be added</div>
-            </div>
             <div class="b1-app-body">
               <h3>{i.label}</h3>
               <p>{i.desc}</p>
@@ -321,49 +370,37 @@ const industries = [
             <a class="b1-btn b1-btn-ghost" href="/en/equipment/inspection">Inspection Equipment →</a>
           </div>
         </div>
-        <figure class="b1-quality-fig">
-          <img
-            src="/workshop/gear-inspection-setup.webp"
-            alt="Gear inspection setup at the Changsheng facility"
-            loading="lazy"
-            width="1448"
-            height="1086"
-          />
-          <figcaption>Gear inspection setup at the Changsheng facility.</figcaption>
-        </figure>
+        <div class="b1-cert-cards">
+          {certs.map((c) => (
+            <a class="b1-cert-card" href="/en/certificates">
+              <img src={c.img} alt={c.alt} loading="lazy" width="400" height="284" />
+              <span>{c.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. Final RFQ -->
-  <section id="rfq" class="b1-rfq">
-    <div class="b1-container b1-rfq-inner">
-      <h2>Have a Gear or Shaft Drawing?</h2>
-      <p>
-        Send us your drawing, estimated quantity, material, and technical requirements for a manufacturing
-        feasibility review and quotation.
-      </p>
-      <a class="b1-btn b1-btn-primary" href="/en/contact">Request a Quote</a>
-      <p class="b1-rfq-note">PDF, DWG, STEP, IGS, DXF, or image drawings can be attached on the contact form (up to 25&nbsp;MB per file).</p>
-    </div>
-  </section>
+  <!-- 7. Contact -->
+  <CTA lang={lang} />
 
   <script>
-    const track = document.getElementById('b1-gallery-track');
-    const prev = document.getElementById('b1-gallery-prev');
-    const next = document.getElementById('b1-gallery-next');
-    if (track && prev && next) {
+    const eqTrack = document.getElementById('b1-equip-track');
+    const eqPrev = document.getElementById('b1-equip-prev');
+    const eqNext = document.getElementById('b1-equip-next');
+    if (eqTrack && eqPrev && eqNext) {
       const step = () => {
-        const tile = track.querySelector('.b1-gallery-tile');
-        return tile ? tile.offsetWidth + 14 : track.clientWidth * 0.8;
+        const card = eqTrack.querySelector('.b1-equip-card');
+        return card ? card.offsetWidth + 14 : eqTrack.clientWidth * 0.8;
       };
       const update = () => {
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        eqPrev.disabled = eqTrack.scrollLeft <= 2;
+        eqNext.disabled = eqTrack.scrollLeft >= eqTrack.scrollWidth - eqTrack.clientWidth - 2;
       };
-      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-      track.addEventListener('scroll', update, { passive: true });
+      eqPrev.addEventListener('click', () => eqTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+      eqNext.addEventListener('click', () => eqTrack.scrollBy({ left: step(), behavior: 'smooth' }));
+      eqTrack.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
     }
@@ -390,105 +427,110 @@ const industries = [
   .b1-btn-ghost:hover { border-color: #215694; background: #eef4fb; }
 
   /* Hero */
-  .b1-hero { background: #fff; border-bottom: 1px solid #e8edf4; }
-  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 64px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
-  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #215694; text-transform: uppercase; }
-  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4.2vw, 54px); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; color: #0b1a33; text-wrap: balance; }
-  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.7; color: #475569; max-width: 540px; }
+  .b1-hero { background: linear-gradient(160deg, #edf3fb 0%, #ddeaf8 45%, #c8ddf2 100%); border-bottom: 1px solid #b7cfe8; }
+  .b1-hero-grid { max-width: 1280px; margin-inline: auto; padding: 72px 24px 48px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; align-items: center; }
+  .b1-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; color: #1b4577; text-transform: uppercase; }
+  .b1-hero-copy h1 { margin-top: 18px; font-family: var(--font-display); font-size: clamp(34px, 4vw, 52px); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; color: #0b1a33; text-wrap: balance; }
+  .b1-hero-intro { margin-top: 20px; font-size: 17px; line-height: 1.7; color: #33425c; max-width: 540px; }
   .b1-hero-intro-2 { margin-top: 12px; font-weight: 500; color: #0b1a33; }
   .b1-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
-  .b1-hero-fig { margin: 0; background: #e9edf0; border-radius: 6px; overflow: hidden; }
-  .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
-  .b1-hero-fig figcaption { padding: 14px 18px; background: #fff; border-top: 1px solid #e8edf4; font-size: 13px; color: #64748b; }
+  .b1-hero .b1-btn-ghost { background: rgba(255, 255, 255, .75); }
+  .b1-hero-fig { margin: 0; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 18px 44px rgba(11, 26, 51, .14); }
+  .b1-hero-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   @media (max-width: 900px) {
     .b1-hero-grid { grid-template-columns: 1fr; padding-top: 48px; gap: 32px; }
     .b1-hero-fig { order: 2; }
   }
 
+  /* Facts strip */
+  .b1-facts { max-width: 1280px; margin-inline: auto; padding: 0 24px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .b1-fact { border-top: 1px solid rgba(33, 86, 148, .22); padding-top: 16px; }
+  .b1-fact strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
+  .b1-fact span { display: block; margin-top: 4px; font-size: 13px; color: #55688a; }
+  @media (max-width: 767px) {
+    .b1-facts { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+  }
+
   /* Product families */
-  .b1-families { margin-top: 44px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .b1-families { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .b1-family { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: box-shadow .15s ease, border-color .15s ease; }
   .b1-family:hover { border-color: #c0d4ec; box-shadow: 0 10px 28px rgba(11, 26, 51, .08); }
   .b1-family-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f7; }
-  .b1-family-body { padding: 20px 22px 22px; }
-  .b1-family-body h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: #0b1a33; }
-  .b1-family-body p { margin-top: 8px; font-size: 14.5px; line-height: 1.65; color: #64748b; }
-  .b1-family-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; }
+  .b1-family-body { padding: 18px 18px 20px; }
+  .b1-family-body h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #0b1a33; }
+  .b1-family-body p { margin-top: 8px; font-size: 13.5px; line-height: 1.6; color: #64748b; }
+  .b1-family-link { display: inline-block; margin-top: 12px; font-size: 13.5px; font-weight: 600; color: #215694; }
+  @media (max-width: 1100px) {
+    .b1-families { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
   @media (max-width: 767px) {
     .b1-families { grid-template-columns: 1fr; gap: 16px; }
   }
 
   /* Process */
-  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
-  .b1-process li { position: relative; padding: 22px 18px 20px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; text-align: center; }
-  .b1-process li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -14px; transform: translateY(-50%); color: #8fb2dc; font-size: 18px; }
-  .b1-process-num { display: block; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-process-label { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: #0b1a33; }
-  .b1-process-hint { display: block; margin-top: 6px; font-size: 13px; color: #64748b; }
+  .b1-process { margin-top: 48px; list-style: none; display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .b1-process li { position: relative; }
+  .b1-process li:not(:last-child)::after { content: '↓'; display: block; text-align: center; color: #5689c6; font-size: 26px; font-weight: 700; line-height: 1; margin: 6px 0 2px; }
+  .b1-process-card { display: flex; align-items: stretch; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
+  .b1-process-card:hover { border-color: #8fb2dc; box-shadow: 0 10px 24px rgba(11, 26, 51, .08); }
+  .b1-process-media { flex: 0 0 280px; display: block; }
+  .b1-process-media img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-process-ph { display: grid; place-items: center; height: 100%; min-height: 210px; background: #eef2f7; border-right: 1px dashed #c0d4ec; color: #94a3b8; font-size: 13px; }
+  .b1-process-body { display: flex; flex-direction: column; padding: 20px 24px; min-width: 0; }
+  .b1-process-num { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-process-label { display: block; margin-top: 4px; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #0b1a33; }
+  .b1-process-hint { display: block; margin-top: 2px; font-size: 13px; color: #64748b; }
+  .b1-process-cap { display: block; margin-top: 10px; font-size: 14px; line-height: 1.6; color: #334155; }
+  .b1-process-cta { display: block; margin-top: auto; padding-top: 10px; font-size: 13.5px; font-weight: 600; color: #215694; }
   .b1-process-note { margin-top: 22px; font-size: 14px; color: #64748b; }
-  @media (max-width: 900px) {
-    .b1-process { grid-template-columns: 1fr; gap: 10px; }
-    .b1-process li { text-align: left; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 12px; padding: 16px 18px; }
-    .b1-process li:not(:last-child)::after { content: none; }
-    .b1-process-num { grid-row: 1 / 3; align-self: center; }
-    .b1-process-hint { margin-top: 2px; }
+  @media (max-width: 640px) {
+    .b1-process-card { flex-direction: column; }
+    .b1-process-media { flex: none; }
+    .b1-process-ph { border-right: 0; border-bottom: 1px dashed #c0d4ec; min-height: 160px; }
   }
 
-  /* Manufacturing photo + links */
-  .b1-manu-grid { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 32px; align-items: start; }
-  .b1-manu-fig { margin: 0; }
-  .b1-manu-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
-  .b1-manu-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
-  .b1-manu-side p { font-size: 16px; line-height: 1.75; color: #334155; }
-  .b1-manu-links { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
-  .b1-manu-links a { font-size: 15px; font-weight: 600; color: #215694; text-decoration: none; }
-  .b1-manu-links a:hover { text-decoration: underline; }
-  @media (max-width: 900px) {
-    .b1-manu-grid { grid-template-columns: 1fr; }
-  }
-
-  /* Featured component */
-  .b1-featured { margin-top: 44px; max-width: 880px; }
-  .b1-featured-desc { font-size: 16.5px; line-height: 1.75; color: #334155; }
-  .b1-spec-table { margin-top: 24px; width: 100%; border-collapse: collapse; font-size: 14.5px; }
-  .b1-spec-table th, .b1-spec-table td { text-align: left; padding: 11px 12px; border-bottom: 1px solid #e8edf4; vertical-align: top; }
-  .b1-spec-table th { width: 38%; color: #64748b; font-weight: 500; }
-  .b1-spec-table td { color: #0b1a33; font-weight: 500; }
-  .b1-spec-note { margin-top: 14px; font-size: 13px; color: #94a3b8; }
-  .b1-featured-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
-
-  /* Process gallery */
-  .b1-process-gallery { margin-top: 48px; }
-  .b1-gallery-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-  .b1-gallery-note { font-size: 13px; color: #64748b; }
-  .b1-gallery-controls { display: flex; gap: 8px; }
-  .b1-gallery-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-  .b1-gallery-btn:hover { background: #eef4fb; border-color: #215694; }
-  .b1-gallery-btn:disabled { opacity: .4; cursor: default; }
-  .b1-gallery-track { margin-top: 16px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 2px; }
-  .b1-gallery-track::-webkit-scrollbar { display: none; }
-  .b1-gallery-tile { margin: 0; flex: 0 0 300px; scroll-snap-align: start; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
-  .b1-gallery-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
-  .b1-gallery-ph { aspect-ratio: 4 / 3; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
-  .b1-gallery-tile figcaption { display: flex; align-items: baseline; gap: 10px; padding: 10px 12px; }
-  .b1-gallery-step { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
-  .b1-gallery-label { font-size: 13.5px; font-weight: 600; color: #0b1a33; }
+  /* Equipment strip */
+  .b1-equip-head { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .b1-equip-head h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-head a { font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
+  .b1-equip-head a:hover { text-decoration: underline; }
+  .b1-equip-head-right { display: flex; align-items: center; gap: 16px; }
+  .b1-equip-controls { display: flex; gap: 8px; }
+  .b1-equip-btn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #c0d4ec; border-radius: 50%; background: #fff; color: #215694; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+  .b1-equip-btn:hover { background: #eef4fb; border-color: #215694; }
+  .b1-equip-btn:disabled { opacity: .4; cursor: default; }
+  .b1-equip-track { margin-top: 20px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 4px; }
+  .b1-equip-track::-webkit-scrollbar { display: none; }
+  .b1-equip-card { flex: 0 0 250px; scroll-snap-align: start; display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
+  .b1-equip-card:hover { border-color: #c0d4ec; }
+  .b1-equip-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #f2f5f9; }
+  .b1-equip-name { display: block; padding: 12px 14px 2px; font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: #0b1a33; }
+  .b1-equip-spec { display: block; padding: 0 14px 12px; font-size: 12.5px; color: #64748b; }
+  .b1-capacity { margin-top: 26px; font-size: 15px; color: #334155; }
   @media (max-width: 560px) {
-    .b1-gallery-tile { flex-basis: 76%; }
+    .b1-equip-card { flex-basis: 78%; }
+  }
+
+  /* Capacity videos */
+  .b1-videos { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .b1-video-tile { margin: 0; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; }
+  .b1-video-tile video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+  .b1-video-ph { aspect-ratio: 16 / 9; display: grid; place-items: center; background: #eef2f7; border-bottom: 1px dashed #c0d4ec; color: #94a3b8; font-size: 14px; }
+  .b1-video-tile figcaption { padding: 14px 16px 16px; }
+  .b1-video-num { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #8fb2dc; }
+  .b1-video-label { display: block; margin-top: 6px; font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #0b1a33; }
+  .b1-video-hint { display: block; margin-top: 4px; font-size: 13px; color: #64748b; }
+  @media (max-width: 640px) {
+    .b1-videos { grid-template-columns: 1fr; }
   }
 
   /* Applications */
   .b1-apps { margin-top: 40px; display: grid; gap: 16px; }
-  .b1-app { display: grid; grid-template-columns: 260px 1fr; gap: 26px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 18px; align-items: center; }
-  .b1-app-img { margin: 0; }
-  .b1-app-ph { aspect-ratio: 4 / 3; background: #eef2f7; border: 1px dashed #c0d4ec; border-radius: 4px; display: grid; place-items: center; color: #94a3b8; font-size: 13px; }
+  .b1-app { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 22px 26px; }
   .b1-app-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #0b1a33; }
   .b1-app-body p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: #64748b; max-width: 760px; }
   .b1-app-body a { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #215694; text-decoration: none; }
   .b1-app-body a:hover { text-decoration: underline; }
-  @media (max-width: 700px) {
-    .b1-app { grid-template-columns: 1fr; gap: 16px; }
-  }
 
   /* Quality */
   .b1-quality-grid { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
@@ -498,22 +540,15 @@ const industries = [
   .b1-quality-list li::after { content: ''; position: absolute; left: 4.5px; top: 11.5px; width: 7px; height: 7px; border-radius: 50%; background: #215694; }
   .b1-quality-list strong { color: #0b1a33; }
   .b1-quality-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
-  .b1-quality-fig { margin: 0; }
-  .b1-quality-fig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
-  .b1-quality-fig figcaption { margin-top: 10px; font-size: 13px; color: #64748b; }
+  .b1-cert-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .b1-cert-card { display: block; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; overflow: hidden; text-decoration: none; transition: border-color .15s ease; }
+  .b1-cert-card:hover { border-color: #c0d4ec; }
+  .b1-cert-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .b1-cert-card span { display: block; padding: 10px 12px; font-size: 13px; font-weight: 600; color: #0b1a33; }
   @media (max-width: 900px) {
     .b1-quality-grid { grid-template-columns: 1fr; gap: 28px; }
   }
-
-  /* Final RFQ */
-  .b1-rfq { background: #0b1a33; color: #fff; padding-block: 88px; }
-  .b1-rfq-inner { text-align: center; max-width: 760px; }
-  .b1-rfq h2 { font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
-  .b1-rfq p { margin-top: 16px; font-size: 17px; line-height: 1.75; color: #c4cedb; }
-  .b1-rfq .b1-btn-primary { margin-top: 30px; background: #ffffff; color: #0b1a33; }
-  .b1-rfq .b1-btn-primary:hover { background: #e2ebf7; }
-  .b1-rfq-note { margin-top: 22px !important; font-size: 13.5px !important; color: #8fa3bd !important; }
-  @media (max-width: 767px) {
-    .b1-rfq { padding-block: 56px; }
+  @media (max-width: 560px) {
+    .b1-cert-cards { grid-template-columns: 1fr; }
   }
 </style>
