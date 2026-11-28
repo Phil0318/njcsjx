@@ -142,9 +142,18 @@ const capacityVideos = [
 ];
 
 const partners = [
-  { name: '太原重工', field: '重型装备 · 矿山机械' },
-  { name: '远景能源', field: '风电' },
-  { name: '三一重工', field: '工程与矿山机械' },
+  {
+    name: '太原重工',
+    files: ['/partners/taiyuan.png', '/partners/taiyuan.svg', '/partners/taiyuan.jpg'],
+  },
+  {
+    name: '远景能源',
+    files: ['/partners/envision.png', '/partners/envision.svg', '/partners/envision.jpg'],
+  },
+  {
+    name: '三一重工',
+    files: ['/partners/sany.png', '/partners/sany.svg', '/partners/sany.jpg'],
+  },
 ];
 
 const certs = [
@@ -303,12 +312,18 @@ const certs = [
         <h2>我们的合作伙伴</h2>
       </div>
       <div class="b1-partners">
-        {partners.map((p) => (
-          <div class="b1-partner">
-            <p class="b1-partner-name">{p.name}</p>
-            <p class="b1-partner-field">{p.field}</p>
-          </div>
-        ))}
+        {partners.map((p) => {
+          const logo = p.files.find((f) => hasFile(f));
+          return (
+            <div class="b1-partner">
+              {logo ? (
+                <img src={logo} alt={`${p.name} 标志`} loading="lazy" class="b1-partner-logo" />
+              ) : (
+                <div class="b1-partner-ph">LOGO 待补充</div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -474,9 +489,9 @@ const certs = [
 
   /* Partners */
   .b1-partners { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .b1-partner { background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 30px 24px; text-align: center; }
-  .b1-partner-name { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: #0b1a33; }
-  .b1-partner-field { margin-top: 8px; font-size: 14px; color: #64748b; }
+  .b1-partner { display: grid; place-items: center; min-height: 150px; background: #fff; border: 1px solid #e8edf4; border-radius: 6px; padding: 24px; }
+  .b1-partner-logo { display: block; max-width: 200px; max-height: 72px; width: auto; height: auto; object-fit: contain; }
+  .b1-partner-ph { display: grid; place-items: center; width: 100%; height: 72px; background: #eef2f7; border: 1px dashed #c0d4ec; border-radius: 4px; color: #94a3b8; font-size: 13px; }
   @media (max-width: 700px) {
     .b1-partners { grid-template-columns: 1fr; }
   }
